@@ -62,8 +62,8 @@ export function useGroceryList() {
     return () => clearInterval(interval);
   }, [fetchItems, fetchCategories, fetchSettings]);
 
-  const sendInput = async (text: string) => {
-    if (!text.trim()) return;
+  const sendInput = async (text: string): Promise<boolean> => {
+    if (!text.trim()) return false;
     setProcessingInput(true);
     setError(null);
     try {
@@ -78,18 +78,24 @@ export function useGroceryList() {
         const result = await res.json();
         if (!res.ok || result.success === false) {
           setError(result.message || 'שגיאה בעיבוד הקלט');
+          return false;
         } else if (result.message && result.message.includes('שגיאת AI')) {
           setError(result.message);
         }
       } else if (!res.ok) {
         console.warn('Server returned non-JSON status:', res.status);
+        setError('שגיאת שרת בעיבוד הבקשה');
+        return false;
       }
 
       await fetchItems();
       await fetchCategories();
+      return true;
     } catch (err: any) {
       console.warn('Error during input processing:', err);
+      setError('שגיאת תקשורת עם השרת');
       await fetchItems();
+      return false;
     } finally {
       setProcessingInput(false);
     }

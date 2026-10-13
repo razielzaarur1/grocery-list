@@ -59,7 +59,27 @@ export const AddItemInput: React.FC<AddItemInputProps> = ({
     if (textareaRef.current) {
       textareaRef.current.style.height = '34px';
     }
-    await onSend(value);
+
+    try {
+      const ok = await onSend(value);
+      if (ok === false) {
+        // AI failed, timed out, or rate-limited -> Restore user's text!
+        setText(value);
+        localStorage.setItem(STORAGE_KEY, value);
+        setTimeout(() => {
+          adjustHeight();
+          textareaRef.current?.focus();
+        }, 60);
+      }
+    } catch {
+      // In case of network error or exception -> Restore user's text!
+      setText(value);
+      localStorage.setItem(STORAGE_KEY, value);
+      setTimeout(() => {
+        adjustHeight();
+        textareaRef.current?.focus();
+      }, 60);
+    }
   };
 
   return (
