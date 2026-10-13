@@ -1,16 +1,18 @@
 {
   "id": "/",
   "name": "רשימת קניות",
-  "short_name": "קניות",
+  "short_name": "רשימת קניות",
   "description": "אפליקציית רשימת קניות חכמה",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "fullscreen"],
   "orientation": "portrait",
-  "background_color": "#f7f9f7",
-  "theme_color": "#15803d",
+  "background_color": "#f6f8f6",
+  "theme_color": "#f6f8f6",
   "dir": "rtl",
   "lang": "he",
+  "categories": ["shopping", "productivity", "utilities"],
   "icons": [
     {
       "src": "/icon-192.png",
