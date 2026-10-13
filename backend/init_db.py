@@ -43,6 +43,22 @@ def init_db():
             seed_database()
         except Exception as e:
             print(f"Error seeding cache: {e}")
+
+        # Seed standard Gemini models if fewer than 2 models exist
+        from models import GeminiModel
+        from ai_client import STANDARD_MODELS
+        from datetime import datetime
+        if db.query(GeminiModel).count() < 2:
+            db.query(GeminiModel).delete()
+            for idx, (m_id, disp) in enumerate(STANDARD_MODELS):
+                db.add(GeminiModel(
+                    model_id=m_id,
+                    display_name=disp,
+                    rank=idx + 1,
+                    is_active=True,
+                    last_tested_at=datetime.utcnow()
+                ))
+            db.commit()
     finally:
         db.close()
 
