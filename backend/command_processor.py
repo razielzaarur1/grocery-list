@@ -5,7 +5,7 @@ from typing import List, Dict, Any, Optional, Tuple
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
-from models import Item, Category
+from models import Item, Category, ClassifierCache
 from classifier import classify_item, save_to_cache, record_user_correction, check_local_cache, classify_locally
 from hebrew_utils import normalize_hebrew_text, hebrew_similarity
 from ai_client import call_gemini_with_fallback, extract_json
@@ -19,7 +19,8 @@ COMMAND_TRIGGER_WORDS = [
     "תוסיף", "הוסף", "תוסיפי", "תוסיפו", "להוסיף",
     "תחליף", "החלף", "תעביר", "העבר", "שנה", "תשנה",
     "תנקה", "נקה", "לנקות", "סמן", "תסמן", "לסמן", "בטל", "לבטל",
-    "כל ה", "שמתחיל", "שנגמר", "שמכיל", "תרוקן", "רוקן", "לרוקן"
+    "כל ה", "שמתחיל", "שנגמר", "שמכיל", "תרוקן", "רוקן", "לרוקן",
+    "תעבור", "תסדר", "תתקן", "סיווגת", "סווגת", "שמת", "סווג", "לסדר"
 ]
 
 HEADER_PATTERNS = [
@@ -37,16 +38,31 @@ def is_header_line(text: str) -> bool:
             return True
     return False
 
+RECLASSIFY_PATTERNS = [
+    r'(סיווגת|סווגת|שמת|הכנסת|זרקת).*(בשונות|לא נכון)',
+    r'(תעבור\s+מחדש|תעבור\s+שוב|תסדר\s+מחדש|סווג\s+מחדש|תסדר\s+את\s+הפריטים|תתקן\s+את\s+הקטגוריות|לסדר\s+מחדש)',
+    r'(תעביר|תסדר).*(משונות|בשונות)'
+]
+
+def is_reclassify_request(text: str) -> bool:
+    """Checks if the user is asking to review, reclassify, or fix categories of existing items."""
+    clean = text.strip()
+    for pat in RECLASSIFY_PATTERNS:
+        if re.search(pat, clean):
+            return True
+    return False
+
 FEEDBACK_PATTERNS = [
-    r'^(יש\s+(הרבה|מלא|כמה)\s+פריטים).*',
-    r'^(למה|מדוע|איך|איפה|מדוע|האם)\s+.*',
-    r'^(תגיד|תסביר|שגיאה|הודעת שגיאה).*',
-    r'.*(שאמורים להיות|במקומות אחרים|בשונות|לא עובד|נתקע).*'
+    r'^(למה|מדוע|איך|איפה|האם)\s+.*',
+    r'^(תגיד|תסביר|שגיאה|הודעת שגיאה).*'
 ]
 
 def is_feedback_or_conversational(text: str) -> bool:
-    """Checks if text looks like feedback, complaint or question rather than grocery items."""
+    """Checks if text looks like generic question rather than grocery items or commands."""
     clean = text.strip()
+    # Do not treat reclassification commands as generic feedback!
+    if is_reclassify_request(clean):
+        return False
     for pat in FEEDBACK_PATTERNS:
         if re.search(pat, clean):
             return True
@@ -211,10 +227,19 @@ async def process_user_input(
     if not raw_text:
         return {"success": True, "message": "טקסט ריק", "items_affected": []}
 
-    # Filter standalone headers or feedback
+    # Filter standalone headers
     if is_header_line(raw_text):
         return {"success": True, "message": "כותרת (לא נוספה כפריט)", "items_affected": []}
 
+    categories = db.query(Category).order_by(Category.order_index.asc()).all()
+    if not categories:
+        return {"success": False, "message": "אין קטגוריות במערכת", "items_affected": []}
+
+    # 1. Check if user is asking to reclassify / review items (e.g. "סיווגת הרבה דברים כשונות במקום הקטגוריות שלהם. תעבור מחדש.")
+    if is_reclassify_request(raw_text):
+        return await handle_reclassify_request(raw_text, categories, db)
+
+    # 2. Filter generic conversational questions/feedback
     if is_feedback_or_conversational(raw_text):
         return {
             "success": True,
@@ -222,20 +247,128 @@ async def process_user_input(
             "items_affected": []
         }
 
-    categories = db.query(Category).order_by(Category.order_index.asc()).all()
-    if not categories:
-        return {"success": False, "message": "אין קטגוריות במערכת", "items_affected": []}
-
-    # 1. Local command execution (0ms, 100% reliable)
+    # 3. Local command execution (0ms, 100% reliable)
     local_res = handle_local_command(raw_text, categories, db)
     if local_res is not None:
         return local_res
 
-    # 2. Dynamic command execution via AI
+    # 4. Dynamic command execution via AI
     if looks_like_command(raw_text):
         return await execute_dynamic_command(raw_text, categories, db)
     else:
         return await process_items_list(raw_text, categories, db)
+
+async def handle_reclassify_request(
+    text: str,
+    categories: List[Category],
+    db: Session
+) -> Dict[str, Any]:
+    """
+    Executes a re-classification review on existing items in the database.
+    Sends items (especially items in 'שונות' or all items) to AI to fix their categories.
+    """
+    current_items = db.query(Item).all()
+    if not current_items:
+        return {
+            "success": True,
+            "message": "אין כרגע פריטים ברשימה לסידור מחדש.",
+            "items_affected": []
+        }
+
+    categories_map = {c.name: c for c in categories}
+    cat_id_to_name = {c.id: c.name for c in categories}
+
+    list_representation = [
+        {
+            "id": it.id,
+            "name": it.name,
+            "quantity": it.quantity,
+            "unit": it.unit,
+            "note": it.note,
+            "category": cat_id_to_name.get(it.category_id, "שונות")
+        }
+        for it in current_items
+    ]
+
+    prompt = f"""
+המשתמש הזין את הבקשה הבאה לתיקון/סידור רשימת הקניות: "{text}"
+
+מצב רשימת הקניות הנוכחית:
+{json_dumps_hebrew(list_representation)}
+
+קטגוריות מותרות בלבד במערכת:
+{json_dumps_hebrew(list(categories_map.keys()))}
+
+הוראות:
+1. עיין בכל המוצרים ברשימה. עבור כל מוצר שנמצא בקטגוריה לא מתאימה או ב'שונות' (למשל מוצר חלב, בשר, ירק, מאפה וכו') - קבע מה הקטגוריה המדויקת ביותר מתוך רשימת הקטגוריות.
+2. החזר אך ורק אובייקט JSON בפורמט:
+{{
+  "reclassified": [
+    {{
+      "item_id": 1,
+      "name": "שם המוצר",
+      "new_category": "שם הקטגוריה המדויק מתוך הרשימה"
+    }}
+  ],
+  "summary": "הסבר בעברית על מה שתוקן והועבר"
+}}
+"""
+    raw_res, ai_err = await call_gemini_with_fallback(
+        prompt=prompt,
+        db=db,
+        system_instruction="אתה מנהל רשימת קניות מומחה בעברית האחראי על סיווג מדויק של מוצרים לקטגוריות הנכונות.",
+        json_mode=True
+    )
+
+    if not raw_res:
+        return {
+            "success": False,
+            "message": f"שגיאת AI בביצוע הסידור מחדש: {ai_err or 'שרת ה-AI אינו זמין'}. נסה שוב בעוד מספר רגעים.",
+            "original_text": text,
+            "items_affected": []
+        }
+
+    parsed = extract_json(raw_res)
+    reclassified_list = []
+    summary = "עברתי על הפריטים וסיווגתי אותם מחדש."
+
+    if isinstance(parsed, dict):
+        reclassified_list = parsed.get("reclassified") or parsed.get("actions") or []
+        summary = parsed.get("summary", summary)
+    elif isinstance(parsed, list):
+        reclassified_list = parsed
+
+    affected_ids = []
+    for r in reclassified_list:
+        if not isinstance(r, dict):
+            continue
+        item_id = r.get("item_id")
+        new_cat_name = r.get("new_category") or r.get("category")
+        target_item = None
+        if item_id:
+            target_item = db.query(Item).filter(Item.id == item_id).first()
+        elif r.get("name"):
+            target_item = db.query(Item).filter(Item.name == r.get("name")).first()
+
+        if target_item and new_cat_name:
+            cat = categories_map.get(new_cat_name)
+            if not cat:
+                for c in categories:
+                    if hebrew_similarity(new_cat_name, c.name) >= 0.75:
+                        cat = c
+                        break
+            if cat:
+                target_item.category_id = cat.id
+                db.flush()
+                affected_ids.append(target_item.id)
+                save_to_cache(normalize_hebrew_text(target_item.name), cat.id, 1.0, "ai", db)
+
+    db.commit()
+    return {
+        "success": True,
+        "message": f"{summary} (עודכנו {len(affected_ids)} פריטים)",
+        "items_affected": affected_ids
+    }
 
 async def execute_dynamic_command(
     text: str,
@@ -249,7 +382,7 @@ async def execute_dynamic_command(
     """
     current_items = db.query(Item).all()
     categories_map = {c.name: c for c in categories}
-    cat_id_to_name = {c.id: c.name for c in categories}
+    cat_id_to_name = {c.id: c for c in categories}
 
     list_representation = [
         {
@@ -278,6 +411,7 @@ async def execute_dynamic_command(
 1. אם המשתמש מורה להוסיף מוצר עם הערה, בקשה או תנאי (למשל 'בשר טחון אבל רק אם זול', 'חלב אם במבצע') - הוסף אותו כפעולת ADD כאשר שם המוצר נקי ("בשר טחון") וההערה/תנאי בשדה note ("רק אם זול").
 2. אם המשתמש מורה על תנאי כגון "אם יש מלפפון תוסיף 3 אם אין תשים 9" - בדוק ברשימה הנוכחית ובצע את הפעולה המתאימה.
 3. אם המשתמש מורה למחוק קטגוריה, הכל, או לפי אות - בצע DELETE / DELETE_CATEGORY.
+4. אם המשתמש מורה לתקן או להעביר קטגוריה של מוצר קיים - בצע UPDATE_CATEGORY עם item_id ו-new_category.
 
 החזר אך ורק אובייקט JSON בפורמט:
 {{
@@ -294,6 +428,11 @@ async def execute_dynamic_command(
       "type": "UPDATE_QUANTITY", 
       "item_id": 1, 
       "new_quantity": "3"
+    }},
+    {{
+      "type": "UPDATE_CATEGORY", 
+      "item_id": 1, 
+      "new_category": "שם קטגוריה"
     }},
     {{
       "type": "DELETE", 
@@ -323,6 +462,7 @@ async def execute_dynamic_command(
         return {
             "success": False,
             "message": f"שגיאה בביצוע הפקודה: {error_msg}",
+            "original_text": text,
             "items_affected": []
         }
 
@@ -347,6 +487,7 @@ async def execute_dynamic_command(
         return {
             "success": False,
             "message": "הפקודה זוהתה, אך לא נמצאו פעולות מתאימות לביצוע ברשימה.",
+            "original_text": text,
             "items_affected": []
         }
 
@@ -391,6 +532,27 @@ async def execute_dynamic_command(
                 db.flush()
                 affected_ids.append(item.id)
 
+        elif act_type in ["UPDATE_CATEGORY", "RECLASSIFY", "MOVE_CATEGORY"]:
+            item_id = act.get("item_id")
+            new_cat_name = act.get("new_category") or act.get("category", "")
+            target_item = None
+            if item_id:
+                target_item = db.query(Item).filter(Item.id == item_id).first()
+            elif act.get("name"):
+                target_item = db.query(Item).filter(Item.name == act.get("name")).first()
+            if target_item and new_cat_name:
+                cat = categories_map.get(new_cat_name)
+                if not cat:
+                    for c in categories:
+                        if hebrew_similarity(new_cat_name, c.name) >= 0.75:
+                            cat = c
+                            break
+                if cat:
+                    target_item.category_id = cat.id
+                    db.flush()
+                    affected_ids.append(target_item.id)
+                    save_to_cache(normalize_hebrew_text(target_item.name), cat.id, 1.0, "ai", db)
+
         elif act_type == "DELETE":
             item_id = act.get("item_id")
             item = db.query(Item).filter(Item.id == item_id).first()
@@ -421,6 +583,47 @@ async def execute_dynamic_command(
         "items_affected": affected_ids
     }
 
+def is_certain_local_item(
+    part: str,
+    categories: List[Category],
+    db: Session
+) -> Optional[Dict[str, Any]]:
+    """
+    Checks if an item can be resolved locally with absolute 100% certainty:
+    - Exact match in ClassifierCache with confidence >= 0.99
+    - Category is not 'שונות'
+    - Has NO conversational conditional notes (e.g. 'אם...', 'רק אם...', 'אבל...')
+    """
+    parsed = parse_simple_item(part)
+    if not parsed["name"]:
+        return None
+
+    # Any conditional/conversational note requires AI analysis
+    if parsed["note"]:
+        if any(w in parsed["note"] for w in ["אם", "רק", "אבל", "בתנאי", "שיהיה"]):
+            return None
+
+    cat_map = {c.id: c for c in categories}
+    norm_name = normalize_hebrew_text(parsed["name"])
+
+    exact = db.query(ClassifierCache).filter(
+        ClassifierCache.item_name_normalized == norm_name,
+        ClassifierCache.confidence >= 0.99
+    ).first()
+
+    if exact and exact.category_id in cat_map:
+        cat = cat_map[exact.category_id]
+        if cat.name != "שונות":
+            return {
+                "name": parsed["name"],
+                "quantity": parsed["quantity"],
+                "unit": parsed["unit"],
+                "note": parsed["note"],
+                "category": cat
+            }
+
+    return None
+
 async def process_items_list(
     text: str,
     categories: List[Category],
@@ -428,53 +631,52 @@ async def process_items_list(
 ) -> Dict[str, Any]:
     """
     Parses comma- or newline-separated items from user input.
-    Extracts name, quantity, unit, and notes.
+    If ALL items are 100% certain locally (exact cache hits without conditional notes),
+    resolves them locally.
+    Otherwise, sends the ENTIRE message to AI. If AI fails, reports error explicitly
+    and preserves user's text without falling back to uncertain local classification.
     """
     raw_parts = [p.strip() for p in re.split(r'[,;\n]+', text) if p.strip()]
-    if not raw_parts:
-        return {"success": True, "message": "אין פריטים להוספה", "items_affected": []}
-
-    added_items = []
-    items_to_ai = []
-    local_resolved = []
-    ai_warning = None
-
+    clean_parts = []
     for part in raw_parts:
-        # Filter header or feedback lines
         if is_header_line(part):
             continue
-        if is_feedback_or_conversational(part):
-            continue
-
-        # If a line inside is a command, execute it locally
         local_cmd = handle_local_command(part, categories, db)
         if local_cmd:
             continue
+        clean_parts.append(part)
 
-        parsed_simple = parse_simple_item(part)
-        if not parsed_simple["name"]:
-            continue
-        
-        # Check local classifier first (runs in 0ms, zero API cost)
-        local_match = classify_locally(parsed_simple["name"], categories, db)
-        if local_match and local_match[0].name != "שונות" and local_match[1] >= 0.85:
-            local_resolved.append({
-                "name": parsed_simple["name"],
-                "quantity": parsed_simple["quantity"],
-                "unit": parsed_simple["unit"],
-                "note": parsed_simple["note"],
-                "category": local_match[0]
-            })
-            continue
+    if not clean_parts:
+        return {"success": True, "message": "אין פריטים להוספה", "items_affected": []}
 
-        # Collect un-cached items for batch AI call
-        items_to_ai.append(part)
+    # Evaluate whether ALL items can be resolved with 100% certainty locally
+    all_certain_local = True
+    local_resolved_items = []
+    for part in clean_parts:
+        certain = is_certain_local_item(part, categories, db)
+        if certain:
+            local_resolved_items.append(certain)
+        else:
+            all_certain_local = False
+            break
 
-    if items_to_ai:
-        ai_resolved, ai_warning = await parse_items_with_ai(items_to_ai, categories, db)
-        local_resolved.extend(ai_resolved)
+    if all_certain_local and len(local_resolved_items) == len(clean_parts):
+        items_to_add = local_resolved_items
+    else:
+        # If any part requires AI, send the entire message to AI as a unified batch
+        ai_resolved, ai_err = await parse_items_with_ai(clean_parts, categories, db)
+        if not ai_resolved:
+            error_msg = ai_err or "לא התקבלה תשובה משרת ה-AI."
+            return {
+                "success": False,
+                "message": f"שגיאת AI בעיבוד הפריטים ({error_msg}). הטקסט הוחזר לתיבת ההקלדה.",
+                "original_text": text,
+                "items_affected": []
+            }
+        items_to_add = ai_resolved
 
-    for it_data in local_resolved:
+    added_items = []
+    for it_data in items_to_add:
         name = it_data["name"].strip()
         if not name:
             continue
@@ -518,9 +720,6 @@ async def process_items_list(
     db.commit()
 
     reply_msg = f"נוספו {len(added_items)} פריטים לרשימה"
-    if ai_warning:
-        reply_msg += f" (שים לב: {ai_warning})"
-
     return {
         "success": True,
         "message": reply_msg,
@@ -633,8 +832,11 @@ async def parse_items_with_ai(
         json_mode=True
     )
 
+    if not raw_res:
+        return [], (ai_err or "לא התקבלה תגובה משרת ה-AI.")
+
     results = []
-    parsed_list = extract_json(raw_res) if raw_res else None
+    parsed_list = extract_json(raw_res)
 
     # Handle dictionary wrapped in {"items": [...]} or raw list
     if isinstance(parsed_list, dict):
@@ -643,7 +845,7 @@ async def parse_items_with_ai(
         elif "actions" in parsed_list:
             parsed_list = parsed_list["actions"]
 
-    if isinstance(parsed_list, list):
+    if isinstance(parsed_list, list) and parsed_list:
         for item_obj in parsed_list:
             if not isinstance(item_obj, dict):
                 continue
@@ -653,11 +855,14 @@ async def parse_items_with_ai(
             cat_name = item_obj.get("category", "")
             cat = categories_map.get(cat_name)
             if not cat:
-                local_m = classify_locally(name, categories, db)
-                if local_m:
-                    cat = local_m[0]
-                else:
-                    cat = default_cat
+                best_sim = 0.0
+                for c in categories:
+                    sim = hebrew_similarity(cat_name, c.name)
+                    if sim > best_sim:
+                        best_sim = sim
+                        cat = c
+            if not cat:
+                cat = default_cat
 
             save_to_cache(normalize_hebrew_text(name), cat.id, 1.0, "ai", db)
 
@@ -669,20 +874,9 @@ async def parse_items_with_ai(
                 "category": cat
             })
     else:
-        # Fallback to ultra-fast local classifier if Gemini failed (prevents 429 cascades!)
-        for raw in items_raw:
-            simple = parse_simple_item(raw)
-            local_m = classify_locally(simple["name"], categories, db)
-            cat = local_m[0] if local_m else default_cat
-            results.append({
-                "name": simple["name"],
-                "quantity": simple["quantity"],
-                "unit": simple["unit"],
-                "note": simple["note"],
-                "category": cat
-            })
+        return [], (ai_err or "ה-AI לא החזיר מבנה תקין של פריטים.")
 
-    return results, ai_err
+    return results, None
 
 def json_dumps_hebrew(obj: Any) -> str:
     import json

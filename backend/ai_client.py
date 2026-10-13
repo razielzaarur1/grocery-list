@@ -161,19 +161,23 @@ async def call_gemini_with_fallback(
     # Fetch active models ordered by rank
     models = db.query(GeminiModel).filter(GeminiModel.is_active == True).order_by(GeminiModel.rank.asc()).all()
 
-    # If no models cached yet, perform a quick scan
-    if not models:
-        await scan_and_verify_gemini_models(api_key, db)
-        models = db.query(GeminiModel).filter(GeminiModel.is_active == True).order_by(GeminiModel.rank.asc()).all()
-
-    model_ids = [m.model_id for m in models] if models else [
-        "models/gemini-3-flash-preview"
+    model_ids = [m.model_id for m in models] if models else []
+    # Always include top fallback candidates in sequence
+    standard_fallbacks = [
+        "models/gemini-3-flash-preview",
+        "models/gemini-2.5-flash",
+        "models/gemini-3.1-flash-lite-preview",
+        "models/gemini-flash-latest",
+        "models/gemini-3.5-flash"
     ]
+    for fb in standard_fallbacks:
+        if fb not in model_ids:
+            model_ids.append(fb)
 
     last_error_msg: Optional[str] = None
 
-    async with httpx.AsyncClient(timeout=6.0) as client:
-        for m_id in model_ids:
+    async with httpx.AsyncClient(timeout=8.0) as client:
+        for idx, m_id in enumerate(model_ids):
             clean_id = m_id if m_id.startswith("models/") else f"models/{m_id}"
             url = f"{GEMINI_BASE_URL}/{clean_id}:generateContent?key={api_key}"
 
@@ -183,7 +187,7 @@ async def call_gemini_with_fallback(
                 ],
                 "generationConfig": {
                     "temperature": 0.1,
-                    "maxOutputTokens": 1000
+                    "maxOutputTokens": 1500
                 }
             }
 
@@ -211,11 +215,15 @@ async def call_gemini_with_fallback(
                         if parts:
                             return parts[0].get("text", ""), None
                 elif resp.status_code == 429:
-                    last_error_msg = "התקבלה שגיאת הגבלת קצב או חריגה ממכסה מה-AI (שגיאה 429). אנא נסה שוב בעוד מספר רגעים או בדוק את מפתח ה-API."
+                    last_error_msg = "התקבלה שגיאת הגבלת קצב או חריגה ממכסה מה-AI (שגיאה 429). אנא המתן מספר שניות ונסה שוב."
                     logger.warning(f"Gemini 429 Rate Limit on {clean_id}: {resp.text[:120]}")
+                    if idx < len(model_ids) - 1:
+                        await asyncio.sleep(1.0)
                 elif resp.status_code == 503:
                     last_error_msg = "שרתי ה-AI של גוגל עמוסים זמנית (שגיאה 503). אנא נסה שוב בעוד מספר רגעים."
                     logger.warning(f"Gemini 503 on {clean_id}: {resp.text[:120]}")
+                    if idx < len(model_ids) - 1:
+                        await asyncio.sleep(1.0)
                 else:
                     last_error_msg = f"שגיאת AI משרת גוגל (קוד {resp.status_code})."
                     logger.warning(f"Gemini call to {clean_id} returned {resp.status_code}: {resp.text[:120]}.")
