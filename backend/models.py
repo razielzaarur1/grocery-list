@@ -51,6 +51,9 @@ class GeminiModel(Base):
     display_name = Column(String(200), default="")
     is_active = Column(Boolean, default=True)
     rank = Column(Integer, default=100)
+    status = Column(String(50), default="active")  # active, quota_exhausted, overloaded, timeout, unavailable
+    status_message = Column(String(255), default="")
+    latency = Column(Float, default=0.0)
     last_tested_at = Column(DateTime, default=datetime.utcnow)
 
 

@@ -13,16 +13,17 @@ logger = logging.getLogger(__name__)
 
 GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
 
-# Standard verified models supported by Google Gemini
-STANDARD_MODELS = [
-    ("models/gemini-3.1-flash-lite-preview", "Gemini 3.1 Flash Lite Preview"),
-    ("models/gemini-3-flash-preview", "Gemini 3 Flash Preview"),
-    ("models/gemini-flash-latest", "Gemini Flash Latest"),
-    ("models/gemini-2.5-flash", "Gemini 2.5 Flash"),
-    ("models/gemini-3.5-flash", "Gemini 3.5 Flash"),
-    ("models/gemini-3.8-flash", "Gemini 3.8 Flash"),
-    ("models/gemini-flash-lite-latest", "Gemini Flash-Lite Latest"),
-    ("models/gemini-3.1-flash-lite", "Gemini 3.1 Flash Lite"),
+# Standard core models preferred for fast Hebrew parsing
+PREFERRED_CORE_MODELS = [
+    "models/gemini-3-flash-preview",
+    "models/gemini-flash-latest",
+    "models/gemini-2.5-flash",
+    "models/gemini-3.5-flash",
+    "models/gemini-3.8-flash",
+    "models/gemini-3.1-flash-lite-preview",
+    "models/gemini-flash-lite-latest",
+    "models/gemini-3.1-flash-lite",
+    "models/gemini-3.5-flash-lite",
 ]
 
 def get_api_key(db: Session) -> str:
@@ -38,87 +39,134 @@ def should_disable_thinking(model_id: str) -> bool:
     clean_id = model_id.lower()
     return "gemini-3" in clean_id and "lite" not in clean_id
 
-async def test_single_model(client: httpx.AsyncClient, model_id: str, api_key: str) -> Tuple[Optional[float], bool]:
+async def test_single_model(client: httpx.AsyncClient, model_id: str, api_key: str) -> Dict[str, Any]:
     """
-    Tests if a model responds and measures its latency.
-    Returns (latency_seconds, is_active).
-    - 200 OK: Returns (dt, True)
-    - 429 Rate Limit / 503 Overloaded: Returns (2.5, True) because the model exists and is valid on the account!
-    - 404 Not Found (e.g. discontinued model): Returns (None, False)
-    - 400 Bad Request: Retries without thinkingConfig, returns (None, False) if still fails.
+    Tests if a model responds, measures latency, and determines exact status.
+    Returns:
+      model_id, status, status_message, latency, is_active
     """
     clean_id = model_id if model_id.startswith("models/") else f"models/{model_id}"
     url = f"{GEMINI_BASE_URL}/{clean_id}:generateContent?key={api_key}"
     payload: Dict[str, Any] = {
         "contents": [{"parts": [{"text": "1"}]}],
-        "generationConfig": {
-            "maxOutputTokens": 2
-        }
+        "generationConfig": {"maxOutputTokens": 2}
     }
     if should_disable_thinking(clean_id):
         payload["generationConfig"]["thinkingConfig"] = {"thinkingBudget": 0}
 
     t0 = asyncio.get_event_loop().time()
     try:
-        resp = await client.post(url, json=payload, timeout=5.0)
+        resp = await client.post(url, json=payload, timeout=2.5)
         dt = asyncio.get_event_loop().time() - t0
         if resp.status_code == 200:
-            logger.info(f"Model {clean_id} verified OK in {dt:.2f}s")
-            return dt, True
-        elif resp.status_code in (429, 503):
-            # Model exists and is available for this key, but currently throttled or busy
-            logger.info(f"Model {clean_id} is active (status {resp.status_code})")
-            return 2.5, True
+            return {
+                "model_id": clean_id,
+                "status": "active",
+                "status_message": f"תקין וזמין ({dt:.2f}s)",
+                "latency": round(dt, 2),
+                "is_active": True
+            }
+        elif resp.status_code == 429:
+            return {
+                "model_id": clean_id,
+                "status": "quota_exhausted",
+                "status_message": "הגיע למגבלת מכסה יומית (שגיאה 429)",
+                "latency": round(dt, 2),
+                "is_active": False
+            }
+        elif resp.status_code == 503:
+            return {
+                "model_id": clean_id,
+                "status": "overloaded",
+                "status_message": "עומס זמני בשרתי גוגל (שגיאה 503)",
+                "latency": round(dt, 2),
+                "is_active": False
+            }
         elif resp.status_code == 400 and "thinkingConfig" in payload.get("generationConfig", {}):
             del payload["generationConfig"]["thinkingConfig"]
-            resp2 = await client.post(url, json=payload, timeout=5.0)
+            resp2 = await client.post(url, json=payload, timeout=2.5)
             dt2 = asyncio.get_event_loop().time() - t0
             if resp2.status_code == 200:
-                return dt2, True
-            elif resp2.status_code in (429, 503):
-                return 2.5, True
-            return None, False
-        elif resp.status_code == 404:
-            logger.warning(f"Model {clean_id} returned 404 (unavailable)")
-            return None, False
+                return {
+                    "model_id": clean_id,
+                    "status": "active",
+                    "status_message": f"תקין וזמין ({dt2:.2f}s)",
+                    "latency": round(dt2, 2),
+                    "is_active": True
+                }
+            elif resp2.status_code == 429:
+                return {
+                    "model_id": clean_id,
+                    "status": "quota_exhausted",
+                    "status_message": "הגיע למגבלת מכסה יומית (שגיאה 429)",
+                    "latency": round(dt2, 2),
+                    "is_active": False
+                }
+            return {
+                "model_id": clean_id,
+                "status": "unavailable",
+                "status_message": f"שגיאה {resp2.status_code}",
+                "latency": 0.0,
+                "is_active": False
+            }
+        elif resp.status_code in (404, 400):
+            return {
+                "model_id": clean_id,
+                "status": "unavailable",
+                "status_message": "מודל אינו זמין לחשבון זה",
+                "latency": 0.0,
+                "is_active": False
+            }
         else:
-            logger.warning(f"Model {clean_id} returned status {resp.status_code}")
-            return None, False
+            return {
+                "model_id": clean_id,
+                "status": "unavailable",
+                "status_message": f"קוד {resp.status_code}",
+                "latency": 0.0,
+                "is_active": False
+            }
     except httpx.TimeoutException:
-        logger.warning(f"Model {clean_id} timed out during test, keeping as active")
-        return 3.0, True
+        return {
+            "model_id": clean_id,
+            "status": "timeout",
+            "status_message": "חריגת זמן תגובה (>2.5s)",
+            "latency": 3.0,
+            "is_active": False
+        }
     except Exception as e:
-        logger.warning(f"Model {clean_id} error: {e}")
-        return 3.0, True
+        return {
+            "model_id": clean_id,
+            "status": "unavailable",
+            "status_message": str(e)[:40],
+            "latency": 0.0,
+            "is_active": False
+        }
 
 async def scan_and_verify_gemini_models(api_key: str, db: Session) -> List[Dict[str, Any]]:
     """
-    Scans and benchmarks available Gemini models using the provided API key.
-    Fetches the full model list from Google API, filters valid chat models,
-    tests them, and persists all active models to the database ranked by latency.
-    NEVER wipes models to leave only 1 model if temporary rate limits occur.
+    Scans ALL available models returned by Google API (/models), tests each one,
+    classifies its status (active, quota_exhausted, overloaded, timeout, unavailable),
+    and stores all models in the database.
     """
     if not api_key:
         return []
 
     available_map: Dict[str, str] = {}
-    async with httpx.AsyncClient(timeout=8.0) as client:
+    async with httpx.AsyncClient(timeout=10.0) as client:
         # 1. Fetch available models list from Google API
         list_url = f"{GEMINI_BASE_URL}/models?key={api_key}"
         try:
             resp = await client.get(list_url)
             if resp.status_code == 200:
                 data = resp.json()
-                models_list = data.get("models", [])
-                for m in models_list:
+                for m in data.get("models", []):
                     name = m.get("name", "")
                     disp = m.get("displayName", "")
                     methods = m.get("supportedGenerationMethods", [])
                     if "generateContent" in methods:
-                        # Skip specialized non-chat / media models
+                        # Skip purely non-text models
                         if not any(x in name.lower() for x in [
-                            "tts", "image", "clip", "robotics", "computer-use",
-                            "aqa", "embed", "transcribe", "banana", "lyria", "argon", "deep-research", "gemma"
+                            "tts", "clip", "robotics", "computer-use", "aqa", "embed", "transcribe", "banana", "lyria", "argon"
                         ]):
                             available_map[name] = disp or name.replace("models/", "")
             else:
@@ -126,74 +174,77 @@ async def scan_and_verify_gemini_models(api_key: str, db: Session) -> List[Dict[
         except Exception as e:
             logger.error(f"Error querying Gemini /models endpoint: {e}")
 
-        # If available_map is empty (e.g. list API failed or was throttled), fall back to standard models
         if not available_map:
-            available_map = {m_id: name for m_id, name in STANDARD_MODELS}
+            # Fallback map if listing failed
+            for pm in PREFERRED_CORE_MODELS:
+                available_map[pm] = pm.replace("models/", "").replace("-", " ").title()
 
-        # Build candidate list: prioritize our standard curated models
-        candidates_to_check: List[str] = []
-        for m_id, _ in STANDARD_MODELS:
-            if m_id in available_map and m_id not in candidates_to_check:
-                candidates_to_check.append(m_id)
+        candidate_ids = list(available_map.keys())
 
-        if not candidates_to_check:
-            candidates_to_check = [m_id for m_id, _ in STANDARD_MODELS]
-
-        # 2. Test candidates concurrently with 5s timeout
-        tasks = [test_single_model(client, c, api_key) for c in candidates_to_check]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
-
-        verified_models: List[Dict[str, Any]] = []
-        for cand, res in zip(candidates_to_check, results):
-            if isinstance(res, tuple):
-                lat, is_active = res
-                if is_active:
-                    disp = available_map.get(cand, cand.replace("models/", ""))
-                    verified_models.append({
-                        "model_id": cand,
+        # 2. Test candidate models concurrently in small batches
+        results: List[Dict[str, Any]] = []
+        batch_size = 8
+        for i in range(0, len(candidate_ids), batch_size):
+            batch = candidate_ids[i:i + batch_size]
+            tasks = [test_single_model(client, m_id, api_key) for m_id in batch]
+            batch_res = await asyncio.gather(*tasks, return_exceptions=True)
+            for m_id, r in zip(batch, batch_res):
+                disp = available_map.get(m_id, m_id.replace("models/", ""))
+                if isinstance(r, dict):
+                    r["display_name"] = disp
+                    results.append(r)
+                else:
+                    results.append({
+                        "model_id": m_id,
                         "display_name": disp,
-                        "latency": float(lat) if lat is not None else 2.5,
-                        "is_active": True
+                        "status": "unavailable",
+                        "status_message": "שגיאת בדיקה",
+                        "latency": 0.0,
+                        "is_active": False
                     })
+            if i + batch_size < len(candidate_ids):
+                await asyncio.sleep(0.2)
 
-    # Ensure all core standard models that exist in available_map are retained
-    existing_ids = {m["model_id"] for m in verified_models}
-    for m_id, disp in STANDARD_MODELS:
-        if m_id in available_map and m_id not in existing_ids:
-            verified_models.append({
-                "model_id": m_id,
-                "display_name": disp,
-                "latency": 3.0,
-                "is_active": True
-            })
+    # Sort priority:
+    # 1. active (lowest latency)
+    # 2. quota_exhausted (valid models currently throttled)
+    # 3. overloaded (503)
+    # 4. timeout
+    # 5. unavailable
+    def sort_key(item):
+        st = item.get("status", "")
+        order = {
+            "active": 1,
+            "quota_exhausted": 2,
+            "overloaded": 3,
+            "timeout": 4,
+            "unavailable": 5
+        }.get(st, 6)
+        # Prioritize preferred core models inside same status group
+        m_id = item.get("model_id", "")
+        pref = 0 if m_id in PREFERRED_CORE_MODELS else 1
+        lat = item.get("latency", 99.0) or 99.0
+        return (order, pref, lat)
 
-    # If completely empty, seed standard models
-    if not verified_models:
-        for m_id, disp in STANDARD_MODELS:
-            verified_models.append({
-                "model_id": m_id,
-                "display_name": disp,
-                "latency": 2.0,
-                "is_active": True
-            })
+    results.sort(key=sort_key)
 
-    # Sort by latency (lowest first)
-    verified_models.sort(key=lambda x: x["latency"])
-
-    # 3. Save all verified models into DB with updated ranks
+    # 3. Save all models into DB
     db.query(GeminiModel).delete()
-    for idx, vm in enumerate(verified_models):
+    for idx, r in enumerate(results):
         model_record = GeminiModel(
-            model_id=vm["model_id"],
-            display_name=vm["display_name"],
+            model_id=r["model_id"],
+            display_name=r["display_name"],
             rank=idx + 1,
-            is_active=True,
+            is_active=(r["status"] in ("active", "quota_exhausted")),
+            status=r["status"],
+            status_message=r["status_message"],
+            latency=r.get("latency", 0.0),
             last_tested_at=datetime.utcnow()
         )
         db.add(model_record)
     db.commit()
 
-    return verified_models
+    return results
 
 async def call_gemini_with_fallback(
     prompt: str,
@@ -202,9 +253,8 @@ async def call_gemini_with_fallback(
     json_mode: bool = True
 ) -> tuple[Optional[str], Optional[str]]:
     """
-    Calls Gemini API using active models in rank order.
+    Calls Gemini API using the top fast Gemini Flash models in priority order.
     Disables thinking tokens (thinkingBudget=0) on supported models for instant response.
-    Automatically falls back across all available models if any model is rate-limited (429) or busy (503).
     Returns (result_text, error_message).
     """
     api_key = get_api_key(db)
@@ -212,19 +262,21 @@ async def call_gemini_with_fallback(
         logger.warning("No Gemini API key configured.")
         return None, "לא הוגדר מפתח Gemini API בהגדרות"
 
-    # Fetch active models ordered by rank
-    models = db.query(GeminiModel).filter(GeminiModel.is_active == True).order_by(GeminiModel.rank.asc()).all()
+    # Always use the top reliable fast Gemini Flash models
+    candidate_model_ids = [
+        "models/gemini-3-flash-preview",
+        "models/gemini-flash-latest",
+        "models/gemini-2.5-flash",
+        "models/gemini-3.5-flash",
+        "models/gemini-3.8-flash",
+        "models/gemini-3.1-flash-lite-preview",
+    ]
 
-    model_ids = [m.model_id for m in models] if models else []
-    # Always include all standard models in sequence as fallbacks
-    for m_id, _ in STANDARD_MODELS:
-        if m_id not in model_ids:
-            model_ids.append(m_id)
-
+    quota_errors_count = 0
     last_error_msg: Optional[str] = None
 
-    async with httpx.AsyncClient(timeout=4.5) as client:
-        for idx, m_id in enumerate(model_ids):
+    async with httpx.AsyncClient(timeout=3.5) as client:
+        for idx, m_id in enumerate(candidate_model_ids):
             clean_id = m_id if m_id.startswith("models/") else f"models/{m_id}"
             url = f"{GEMINI_BASE_URL}/{clean_id}:generateContent?key={api_key}"
 
@@ -238,7 +290,6 @@ async def call_gemini_with_fallback(
                 }
             }
 
-            # Only disable thinking tokens on models that support thinkingBudget
             if should_disable_thinking(clean_id):
                 payload["generationConfig"]["thinkingConfig"] = {
                     "thinkingBudget": 0
@@ -262,7 +313,6 @@ async def call_gemini_with_fallback(
                         if parts:
                             return parts[0].get("text", ""), None
                 elif resp.status_code == 400 and "thinkingConfig" in payload.get("generationConfig", {}):
-                    # In case a model rejected thinkingConfig, retry immediately without it
                     del payload["generationConfig"]["thinkingConfig"]
                     resp2 = await client.post(url, json=payload)
                     if resp2.status_code == 200:
@@ -272,22 +322,31 @@ async def call_gemini_with_fallback(
                             parts = candidates[0].get("content", {}).get("parts", [])
                             if parts:
                                 return parts[0].get("text", ""), None
-                    logger.warning(f"Model {clean_id} failed with 400: {resp2.text[:120]}")
                 elif resp.status_code == 429:
-                    last_error_msg = "התקבלה שגיאת הגבלת קצב או חריגה ממכסה מה-AI (שגיאה 429). אנא המתן מספר שניות ונסה שוב."
-                    logger.warning(f"Gemini 429 Rate Limit on {clean_id}: {resp.text[:120]}. Falling back to next model...")
+                    quota_errors_count += 1
+                    last_error_msg = "שרתי Google Gemini החזירו שגיאת מכסה (429 Quota Exceeded) - המכסה היומית של מפתח ה-API מוצתה לחלוטין (20 בקשות). הטקסט נשמר בשורת הקלט."
+                    logger.warning(f"Gemini 429 on {clean_id}: {resp.text[:120]}")
+                    # If already 2 consecutive models returned 429, don't keep hanging
+                    if quota_errors_count >= 2:
+                        return None, last_error_msg
                 elif resp.status_code == 503:
                     last_error_msg = "שרתי ה-AI של גוגל עמוסים זמנית (שגיאה 503). אנא נסה שוב בעוד מספר רגעים."
-                    logger.warning(f"Gemini 503 on {clean_id}: {resp.text[:120]}. Falling back to next model...")
+                    logger.warning(f"Gemini 503 on {clean_id}: {resp.text[:120]}")
                 else:
                     last_error_msg = f"שגיאת AI משרת גוגל (קוד {resp.status_code})."
                     logger.warning(f"Gemini call to {clean_id} returned {resp.status_code}: {resp.text[:120]}.")
             except httpx.TimeoutException:
-                last_error_msg = "זמן ההמתנה לשרת ה-AI פג (Timeout)."
+                if not last_error_msg:
+                    last_error_msg = "זמן ההמתנה לשרת ה-AI פג (Timeout)."
                 logger.warning(f"Timeout calling Gemini model {clean_id}.")
             except Exception as e:
-                last_error_msg = f"שגיאת תקשורת עם ה-AI: {str(e)}"
+                if not last_error_msg:
+                    last_error_msg = f"שגיאת תקשורת עם ה-AI: {str(e)}"
                 logger.warning(f"Error calling Gemini model {clean_id}: {e}.")
+
+    # If any model gave 429, prioritize reporting 429 rather than timeout
+    if quota_errors_count > 0:
+        return None, "שרתי Google Gemini החזירו שגיאת מכסה (429 Quota Exceeded) - המכסה היומית של מפתח ה-API מוצתה לחלוטין (20 בקשות). הטקסט נשמר בשורת הקלט."
 
     return None, (last_error_msg or "שירות ה-AI אינו זמין כרגע. אנא נסה שוב מאוחר יותר.")
 

@@ -44,18 +44,31 @@ def init_db():
         except Exception as e:
             print(f"Error seeding cache: {e}")
 
+        # Add new columns to gemini_models if they don't exist
+        from sqlalchemy import text
+        for col, col_type in [("status", "VARCHAR(50) DEFAULT 'active'"), ("status_message", "VARCHAR(255) DEFAULT ''"), ("latency", "FLOAT DEFAULT 0.0")]:
+            try:
+                db.execute(text(f"ALTER TABLE gemini_models ADD COLUMN {col} {col_type}"))
+                db.commit()
+            except Exception:
+                db.rollback()
+
         # Seed standard Gemini models if fewer than 2 models exist
         from models import GeminiModel
-        from ai_client import STANDARD_MODELS
+        from ai_client import PREFERRED_CORE_MODELS
         from datetime import datetime
         if db.query(GeminiModel).count() < 2:
             db.query(GeminiModel).delete()
-            for idx, (m_id, disp) in enumerate(STANDARD_MODELS):
+            for idx, m_id in enumerate(PREFERRED_CORE_MODELS):
+                disp = m_id.replace("models/", "").replace("-", " ").title()
                 db.add(GeminiModel(
                     model_id=m_id,
                     display_name=disp,
                     rank=idx + 1,
                     is_active=True,
+                    status="active",
+                    status_message="תקין ומוגדר",
+                    latency=1.5,
                     last_tested_at=datetime.utcnow()
                 ))
             db.commit()

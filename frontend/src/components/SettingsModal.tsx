@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AppSettings, Category } from '../types';
-import { ChevronDown, ChevronUp, ArrowUp, ArrowDown, Trash2, Download, Loader2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, ArrowUp, ArrowDown, Trash2, Download, Loader2, AlertTriangle, Clock } from 'lucide-react';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -205,42 +205,104 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
 
             {/* Minimized Models Accordion */}
-            <div className="border border-slate-100 rounded-xl overflow-hidden bg-slate-50/60">
+            <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-slate-50/60">
               <button
                 type="button"
                 onClick={() => setModelsExpanded(!modelsExpanded)}
-                className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors"
+                className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 transition-colors"
               >
-                <span>
-                  מודלים פעילים ב-Gemini ({settings?.gemini_models?.length || 0})
-                </span>
+                <div className="flex items-center gap-2">
+                  <span>
+                    מודלים שזוהו ב-Gemini ({settings?.gemini_models?.length || 0})
+                  </span>
+                  {(() => {
+                    const activeCount = settings?.gemini_models?.filter(m => m.status === 'active' || (!m.status && m.is_active)).length || 0;
+                    const quotaCount = settings?.gemini_models?.filter(m => m.status === 'quota_exhausted').length || 0;
+                    if (activeCount > 0) {
+                      return <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full font-normal">🟢 {activeCount} פעילים</span>;
+                    }
+                    if (quotaCount > 0) {
+                      return <span className="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded-full font-normal">🟡 הגיעו למגבלת מכסה</span>;
+                    }
+                    return null;
+                  })()}
+                </div>
                 {modelsExpanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
               </button>
 
               {modelsExpanded && (
-                <div className="p-2.5 bg-white border-t border-slate-100 space-y-1.5 max-h-40 overflow-y-auto">
-                  {settings?.gemini_models && settings.gemini_models.length > 0 ? (
-                    settings.gemini_models.map((m) => (
-                      <div
-                        key={m.id}
-                        className="flex items-center justify-between text-xs py-1 px-2 rounded bg-slate-50 text-slate-700"
-                      >
-                        <span className="font-mono text-[11px] truncate max-w-[200px]" dir="ltr">
-                          {m.model_id.replace('models/', '')}
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] text-slate-400">
-                            עדיפות #{m.rank}
-                          </span>
-                          <span className="w-2 h-2 rounded-full bg-emerald-500" title="פעיל ונבדק" />
-                        </div>
+                <div className="p-2.5 bg-white border-t border-slate-100 space-y-2">
+                  {/* Warning banner if quota exhausted on all or most models */}
+                  {settings?.gemini_models && settings.gemini_models.some(m => m.status === 'quota_exhausted') && !settings.gemini_models.some(m => m.status === 'active') && (
+                    <div className="p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-[11px] text-amber-900 leading-normal flex items-start gap-2">
+                      <AlertTriangle size={15} className="text-amber-600 shrink-0 mt-0.5" />
+                      <div>
+                        <span className="font-bold">המכסה היומית של גוגל מוצתה (שגיאה 429):</span>
+                        <p className="text-[10.5px] text-amber-800 mt-0.5">
+                          בחשבון Gemini חינמי, גוגל מגבילה את השימוש ל-20 בקשות ליום לכל מודל. כל המודלים הגיעו לתקרה זו. המכסה תתאפס אוטומטית על ידי גוגל ביממה הבאה, או שניתן להזין מפתח API נוסף.
+                        </p>
                       </div>
-                    ))
-                  ) : (
-                    <p className="text-xs text-slate-400 text-center py-2">
-                      הזן מפתח ולחץ על "סרוק מודלים" לגילוי כל המודלים הזמינים.
-                    </p>
+                    </div>
                   )}
+
+                  <div className="space-y-1.5 max-h-64 overflow-y-auto pr-0.5">
+                    {settings?.gemini_models && settings.gemini_models.length > 0 ? (
+                      settings.gemini_models.map((m) => {
+                        const status = m.status || (m.is_active ? 'active' : 'unavailable');
+                        return (
+                          <div
+                            key={m.id}
+                            className="flex items-center justify-between text-xs p-2 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors"
+                          >
+                            <div className="min-w-0 pr-1 text-right">
+                              <p className="font-semibold text-slate-800 text-[11px] truncate">
+                                {m.display_name || m.model_id.replace('models/', '')}
+                              </p>
+                              <p className="font-mono text-[9.5px] text-slate-400 truncate" dir="ltr">
+                                {m.model_id.replace('models/', '')}
+                              </p>
+                            </div>
+
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              {status === 'active' && (
+                                <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                  <span>פעיל {m.latency ? `(${m.latency}s)` : ''}</span>
+                                </span>
+                              )}
+                              {status === 'quota_exhausted' && (
+                                <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200 font-medium" title={m.status_message || "הגיע למגבלת מכסה יומית (שגיאה 429)"}>
+                                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                                  <span>מגבלת מכסה (429)</span>
+                                </span>
+                              )}
+                              {status === 'overloaded' && (
+                                <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-md bg-orange-50 text-orange-800 border border-orange-200 font-medium" title={m.status_message || "עומס זמני בשרת (שגיאה 503)"}>
+                                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+                                  <span>עומס זמני (503)</span>
+                                </span>
+                              )}
+                              {status === 'timeout' && (
+                                <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 border border-slate-200 font-medium" title={m.status_message || "זמן תגובה איטי"}>
+                                  <Clock size={11} className="text-slate-400" />
+                                  <span>חריגת זמן</span>
+                                </span>
+                              )}
+                              {status === 'unavailable' && (
+                                <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-400 border border-slate-200" title={m.status_message || "אינו זמין"}>
+                                  <span>לא נתמך</span>
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p className="text-xs text-slate-400 text-center py-3">
+                        הזן מפתח ולחץ על "סרוק מודלים" לגילוי וסריקת כל המודלים.
+                      </p>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

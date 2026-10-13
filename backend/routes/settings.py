@@ -27,22 +27,6 @@ def get_settings(db: Session = Depends(get_db)):
     masked_gemini = (gemini_key[:4] + "..." + gemini_key[-4:]) if len(gemini_key) > 8 else gemini_key
 
     models = db.query(GeminiModel).order_by(GeminiModel.rank.asc()).all()
-    if len(models) < 2:
-        from ai_client import STANDARD_MODELS
-        from datetime import datetime
-        db.query(GeminiModel).delete()
-        models = []
-        for idx, (m_id, disp) in enumerate(STANDARD_MODELS):
-            rec = GeminiModel(
-                model_id=m_id,
-                display_name=disp,
-                rank=idx + 1,
-                is_active=True,
-                last_tested_at=datetime.utcnow()
-            )
-            db.add(rec)
-            models.append(rec)
-        db.commit()
     models_list = [
         {
             "id": m.id,
@@ -50,6 +34,9 @@ def get_settings(db: Session = Depends(get_db)):
             "display_name": m.display_name,
             "rank": m.rank,
             "is_active": m.is_active,
+            "status": getattr(m, "status", "active") or "active",
+            "status_message": getattr(m, "status_message", "") or "",
+            "latency": getattr(m, "latency", 0.0) or 0.0,
             "last_tested": m.last_tested_at.isoformat() if m.last_tested_at else None
         }
         for m in models

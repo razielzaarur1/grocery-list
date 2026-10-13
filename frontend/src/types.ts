@@ -38,6 +38,9 @@ export interface GeminiModel {
   display_name: string;
   rank: number;
   is_active: boolean;
+  status?: string;
+  status_message?: string;
+  latency?: number;
   last_tested: string | null;
 }
 
