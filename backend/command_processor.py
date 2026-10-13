@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 
 from models import Item, Category
-from classifier import classify_item, save_to_cache, record_user_correction, check_local_cache
+from classifier import classify_item, save_to_cache, record_user_correction, check_local_cache, classify_locally
 from hebrew_utils import normalize_hebrew_text, hebrew_similarity
 from ai_client import call_gemini_with_fallback, extract_json
 
@@ -22,6 +22,36 @@ COMMAND_TRIGGER_WORDS = [
     "כל ה", "שמתחיל", "שנגמר", "שמכיל", "תרוקן", "רוקן", "לרוקן"
 ]
 
+HEADER_PATTERNS = [
+    r'^(רשימת\s+)?(קניות|סופר|מצרכים)(\s+לסופר|\s+לבית)?[:\s\.-]*$',
+    r'^(רשימה)[:\s\.-]*$',
+    r'^(קניות|מצרכים)[:\s\.-]*$'
+]
+
+def is_header_line(text: str) -> bool:
+    """Checks if a line is just a title/header like 'קניות', 'רשימת קניות'."""
+    clean = text.strip()
+    clean_norm = re.sub(r'[\'\"״׳:!\.-]', '', clean).strip()
+    for pat in HEADER_PATTERNS:
+        if re.match(pat, clean_norm):
+            return True
+    return False
+
+FEEDBACK_PATTERNS = [
+    r'^(יש\s+(הרבה|מלא|כמה)\s+פריטים).*',
+    r'^(למה|מדוע|איך|איפה|מדוע|האם)\s+.*',
+    r'^(תגיד|תסביר|שגיאה|הודעת שגיאה).*',
+    r'.*(שאמורים להיות|במקומות אחרים|בשונות|לא עובד|נתקע).*'
+]
+
+def is_feedback_or_conversational(text: str) -> bool:
+    """Checks if text looks like feedback, complaint or question rather than grocery items."""
+    clean = text.strip()
+    for pat in FEEDBACK_PATTERNS:
+        if re.search(pat, clean):
+            return True
+    return False
+
 def looks_like_command(text: str) -> bool:
     """
     Checks if the user input is an explicit command rather than items to add.
@@ -29,7 +59,7 @@ def looks_like_command(text: str) -> bool:
     clean = text.strip()
     words = clean.split()
     for w in words:
-        w_norm = re.sub(r'[\'\"״׳]', '', w).strip()
+        w_norm = re.sub(r'[\'\"״׳:!\.\?\-,]', '', w).strip()
         if w_norm in COMMAND_TRIGGER_WORDS:
             return True
         if len(w_norm) > 3 and w_norm[0] == 'ו' and w_norm[1:] in COMMAND_TRIGGER_WORDS:
@@ -54,15 +84,15 @@ def handle_local_command(
     Handles: delete all, delete checked, check all, uncheck all, delete category, delete single item.
     """
     clean = raw_text.strip()
-    norm = re.sub(r'[\'\"״׳]', '', clean).strip()
+    norm = re.sub(r'[\'\"״׳:!\.\?\-,]', '', clean).strip()
 
     # 1. Delete all items
     # Variations: תמחק את כל הפריטים, מחק את כל הפריטים, תמחק הכל, מחק הכל, תנקה הכל, רוקן הכל, תרוקן הכל, למחוק הכל, תמחק את כל הרשימה
     delete_all_patterns = [
-        r'^(ת?מחק|ת?מחוק|למחוק|ת?רוקן|לרוקן|ת?נקה|לנקות)\s+(את\s+)?(כל\s+)?(הפריטים|המוצרים|הרשימה|הכל)(\s+ברשימה)?$',
-        r'^(ת?מחק|ת?מחוק|למחוק|ת?רוקן|לרוקן|ת?נקה|לנקות)\s+הכל$',
-        r'^(רוקן|ת?רוקן|לרוקן)(\s+את)?\s+הרשימה$',
-        r'^(נקה|ת?נקה|לנקות)(\s+את)?\s+הרשימה$'
+        r'^(בבקשה\s+|אפשר\s+)?(ת?מחק|ת?מחוק|למחוק|ת?רוקן|לרוקן|ת?נקה|לנקות)\s+(את\s+)?(כל\s+)?(הפריטים|המוצרים|הרשימה|הכל)(\s+ברשימה)?$',
+        r'^(בבקשה\s+|אפשר\s+)?(ת?מחק|ת?מחוק|למחוק|ת?רוקן|לרוקן|ת?נקה|לנקות)\s+הכל$',
+        r'^(בבקשה\s+|אפשר\s+)?(רוקן|ת?רוקן|לרוקן)(\s+את)?\s+הרשימה$',
+        r'^(בבקשה\s+|אפשר\s+)?(נקה|ת?נקה|לנקות)(\s+את)?\s+הרשימה$'
     ]
     for pat in delete_all_patterns:
         if re.match(pat, norm):
@@ -77,7 +107,7 @@ def handle_local_command(
     # 2. Delete checked items
     # Variations: תמחק את כל המסומנים, מחק מסומנים, תמחק מסומנים, נקה מסומנים
     delete_checked_patterns = [
-        r'^(ת?מחק|ת?מחוק|למחוק|ת?נקה|לנקות)\s+(את\s+)?(כל\s+)?(ה?מסומנים|ה?מחוקים)(\s+ברשימה)?$',
+        r'^(בבקשה\s+|אפשר\s+)?(ת?מחק|ת?מחוק|למחוק|ת?נקה|לנקות)\s+(את\s+)?(כל\s+)?(ה?מסומנים|ה?מחוקים)(\s+ברשימה)?$',
     ]
     for pat in delete_checked_patterns:
         if re.match(pat, norm):
@@ -94,8 +124,8 @@ def handle_local_command(
 
     # 3. Check all items
     check_all_patterns = [
-        r'^(ת?סמן|לסמן)\s+(את\s+)?(כל\s+)?(הפריטים|המוצרים|הרשימה|הכל)(\s+ברשימה)?$',
-        r'^(ת?סמן|לסמן)\s+הכל$',
+        r'^(בבקשה\s+|אפשר\s+)?(ת?סמן|לסמן)\s+(את\s+)?(כל\s+)?(הפריטים|המוצרים|הרשימה|הכל)(\s+ברשימה)?$',
+        r'^(בבקשה\s+|אפשר\s+)?(ת?סמן|לסמן)\s+הכל$',
     ]
     for pat in check_all_patterns:
         if re.match(pat, norm):
@@ -180,6 +210,17 @@ async def process_user_input(
     raw_text = raw_text.strip()
     if not raw_text:
         return {"success": True, "message": "טקסט ריק", "items_affected": []}
+
+    # Filter standalone headers or feedback
+    if is_header_line(raw_text):
+        return {"success": True, "message": "כותרת (לא נוספה כפריט)", "items_affected": []}
+
+    if is_feedback_or_conversational(raw_text):
+        return {
+            "success": True,
+            "message": "ההודעה זוהתה כמשוב או פנייה ולא נוספה כפריט לרשימה.",
+            "items_affected": []
+        }
 
     categories = db.query(Category).order_by(Category.order_index.asc()).all()
     if not categories:
@@ -399,18 +440,30 @@ async def process_items_list(
     ai_warning = None
 
     for part in raw_parts:
+        # Filter header or feedback lines
+        if is_header_line(part):
+            continue
+        if is_feedback_or_conversational(part):
+            continue
+
+        # If a line inside is a command, execute it locally
+        local_cmd = handle_local_command(part, categories, db)
+        if local_cmd:
+            continue
+
         parsed_simple = parse_simple_item(part)
+        if not parsed_simple["name"]:
+            continue
         
-        # Check local cache first (runs in 0ms, zero API cost)
-        cached_match = check_local_cache(parsed_simple["name"], categories, db, threshold=0.99)
-        if cached_match and not (parsed_simple["note"] and len(parsed_simple["note"]) > 30):
-            cat, conf = cached_match
+        # Check local classifier first (runs in 0ms, zero API cost)
+        local_match = classify_locally(parsed_simple["name"], categories, db)
+        if local_match and local_match[0].name != "שונות" and local_match[1] >= 0.85:
             local_resolved.append({
                 "name": parsed_simple["name"],
                 "quantity": parsed_simple["quantity"],
                 "unit": parsed_simple["unit"],
                 "note": parsed_simple["note"],
-                "category": cat
+                "category": local_match[0]
             })
             continue
 
@@ -477,7 +530,7 @@ async def process_items_list(
 def parse_simple_item(part: str) -> Dict[str, str]:
     """
     Fast local extractor for Hebrew items, including inline notes and conditions:
-    e.g. 'בשר טחון אבל רק אם זול', 'חלב 3% 2', 'לחם שחור - פרוס'
+    e.g. 'בשר טחון אבל רק אם זול', 'חלב 3% 2', 'לחם שחור - פרוס', 'קוטג תוקף ארוך'
     """
     name = part.strip()
     quantity = ""
@@ -495,27 +548,31 @@ def parse_simple_item(part: str) -> Dict[str, str]:
         note = f"{note} {paren_match.group(1)}".strip()
         name = re.sub(r'\(.+?\)', '', name).strip()
 
-    # 2. Extract Hebrew conversational notes (אבל, רק אם, בתנאי ש, בלי, ללא)
-    convo_note_match = re.search(r'\s+(אבל\s+.+|רק\s+אם\s+.+|אם\s+יש\s+.+|בתנאי\s+ש.+|ללא\s+.+|בלי\s+.+)$', name)
+    # 2. Extract Hebrew conversational notes (אבל, רק אם, בתנאי ש, בלי, ללא, לא, תוקף, עדיף)
+    convo_note_match = re.search(r'\s+(אבל\s+רק\s+אם\s+.+|אבל\s+.+|רק\s+אם\s+.+|אם\s+יש\s+.+|אם\s+.+|בתנאי\s+ש.+|ללא\s+.+|בלי\s+.+|לא\s+.+|תוקף\s+.+|עדיף\s+.+)$', name)
     if convo_note_match:
         extracted_note = convo_note_match.group(1).strip()
         note = f"{note} {extracted_note}".strip()
         name = name[:convo_note_match.start()].strip()
 
+    # Strip trailing punctuation like .., :, etc.
+    name = re.sub(r'[\.:!\-]+$', '', name).strip()
+    note = re.sub(r'[\.:!\-]+$', '', note).strip()
+
     # 3. Match standalone unit words
-    standalone_unit = re.search(r'\s+(תבנית|חבילה|שקית|בקבוק|קרטון|מארז|יח\'|יחידות)$', name)
+    standalone_unit = re.search(r'\s+(תבנית|חבילה|שקית|בקבוק|קרטון|מארז|יח\'|יחידות|קופסה|קופסא|צנצנת)$', name)
     if standalone_unit:
         unit = standalone_unit.group(1)
         name = name[:standalone_unit.start()].strip()
     else:
         # Match quantity & unit at end or start
-        qty_unit_end = re.search(r'\s+(\d+(?:\.\d+)?)\s*(ק"ג|קג|גרם|גר|ליטר|יח\'|יחידות|חבילה|תבנית|בקבוק|מארז)?$', name)
+        qty_unit_end = re.search(r'\s+(\d+(?:\.\d+)?)\s*(ק"ג|קג|גרם|גר|ליטר|יח\'|יחידות|חבילה|תבנית|בקבוק|מארז|קופסה|קופסא|צנצנת)?$', name)
         if qty_unit_end:
             quantity = qty_unit_end.group(1)
             unit = qty_unit_end.group(2) or ""
             name = name[:qty_unit_end.start()].strip()
         else:
-            qty_unit_start = re.match(r'^(\d+(?:\.\d+)?)\s*(ק"ג|קג|גרם|גר|ליטר|יח\'|יחידות|חבילה|תבנית|בקבוק|מארז)?\s+(.+)$', name)
+            qty_unit_start = re.match(r'^(\d+(?:\.\d+)?)\s*(ק"ג|קג|גרם|גר|ליטר|יח\'|יחידות|חבילה|תבנית|בקבוק|מארז|קופסה|קופסא|צנצנת)?\s+(.+)$', name)
             if qty_unit_start:
                 quantity = qty_unit_start.group(1)
                 unit = qty_unit_start.group(2) or ""
@@ -596,9 +653,11 @@ async def parse_items_with_ai(
             cat_name = item_obj.get("category", "")
             cat = categories_map.get(cat_name)
             if not cat:
-                cat, _, _ = await classify_item(name, categories, db)
-            if not cat:
-                cat = default_cat
+                local_m = classify_locally(name, categories, db)
+                if local_m:
+                    cat = local_m[0]
+                else:
+                    cat = default_cat
 
             save_to_cache(normalize_hebrew_text(name), cat.id, 1.0, "ai", db)
 
@@ -610,10 +669,11 @@ async def parse_items_with_ai(
                 "category": cat
             })
     else:
-        # Fallback to simple local parser if Gemini failed
+        # Fallback to ultra-fast local classifier if Gemini failed (prevents 429 cascades!)
         for raw in items_raw:
             simple = parse_simple_item(raw)
-            cat, _, _ = await classify_item(simple["name"], categories, db)
+            local_m = classify_locally(simple["name"], categories, db)
+            cat = local_m[0] if local_m else default_cat
             results.append({
                 "name": simple["name"],
                 "quantity": simple["quantity"],
