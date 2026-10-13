@@ -1,0 +1,10 @@
+{
+    admin off
+}
+
+https://:8888 {
+    tls internal {
+        on_demand
+    }
+    reverse_proxy frontend:80
+}

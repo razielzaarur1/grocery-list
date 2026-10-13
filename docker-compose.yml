@@ -17,8 +17,21 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: grocery_frontend
-    ports:
-      - "8888:80"
+    expose:
+      - "80"
     depends_on:
       - backend
     restart: unless-stopped
+
+  caddy:
+    image: caddy:alpine
+    container_name: grocery_caddy
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./data/caddy_data:/data
+      - ./data/caddy_config:/config
+    depends_on:
+      - frontend
