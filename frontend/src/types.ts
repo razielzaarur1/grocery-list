@@ -44,9 +44,16 @@ export interface GeminiModel {
   last_tested: string | null;
 }
 
+export interface GeminiApiKeyItem {
+  key: string;
+  masked_key: string;
+  is_primary: boolean;
+}
+
 export interface AppSettings {
   gemini_api_key: string;
   masked_gemini_key: string;
+  gemini_api_keys?: GeminiApiKeyItem[];
   telegram_bot_token: string;
   telegram_chat_id_1: string;
   telegram_chat_id_2: string;

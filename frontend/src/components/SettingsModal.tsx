@@ -33,6 +33,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const [tgChat2, setTgChat2] = useState('');
 
   const [modelsExpanded, setModelsExpanded] = useState(false);
+  const [newApiKey, setNewApiKey] = useState('');
+  const [addingKey, setAddingKey] = useState(false);
+  const [deletingKey, setDeletingKey] = useState<string | null>(null);
   const [newCatName, setNewCatName] = useState('');
   const [saving, setSaving] = useState(false);
   const [scanning, setScanning] = useState(false);
@@ -93,11 +96,50 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   const handleScan = async () => {
     setScanning(true);
-    setSaveStatus('סורק ומאמת מודלים מול Google Gemini...');
+    setSaveStatus('סורק ומאמת מודלים ומפתחות מול Google Gemini...');
     await onScanModels();
     setScanning(false);
-    setSaveStatus('סריקת המודלים הושלמה בהצלחה!');
+    setSaveStatus('סריקת המודלים והמפתחות הושלמה בהצלחה!');
     setTimeout(() => setSaveStatus(null), 3500);
+  };
+
+  const handleAddApiKey = async () => {
+    if (!newApiKey.trim()) return;
+    const keyToAdd = newApiKey.trim();
+    setAddingKey(true);
+    try {
+      const res = await fetch('/api/settings/keys', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: keyToAdd })
+      });
+      if (res.ok) {
+        setNewApiKey('');
+        await onScanModels();
+      }
+    } catch (err) {
+      console.error('Failed to add API key:', err);
+    } finally {
+      setAddingKey(false);
+    }
+  };
+
+  const handleDeleteApiKey = async (keyToDelete: string) => {
+    setDeletingKey(keyToDelete);
+    try {
+      const res = await fetch('/api/settings/keys', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: keyToDelete })
+      });
+      if (res.ok) {
+        await onScanModels();
+      }
+    } catch (err) {
+      console.error('Failed to delete API key:', err);
+    } finally {
+      setDeletingKey(null);
+    }
   };
 
   const handleTestTg = async () => {
@@ -176,31 +218,109 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </div>
 
           {/* Gemini AI Settings */}
-          <div className="space-y-2.5">
-            <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-              בינה מלאכותית (Google Gemini)
-            </h3>
-            <div>
-              <label className="block text-[11px] text-slate-500 mb-1">
-                Gemini API Key
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                בינה מלאכותית (Google Gemini)
+              </h3>
+              <button
+                type="button"
+                onClick={handleScan}
+                disabled={scanning}
+                className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition-colors disabled:opacity-50 whitespace-nowrap flex items-center gap-1.5"
+              >
+                {scanning && <Loader2 size={12} className="animate-spin" />}
+                <span>{scanning ? 'סורק מפתחות ומודלים...' : 'סרוק ובדוק הכל'}</span>
+              </button>
+            </div>
+
+            {/* List of Configured API Keys */}
+            <div className="space-y-2">
+              <label className="block text-[11px] font-semibold text-slate-700">
+                מפתחות API מוגדרים ({settings?.gemini_api_keys?.length || (geminiKey ? 1 : 0)})
               </label>
-              <div className="flex gap-2">
-                <input
-                  type="password"
-                  value={geminiKey}
-                  onChange={(e) => setGeminiKey(e.target.value)}
-                  placeholder="AIzaSy..."
-                  className="flex-1 px-3 py-1.5 border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-slate-400 text-left font-mono"
-                />
-                <button
-                  type="button"
-                  onClick={handleScan}
-                  disabled={scanning || !geminiKey}
-                  className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition-colors disabled:opacity-50 whitespace-nowrap flex items-center gap-1"
-                >
-                  {scanning && <Loader2 size={12} className="animate-spin" />}
-                  <span>{scanning ? 'סורק...' : 'סרוק מודלים'}</span>
-                </button>
+
+              <div className="space-y-1.5 max-h-36 overflow-y-auto">
+                {settings?.gemini_api_keys && settings.gemini_api_keys.length > 0 ? (
+                  settings.gemini_api_keys.map((kItem, idx) => (
+                    <div
+                      key={kItem.key || idx}
+                      className="flex items-center justify-between p-2 rounded-xl border border-slate-200/80 bg-slate-50/70 text-xs"
+                    >
+                      <div className="flex items-center gap-2 min-w-0 pr-1">
+                        <span className="font-mono text-[11.5px] text-slate-700 tracking-wider" dir="ltr">
+                          {kItem.masked_key}
+                        </span>
+                        {kItem.is_primary && (
+                          <span className="px-1.5 py-0.5 rounded text-[9.5px] bg-slate-200 text-slate-700 font-medium">
+                            ראשי
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteApiKey(kItem.key)}
+                          disabled={deletingKey === kItem.key}
+                          title="מחק מפתח זה"
+                          className="p-1 text-slate-400 hover:text-rose-500 rounded-lg transition-colors hover:bg-rose-50"
+                        >
+                          {deletingKey === kItem.key ? (
+                            <Loader2 size={13} className="animate-spin text-rose-500" />
+                          ) : (
+                            <Trash2 size={13} />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                ) : geminiKey ? (
+                  <div className="flex items-center justify-between p-2 rounded-xl border border-slate-200/80 bg-slate-50/70 text-xs">
+                    <span className="font-mono text-[11.5px] text-slate-700 tracking-wider" dir="ltr">
+                      {settings?.masked_gemini_key || (geminiKey.slice(0, 4) + '...' + geminiKey.slice(-4))}
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded text-[9.5px] bg-slate-200 text-slate-700 font-medium">
+                      ראשי
+                    </span>
+                  </div>
+                ) : (
+                  <p className="text-[11px] text-slate-400 italic">לא הוגדר עדיין אף מפתח API.</p>
+                )}
+              </div>
+
+              {/* Add New API Key Input */}
+              <div className="pt-1 bg-slate-50 border border-slate-200/70 rounded-xl p-2.5 space-y-1.5">
+                <label className="block text-[10.5px] font-medium text-slate-600">
+                  הוספת מפתח API נוסף (לניתוב אוטומטי כשנגמרת המכסה):
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="password"
+                    value={newApiKey}
+                    onChange={(e) => setNewApiKey(e.target.value)}
+                    placeholder="הדבק מפתח חדש מחשבון נוסף..."
+                    className="flex-1 px-3 py-1.5 border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-slate-400 text-left font-mono bg-white"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleAddApiKey();
+                      }
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddApiKey}
+                    disabled={addingKey || !newApiKey.trim()}
+                    className="px-3 py-1.5 bg-[#1e232a] hover:bg-black text-white rounded-lg text-xs font-medium transition-colors disabled:opacity-50 whitespace-nowrap flex items-center gap-1 shadow-sm"
+                  >
+                    {addingKey && <Loader2 size={12} className="animate-spin" />}
+                    <span>{addingKey ? 'מוסיף...' : '+ הוסף מפתח'}</span>
+                  </button>
+                </div>
+                <p className="text-[10px] text-slate-500 leading-normal">
+                  💡 <strong>ניתוב אוטומטי:</strong> ניתן להוסיף מפתחות מחשבונות Google שונים ב-Google AI Studio. כשאחד מגיע ל-20 בקשות/יום, המערכת תעבור מיד למפתח הבא!
+                </p>
               </div>
             </div>
 

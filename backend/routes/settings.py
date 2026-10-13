@@ -6,25 +6,44 @@ import httpx
 
 from database import get_db
 from models import Setting, GeminiModel
-from ai_client import scan_and_verify_gemini_models
+from ai_client import (
+    scan_and_verify_gemini_models,
+    get_all_api_keys,
+    save_all_api_keys,
+)
 
 router = APIRouter(prefix="/api/settings", tags=["settings"])
 
 class SettingsUpdateRequest(BaseModel):
     gemini_api_key: Optional[str] = None
+    gemini_api_keys: Optional[List[str]] = None
     telegram_bot_token: Optional[str] = None
     telegram_chat_id_1: Optional[str] = None
     telegram_chat_id_2: Optional[str] = None
 
+class AddApiKeyRequest(BaseModel):
+    key: str
+
+class DeleteApiKeyRequest(BaseModel):
+    key: str
+
 @router.get("")
 def get_settings(db: Session = Depends(get_db)):
-    """Returns current settings and verified Gemini models list."""
+    """Returns current settings, all API keys, and verified Gemini models list."""
     settings_rows = db.query(Setting).all()
     settings_dict = {s.key: s.value for s in settings_rows}
 
-    # Hide part of secret keys for safety in UI
-    gemini_key = settings_dict.get("gemini_api_key", "")
-    masked_gemini = (gemini_key[:4] + "..." + gemini_key[-4:]) if len(gemini_key) > 8 else gemini_key
+    all_keys = get_all_api_keys(db)
+    keys_list = [
+        {
+            "key": k,
+            "masked_key": (k[:4] + "..." + k[-4:]) if len(k) > 8 else k,
+            "is_primary": idx == 0
+        }
+        for idx, k in enumerate(all_keys)
+    ]
+    primary_key = all_keys[0] if all_keys else ""
+    masked_primary = (primary_key[:4] + "..." + primary_key[-4:]) if len(primary_key) > 8 else primary_key
 
     models = db.query(GeminiModel).order_by(GeminiModel.rank.asc()).all()
     models_list = [
@@ -43,8 +62,9 @@ def get_settings(db: Session = Depends(get_db)):
     ]
 
     return {
-        "gemini_api_key": gemini_key,
-        "masked_gemini_key": masked_gemini,
+        "gemini_api_key": primary_key,
+        "masked_gemini_key": masked_primary,
+        "gemini_api_keys": keys_list,
         "telegram_bot_token": settings_dict.get("telegram_bot_token", ""),
         "telegram_chat_id_1": settings_dict.get("telegram_chat_id_1", ""),
         "telegram_chat_id_2": settings_dict.get("telegram_chat_id_2", ""),
@@ -53,51 +73,76 @@ def get_settings(db: Session = Depends(get_db)):
 
 @router.post("")
 async def update_settings(req: SettingsUpdateRequest, db: Session = Depends(get_db)):
-    """Updates settings and triggers Gemini model scan if key changed."""
-    updated = {}
+    """Updates settings and triggers Gemini model scan if keys changed."""
     key_changed = False
+    current_keys = get_all_api_keys(db)
 
-    if req.gemini_api_key is not None:
-        curr_key = db.query(Setting).filter(Setting.key == "gemini_api_key").first()
-        new_val = req.gemini_api_key.strip()
-        if not curr_key or curr_key.value != new_val:
+    if req.gemini_api_keys is not None:
+        new_keys = [k.strip() for k in req.gemini_api_keys if k.strip()]
+        if new_keys != current_keys:
             key_changed = True
-        _set_setting(db, "gemini_api_key", new_val)
-        updated["gemini_api_key"] = new_val
+            save_all_api_keys(new_keys, db)
+    elif req.gemini_api_key is not None:
+        new_val = req.gemini_api_key.strip()
+        if not current_keys or current_keys[0] != new_val:
+            key_changed = True
+            other_keys = [k for k in current_keys if k != new_val]
+            save_all_api_keys([new_val] + other_keys if new_val else other_keys, db)
 
     if req.telegram_bot_token is not None:
         _set_setting(db, "telegram_bot_token", req.telegram_bot_token.strip())
-        updated["telegram_bot_token"] = req.telegram_bot_token.strip()
 
     if req.telegram_chat_id_1 is not None:
         _set_setting(db, "telegram_chat_id_1", req.telegram_chat_id_1.strip())
-        updated["telegram_chat_id_1"] = req.telegram_chat_id_1.strip()
 
     if req.telegram_chat_id_2 is not None:
         _set_setting(db, "telegram_chat_id_2", req.telegram_chat_id_2.strip())
-        updated["telegram_chat_id_2"] = req.telegram_chat_id_2.strip()
 
     db.commit()
 
     scanned_models = []
-    # If Gemini API key changed or was set, scan & verify models
-    if key_changed and req.gemini_api_key:
-        scanned_models = await scan_and_verify_gemini_models(req.gemini_api_key.strip(), db)
+    if key_changed:
+        scanned_models = await scan_and_verify_gemini_models(db)
 
     return {
         "success": True,
         "scanned_models_count": len(scanned_models) if key_changed else None
     }
 
+@router.post("/keys")
+async def add_api_key(req: AddApiKeyRequest, db: Session = Depends(get_db)):
+    """Appends a new Gemini API key, validates, and triggers rescan."""
+    new_k = req.key.strip()
+    if not new_k:
+        raise HTTPException(status_code=400, detail="מפתח ה-API ריק")
+
+    keys = get_all_api_keys(db)
+    if new_k in keys:
+        return {"success": True, "message": "המפתח כבר קיים במערכת", "keys_count": len(keys)}
+
+    keys.append(new_k)
+    save_all_api_keys(keys, db)
+    await scan_and_verify_gemini_models(db)
+    return {"success": True, "message": "מפתח API נוסף בהצלחה", "keys_count": len(keys)}
+
+@router.delete("/keys")
+async def delete_api_key(req: DeleteApiKeyRequest, db: Session = Depends(get_db)):
+    """Removes a Gemini API key and rescans remaining keys."""
+    target_k = req.key.strip()
+    keys = get_all_api_keys(db)
+    filtered = [k for k in keys if k != target_k]
+    save_all_api_keys(filtered, db)
+    await scan_and_verify_gemini_models(db)
+    return {"success": True, "message": "המפתח הוסר", "keys_count": len(filtered)}
+
 @router.post("/gemini/scan")
 async def scan_models(db: Session = Depends(get_db)):
-    """Manually scans and tests all Gemini models."""
-    key_row = db.query(Setting).filter(Setting.key == "gemini_api_key").first()
-    key = key_row.value.strip() if key_row and key_row.value else ""
-    if not key:
-        raise HTTPException(status_code=400, detail="לא הוגדר מפתח Gemini API")
+    """Manually scans and tests all Gemini models across all configured keys."""
+    keys = get_all_api_keys(db)
+    if not keys:
+        raise HTTPException(status_code=400, detail="לא הוגדר אף מפתח Gemini API")
 
-    models = await scan_and_verify_gemini_models(key, db)
+    models = await scan_and_verify_gemini_models(db)
     return {
         "success": True,
         "models": models
