@@ -12,6 +12,15 @@ https://:8888 {
         reverse_proxy backend:8000
     }
 
+    # Download Caddy root CA certificate to install on phone / devices
+    handle /ca.crt {
+        root * /data/caddy/pki/authorities/local
+        rewrite * /root.crt
+        header Content-Type "application/x-x509-ca-cert"
+        header Content-Disposition "attachment; filename=root.crt"
+        file_server
+    }
+
     # Ensure PWA manifest and service worker are not stale cached
     @pwaAssets {
         path /manifest.json /sw.js
