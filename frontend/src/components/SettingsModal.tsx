@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AppSettings, Category } from '../types';
-import { ChevronDown, ChevronUp, ArrowUp, ArrowDown, Trash2, Download, Loader2, AlertTriangle, Clock, ShieldCheck } from 'lucide-react';
+import { ChevronDown, ChevronUp, ArrowUp, ArrowDown, Trash2, Download, Loader2, AlertTriangle, Clock } from 'lucide-react';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -195,39 +195,19 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         {/* Content body */}
         <div className="overflow-y-auto p-4 space-y-5 text-right">
           {/* PWA Install Button */}
-          <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 space-y-2">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-semibold text-slate-800">התקנת האפליקציה בטלפון (PWA)</p>
-                <p className="text-[11px] text-slate-500">התקנה מלאה במסך הבית ללא שורת כתובת</p>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <a
-                  href="/ca.crt"
-                  download="root.crt"
-                  className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 rounded-lg text-xs font-medium transition-colors"
-                  title="הורד תעודת אבטחה לטלפון"
-                >
-                  <ShieldCheck size={14} className="text-emerald-600" />
-                  <span>הורד תעודה</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={handleInstallPWA}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1e232a] text-white rounded-lg text-xs font-medium hover:bg-black transition-colors"
-                >
-                  <Download size={14} />
-                  <span>התקן</span>
-                </button>
-              </div>
+          <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 flex items-center justify-between">
+            <div>
+              <p className="text-xs font-semibold text-slate-800">התקנת האפליקציה בטלפון (PWA)</p>
+              <p className="text-[11px] text-slate-500">התקנה מהירה במסך הבית של הטלפון</p>
             </div>
-            <div className="p-2 bg-emerald-50/80 border border-emerald-200/60 rounded-lg text-[10.5px] text-emerald-800 leading-normal">
-              <strong>להעלמת השורה השחורה למעלה:</strong>
-              <br />
-              • <strong>בטלפון סמסונג:</strong> פתח את הכתובת ב-<strong>Samsung Internet</strong> ובחר &quot;הוסף עמוד אל מסך הבית&quot; – נפתח מיד נקי ללא שום שורה!
-              <br />
-              • <strong>ב-Chrome:</strong> לחץ על &quot;הורד תעודה&quot; למעלה, גש בהגדרות הטלפון ל-<em>אבטחה &gt; התקנת תעודת CA</em>, והתקן את הקובץ. השורה תעלם לחלוטין!
-            </div>
+            <button
+              type="button"
+              onClick={handleInstallPWA}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1e232a] text-white rounded-lg text-xs font-medium hover:bg-black transition-colors"
+            >
+              <Download size={14} />
+              <span>התקן אפליקציה</span>
+            </button>
           </div>
 
           {/* Gemini AI Settings */}
