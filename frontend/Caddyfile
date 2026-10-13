@@ -1,0 +1,27 @@
+{
+    admin off
+}
+
+https://:8888 {
+    tls internal {
+        on_demand
+    }
+
+    # Route API endpoints directly to backend
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # Ensure PWA manifest and service worker are not stale cached
+    @pwaAssets {
+        path /manifest.json /sw.js
+    }
+    header @pwaAssets Cache-Control "no-cache, no-store, must-revalidate"
+
+    # Serve static frontend with SPA fallback
+    handle {
+        root * /usr/share/caddy
+        try_files {path} /index.html
+        file_server
+    }
+}

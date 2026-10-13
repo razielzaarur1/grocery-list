@@ -17,26 +17,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: grocery_frontend
-    expose:
-      - "80"
+    ports:
+      - "8888:8888"
     depends_on:
       - backend
     restart: unless-stopped
-
-  caddy:
-    image: caddy:alpine
-    container_name: grocery_caddy
-    restart: unless-stopped
-    ports:
-      - "8888:8888"
-    entrypoint: >
-      sh -c "printf '{\n  admin off\n}\n\nhttps://:8888 {\n  tls internal {\n    on_demand\n  }\n  reverse_proxy frontend:80\n}\n' > /etc/caddy/Caddyfile && exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile"
-    volumes:
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - frontend
-
-volumes:
-  caddy_data:
-  caddy_config:
