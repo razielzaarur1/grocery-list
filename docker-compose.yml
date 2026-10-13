@@ -29,9 +29,14 @@ services:
     restart: unless-stopped
     ports:
       - "8888:8888"
+    entrypoint: >
+      sh -c "printf '{\n  admin off\n}\n\nhttps://:8888 {\n  tls internal {\n    on_demand\n  }\n  reverse_proxy frontend:80\n}\n' > /etc/caddy/Caddyfile && exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - ./data/caddy_data:/data
-      - ./data/caddy_config:/config
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
       - frontend
+
+volumes:
+  caddy_data:
+  caddy_config:
