@@ -382,7 +382,7 @@ async def execute_dynamic_command(
     """
     current_items = db.query(Item).all()
     categories_map = {c.name: c for c in categories}
-    cat_id_to_name = {c.id: c for c in categories}
+    cat_id_to_name = {c.id: c.name for c in categories}
 
     list_representation = [
         {

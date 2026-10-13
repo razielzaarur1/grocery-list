@@ -84,14 +84,19 @@ def get_api_key(db: Session) -> str:
     keys = get_all_api_keys(db)
     return keys[0] if keys else ""
 
-def should_disable_thinking(model_id: str) -> bool:
+def get_thinking_config(model_id: str) -> Optional[Dict[str, Any]]:
     """
-    Checks if model supports thinkingConfig with thinkingBudget=0.
-    Lite models and standard flash models fail with 400 Bad Request if thinkingConfig is attached.
-    Only gemini-3 non-lite models support thinkingBudget=0 safely.
+    Minimizes internal thinking/reasoning latency for models that support it.
+    Gemini 2.5, 3, and Flash Lite models spend dozens of seconds generating
+    internal thoughts unless thinkingBudget is set.
+    Setting thinkingBudget=1 reduces latency from 30-60s to 1-2s.
+    Models that do not support thinkingConfig will return 400, which we catch
+    and retry without thinkingConfig.
     """
     clean_id = model_id.lower()
-    return "gemini-3" in clean_id and "lite" not in clean_id
+    if any(k in clean_id for k in ["gemini-3", "gemini-2.5", "flash-lite", "thinking"]):
+        return {"thinkingBudget": 1}
+    return None
 
 async def test_single_model(client: httpx.AsyncClient, model_id: str, api_key: str) -> Dict[str, Any]:
     """
@@ -104,12 +109,13 @@ async def test_single_model(client: httpx.AsyncClient, model_id: str, api_key: s
         "contents": [{"parts": [{"text": "1"}]}],
         "generationConfig": {"maxOutputTokens": 2}
     }
-    if should_disable_thinking(clean_id):
-        payload["generationConfig"]["thinkingConfig"] = {"thinkingBudget": 0}
+    tc = get_thinking_config(clean_id)
+    if tc:
+        payload["generationConfig"]["thinkingConfig"] = tc
 
     t0 = asyncio.get_event_loop().time()
     try:
-        resp = await client.post(url, json=payload, timeout=2.5)
+        resp = await client.post(url, json=payload, timeout=4.0)
         dt = asyncio.get_event_loop().time() - t0
         if resp.status_code == 200:
             return {
@@ -137,7 +143,7 @@ async def test_single_model(client: httpx.AsyncClient, model_id: str, api_key: s
             }
         elif resp.status_code == 400 and "thinkingConfig" in payload.get("generationConfig", {}):
             del payload["generationConfig"]["thinkingConfig"]
-            resp2 = await client.post(url, json=payload, timeout=2.5)
+            resp2 = await client.post(url, json=payload, timeout=4.0)
             dt2 = asyncio.get_event_loop().time() - t0
             if resp2.status_code == 200:
                 return {
@@ -182,8 +188,8 @@ async def test_single_model(client: httpx.AsyncClient, model_id: str, api_key: s
         return {
             "model_id": clean_id,
             "status": "timeout",
-            "status_message": "חריגת זמן תגובה (>2.5s)",
-            "latency": 3.0,
+            "status_message": "חריגת זמן תגובה (>4.0s)",
+            "latency": 4.0,
             "is_active": False
         }
     except Exception as e:
@@ -246,8 +252,8 @@ async def scan_and_verify_gemini_models(db: Session, api_key: Optional[str] = No
                         disp = m.get("displayName", "")
                         methods = m.get("supportedGenerationMethods", [])
                         if "generateContent" in methods:
-                            if not any(x in name.lower() for x in [
-                                "tts", "clip", "robotics", "computer-use", "aqa", "embed", "transcribe", "banana", "lyria", "argon"
+                            if "gemini" in name.lower() and not any(x in name.lower() for x in [
+                                "tts", "clip", "robotics", "computer-use", "aqa", "embed", "transcribe", "banana", "lyria", "argon", "gemma"
                             ]):
                                 available_map[name] = disp or name.replace("models/", "")
                     if available_map:
@@ -333,6 +339,9 @@ async def call_gemini_with_fallback(
 ) -> tuple[Optional[str], Optional[str]]:
     """
     Calls Gemini API routing across ALL configured API keys and fast Gemini Flash models.
+    Supports dynamic generous timeout (25s - 60s) based on prompt complexity to prevent
+    premature timeout failures on large grocery lists or complex instructions.
+    Prioritizes models currently marked active in DB.
     If Key 1 hits 429 quota exhaustion, immediately fails over to Key 2, Key 3, etc.
     Returns (result_text, error_message).
     """
@@ -341,25 +350,47 @@ async def call_gemini_with_fallback(
         logger.warning("No Gemini API keys configured.")
         return None, "לא הוגדר אף מפתח Gemini API בהגדרות"
 
-    # Fast, high-accuracy flash models
-    candidate_model_ids = [
+    # Compute generous dynamic timeout: minimum 25.0s, scaling up to 60.0s for long texts
+    prompt_len = len(prompt)
+    dynamic_timeout = max(25.0, min(60.0, 25.0 + (prompt_len / 40.0)))
+
+    # Fetch models currently active in DB, ordered by lowest latency
+    active_db_models: List[str] = []
+    try:
+        active_db_models = [
+            m.model_id for m in db.query(GeminiModel).filter(
+                GeminiModel.status == "active",
+                GeminiModel.model_id.ilike("%gemini%")
+            ).order_by(GeminiModel.latency.asc()).all()
+        ]
+    except Exception as e:
+        logger.warning(f"Could not read active models from DB: {e}")
+
+    # Build prioritized candidate models list
+    candidate_model_ids: List[str] = list(active_db_models)
+    for default_m in [
+        "models/gemini-flash-lite-latest",
         "models/gemini-3-flash-preview",
-        "models/gemini-flash-latest",
         "models/gemini-2.5-flash",
+        "models/gemini-flash-latest",
+        "models/gemini-3.5-flash-lite",
         "models/gemini-3.5-flash",
         "models/gemini-3.8-flash",
         "models/gemini-3.1-flash-lite-preview",
-    ]
+    ]:
+        if default_m not in candidate_model_ids:
+            candidate_model_ids.append(default_m)
 
     exhausted_keys_count = 0
     last_error_msg: Optional[str] = None
 
-    async with httpx.AsyncClient(timeout=3.5) as client:
+    async with httpx.AsyncClient(timeout=dynamic_timeout) as client:
         # Loop across all configured API keys
         for key_idx, api_key in enumerate(api_keys):
             masked_key = (api_key[:4] + "..." + api_key[-4:]) if len(api_key) > 8 else api_key
-            logger.info(f"Attempting prompt with API key #{key_idx + 1} ({masked_key})...")
+            logger.info(f"Attempting prompt with API key #{key_idx + 1} ({masked_key}), timeout={dynamic_timeout:.1f}s...")
             key_had_quota_exhaustion = False
+            consecutive_timeouts = 0
 
             for m_id in candidate_model_ids:
                 clean_id = m_id if m_id.startswith("models/") else f"models/{m_id}"
@@ -371,14 +402,13 @@ async def call_gemini_with_fallback(
                     ],
                     "generationConfig": {
                         "temperature": 0.1,
-                        "maxOutputTokens": 1500
+                        "maxOutputTokens": 4096
                     }
                 }
 
-                if should_disable_thinking(clean_id):
-                    payload["generationConfig"]["thinkingConfig"] = {
-                        "thinkingBudget": 0
-                    }
+                tc = get_thinking_config(clean_id)
+                if tc:
+                    payload["generationConfig"]["thinkingConfig"] = tc
 
                 if json_mode:
                     payload["generationConfig"]["responseMimeType"] = "application/json"
@@ -421,8 +451,13 @@ async def call_gemini_with_fallback(
                         last_error_msg = f"שגיאת AI משרת גוגל (קוד {resp.status_code})."
                         logger.warning(f"Key #{key_idx + 1} call to {clean_id} returned {resp.status_code}.")
                 except httpx.TimeoutException:
-                    last_error_msg = "זמן ההמתנה לשרת ה-AI פג (Timeout)."
-                    logger.warning(f"Timeout calling Gemini model {clean_id} with key #{key_idx + 1}.")
+                    consecutive_timeouts += 1
+                    last_error_msg = f"זמן ההמתנה לשרת ה-AI פג (Timeout לאחר {dynamic_timeout:.0f} שניות)."
+                    logger.warning(f"Timeout calling Gemini model {clean_id} with key #{key_idx + 1} after {dynamic_timeout:.1f}s.")
+                    # If 2 models in a row time out after 25+ seconds each, don't hold the user indefinitely
+                    if consecutive_timeouts >= 2:
+                        logger.warning("Two consecutive models timed out. Skipping remaining models on this key.")
+                        break
                 except Exception as e:
                     last_error_msg = f"שגיאת תקשורת עם ה-AI: {str(e)}"
                     logger.warning(f"Error calling Gemini model {clean_id} with key #{key_idx + 1}: {e}.")
