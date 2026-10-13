@@ -1,7 +1,7 @@
 import re
 import logging
 from datetime import datetime
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
@@ -12,14 +12,14 @@ from ai_client import call_gemini_with_fallback, extract_json
 
 logger = logging.getLogger(__name__)
 
-# Heuristic list of explicit command words in Hebrew
+# Explicit command trigger words in Hebrew
 COMMAND_TRIGGER_WORDS = [
-    "תמחק", "מחק", "תמחוק", "תמחקי", "תמחקו",
-    "תוריד", "הורד", "תורידי", "תורידו",
-    "תוסיף", "הוסף", "תוסיפי", "תוסיפו",
+    "תמחק", "מחק", "תמחוק", "תמחקי", "תמחקו", "למחוק",
+    "תוריד", "הורד", "תורידי", "תורידו", "להוריד",
+    "תוסיף", "הוסף", "תוסיפי", "תוסיפו", "להוסיף",
     "תחליף", "החלף", "תעביר", "העבר", "שנה", "תשנה",
-    "תנקה", "נקה", "סמן", "תסמן", "בטל",
-    "כל ה", "שמתחיל", "שנגמר", "שמכיל", "תרוקן"
+    "תנקה", "נקה", "לנקות", "סמן", "תסמן", "לסמן", "בטל", "לבטל",
+    "כל ה", "שמתחיל", "שנגמר", "שמכיל", "תרוקן", "רוקן", "לרוקן"
 ]
 
 def looks_like_command(text: str) -> bool:
@@ -44,6 +44,131 @@ def get_next_global_add_order(db: Session) -> int:
     max_val = db.query(func.max(Item.global_add_order)).scalar()
     return (max_val or 0) + 1
 
+def handle_local_command(
+    raw_text: str,
+    categories: List[Category],
+    db: Session
+) -> Optional[Dict[str, Any]]:
+    """
+    Executes standard commands directly in 0ms without contacting AI.
+    Handles: delete all, delete checked, check all, uncheck all, delete category, delete single item.
+    """
+    clean = raw_text.strip()
+    norm = re.sub(r'[\'\"״׳]', '', clean).strip()
+
+    # 1. Delete all items
+    # Variations: תמחק את כל הפריטים, מחק את כל הפריטים, תמחק הכל, מחק הכל, תנקה הכל, רוקן הכל, תרוקן הכל, למחוק הכל, תמחק את כל הרשימה
+    delete_all_patterns = [
+        r'^(ת?מחק|ת?מחוק|למחוק|ת?רוקן|לרוקן|ת?נקה|לנקות)\s+(את\s+)?(כל\s+)?(הפריטים|המוצרים|הרשימה|הכל)(\s+ברשימה)?$',
+        r'^(ת?מחק|ת?מחוק|למחוק|ת?רוקן|לרוקן|ת?נקה|לנקות)\s+הכל$',
+        r'^(רוקן|ת?רוקן|לרוקן)(\s+את)?\s+הרשימה$',
+        r'^(נקה|ת?נקה|לנקות)(\s+את)?\s+הרשימה$'
+    ]
+    for pat in delete_all_patterns:
+        if re.match(pat, norm):
+            db.query(Item).delete()
+            db.commit()
+            return {
+                "success": True,
+                "message": "כל הפריטים ברשימה נמחקו בהצלחה",
+                "items_affected": []
+            }
+
+    # 2. Delete checked items
+    # Variations: תמחק את כל המסומנים, מחק מסומנים, תמחק מסומנים, נקה מסומנים
+    delete_checked_patterns = [
+        r'^(ת?מחק|ת?מחוק|למחוק|ת?נקה|לנקות)\s+(את\s+)?(כל\s+)?(ה?מסומנים|ה?מחוקים)(\s+ברשימה)?$',
+    ]
+    for pat in delete_checked_patterns:
+        if re.match(pat, norm):
+            checked_items = db.query(Item).filter(Item.is_checked == True).all()
+            cnt = len(checked_items)
+            for it in checked_items:
+                db.delete(it)
+            db.commit()
+            return {
+                "success": True,
+                "message": f"נמחקו {cnt} פריטים מסומנים מהרשימה",
+                "items_affected": []
+            }
+
+    # 3. Check all items
+    check_all_patterns = [
+        r'^(ת?סמן|לסמן)\s+(את\s+)?(כל\s+)?(הפריטים|המוצרים|הרשימה|הכל)(\s+ברשימה)?$',
+        r'^(ת?סמן|לסמן)\s+הכל$',
+    ]
+    for pat in check_all_patterns:
+        if re.match(pat, norm):
+            items = db.query(Item).all()
+            now = datetime.utcnow()
+            for it in items:
+                it.is_checked = True
+                it.checked_at = now
+            db.commit()
+            return {
+                "success": True,
+                "message": f"כל {len(items)} הפריטים סומנו בהצלחה",
+                "items_affected": [it.id for it in items]
+            }
+
+    # 4. Uncheck all items
+    uncheck_all_patterns = [
+        r'^(בטל|לבטל)\s+(את\s+)?(כל\s+)?(ה?סימונים|ה?סימון|ה?מסומנים)(\s+ברשימה)?$',
+        r'^(בטל|לבטל)\s+(את\s+)?(ה?סימון\s+לכל\s+הפריטים|הכל)$',
+        r'^(נקה|ת?נקה|לנקות)\s+סימונים$',
+    ]
+    for pat in uncheck_all_patterns:
+        if re.match(pat, norm):
+            items = db.query(Item).all()
+            for it in items:
+                it.is_checked = False
+                it.checked_at = None
+            db.commit()
+            return {
+                "success": True,
+                "message": f"בוטל הסימון עבור {len(items)} פריטים",
+                "items_affected": [it.id for it in items]
+            }
+
+    # 5. Delete category items
+    # Variations: תמחק את כל הפירות וירקות, תמחק קטגוריית חלב, מחק את מוצרי חלב
+    del_cat_match = re.match(r'^(ת?מחק|ת?מחוק|למחוק|ת?רוקן|ת?נקה)\s+(את\s+)?(כל\s+)?(קטגוריית\s+|קטגוריה\s+)?(.+)$', norm)
+    if del_cat_match:
+        target = del_cat_match.group(5).strip()
+        for cat in categories:
+            sim = hebrew_similarity(target, cat.name)
+            if sim >= 0.75 or target in cat.name or cat.name in target:
+                items_in_cat = db.query(Item).filter(Item.category_id == cat.id).all()
+                cnt = len(items_in_cat)
+                for it in items_in_cat:
+                    db.delete(it)
+                db.commit()
+                return {
+                    "success": True,
+                    "message": f"נמחקו {cnt} פריטים מקטגוריית '{cat.name}'",
+                    "items_affected": []
+                }
+
+    # 6. Delete specific single item
+    # Variations: תמחק את החלב, תמחק עגבניות, תוריד את הביצים
+    del_single_match = re.match(r'^(ת?מחק|ת?מחוק|למחוק|ת?וריד|להוריד)\s+(את\s+)?(.+)$', norm)
+    if del_single_match:
+        target_item = del_single_match.group(3).strip()
+        existing_items = db.query(Item).all()
+        for it in existing_items:
+            sim = hebrew_similarity(target_item, it.name)
+            if sim >= 0.85 or target_item == it.name:
+                item_id = it.id
+                db.delete(it)
+                db.commit()
+                return {
+                    "success": True,
+                    "message": f"הפריט '{it.name}' נמחק מהרשימה",
+                    "items_affected": [item_id]
+                }
+
+    return None
+
 async def process_user_input(
     raw_text: str,
     db: Session
@@ -60,6 +185,12 @@ async def process_user_input(
     if not categories:
         return {"success": False, "message": "אין קטגוריות במערכת", "items_affected": []}
 
+    # 1. Local command execution (0ms, 100% reliable)
+    local_res = handle_local_command(raw_text, categories, db)
+    if local_res is not None:
+        return local_res
+
+    # 2. Dynamic command execution via AI
     if looks_like_command(raw_text):
         return await execute_dynamic_command(raw_text, categories, db)
     else:
@@ -73,7 +204,7 @@ async def execute_dynamic_command(
     """
     Sends the current full list state + categories + user prompt to Gemini
     to interpret and execute dynamic, conditional, and bulk actions.
-    Falls back gracefully to item parser if Gemini response is non-standard.
+    If AI fails, reports error explicitly. NEVER adds command as a grocery item!
     """
     current_items = db.query(Item).all()
     categories_map = {c.name: c for c in categories}
@@ -138,16 +269,24 @@ async def execute_dynamic_command(
   "summary": "הסבר קצר בעברית"
 }}
 """
-    raw_res = await call_gemini_with_fallback(
+    raw_res, ai_err = await call_gemini_with_fallback(
         prompt=prompt,
         db=db,
         system_instruction="אתה מנהל רשימת קניות מבריק ומדויק בעברית. החזר תמיד JSON תקני.",
         json_mode=True
     )
 
-    parsed = extract_json(raw_res) if raw_res else None
+    if not raw_res:
+        error_msg = ai_err or "לא התקבלה תגובה משרת ה-AI."
+        logger.warning(f"Gemini dynamic command failed for: '{text}' - Error: {error_msg}")
+        return {
+            "success": False,
+            "message": f"שגיאה בביצוע הפקודה: {error_msg}",
+            "items_affected": []
+        }
 
-    # Robust normalization of actions from parsed JSON
+    parsed = extract_json(raw_res)
+
     actions = []
     summary = "בוצע בהצלחה"
 
@@ -163,10 +302,12 @@ async def execute_dynamic_command(
                 act_type = it.get("type", "ADD")
                 actions.append({"type": act_type, **it})
 
-    # If Gemini failed or didn't return valid actions, fallback to standard items parser!
     if not actions:
-        logger.warning(f"Could not parse actions from Gemini response. Falling back to process_items_list for: {text}")
-        return await process_items_list(text, categories, db)
+        return {
+            "success": False,
+            "message": "הפקודה זוהתה, אך לא נמצאו פעולות מתאימות לביצוע ברשימה.",
+            "items_affected": []
+        }
 
     affected_ids = []
 
@@ -255,6 +396,7 @@ async def process_items_list(
     added_items = []
     items_to_ai = []
     local_resolved = []
+    ai_warning = None
 
     for part in raw_parts:
         parsed_simple = parse_simple_item(part)
@@ -272,11 +414,11 @@ async def process_items_list(
             })
             continue
 
-        # Collect un-cached items for a single batch AI call
+        # Collect un-cached items for batch AI call
         items_to_ai.append(part)
 
     if items_to_ai:
-        ai_resolved = await parse_items_with_ai(items_to_ai, categories, db)
+        ai_resolved, ai_warning = await parse_items_with_ai(items_to_ai, categories, db)
         local_resolved.extend(ai_resolved)
 
     for it_data in local_resolved:
@@ -321,9 +463,14 @@ async def process_items_list(
             added_items.append(new_item.id)
 
     db.commit()
+
+    reply_msg = f"נוספו {len(added_items)} פריטים לרשימה"
+    if ai_warning:
+        reply_msg += f" (שים לב: {ai_warning})"
+
     return {
         "success": True,
-        "message": f"נוספו {len(added_items)} פריטים לרשימה",
+        "message": reply_msg,
         "items_affected": added_items
     }
 
@@ -385,10 +532,11 @@ async def parse_items_with_ai(
     items_raw: List[str],
     categories: List[Category],
     db: Session
-) -> List[Dict[str, Any]]:
+) -> Tuple[List[Dict[str, Any]], Optional[str]]:
     """
     Uses Gemini to parse and classify complex items with notes/conditions.
     Caches classifications for future zero-cost recall.
+    Returns (results, error_warning).
     """
     categories_map = {c.name: c for c in categories}
     default_cat = next((c for c in categories if c.name == "שונות"), categories[-1])
@@ -421,7 +569,7 @@ async def parse_items_with_ai(
   }}
 ]
 """
-    raw_res = await call_gemini_with_fallback(
+    raw_res, ai_err = await call_gemini_with_fallback(
         prompt=prompt,
         db=db,
         system_instruction="אתה מנתח מוצרי קניות מומחה בעברית. החזר תמיד מערך JSON.",
@@ -462,7 +610,7 @@ async def parse_items_with_ai(
                 "category": cat
             })
     else:
-        # Fallback if Gemini failed
+        # Fallback to simple local parser if Gemini failed
         for raw in items_raw:
             simple = parse_simple_item(raw)
             cat, _, _ = await classify_item(simple["name"], categories, db)
@@ -474,7 +622,7 @@ async def parse_items_with_ai(
                 "category": cat
             })
 
-    return results
+    return results, ai_err
 
 def json_dumps_hebrew(obj: Any) -> str:
     import json

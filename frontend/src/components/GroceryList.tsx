@@ -14,6 +14,7 @@ export const GroceryList: React.FC = () => {
     settings,
     processingInput,
     error,
+    clearError,
     sendInput,
     toggleCheck,
     deleteItem,
@@ -62,8 +63,15 @@ export const GroceryList: React.FC = () => {
 
       {/* Global Error Notice if any */}
       {error && (
-        <div className="mb-3 p-2.5 bg-red-50 border border-red-100 text-red-600 text-xs rounded-xl text-right">
-          {error}
+        <div className="mb-3 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center justify-between shadow-sm">
+          <span className="text-right flex-1 font-medium">{error}</span>
+          <button
+            type="button"
+            onClick={clearError}
+            className="mr-2 text-red-400 hover:text-red-700 font-bold text-sm px-1.5 py-0.5 cursor-pointer"
+          >
+            ✕
+          </button>
         </div>
       )}
 

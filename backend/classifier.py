@@ -92,7 +92,7 @@ async def classify_item(
   "confidence": 1.0
 }}
 """
-    raw_ai_res = await call_gemini_with_fallback(
+    raw_ai_res, _ = await call_gemini_with_fallback(
         prompt=prompt,
         db=db,
         system_instruction="אתה עוזר חכם לסיווג מוצרי קניות לסופרמרקט בעברית.",

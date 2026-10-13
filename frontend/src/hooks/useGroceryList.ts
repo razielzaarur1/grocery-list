@@ -78,6 +78,8 @@ export function useGroceryList() {
         const result = await res.json();
         if (!res.ok || result.success === false) {
           setError(result.message || 'שגיאה בעיבוד הקלט');
+        } else if (result.message && result.message.includes('שגיאת AI')) {
+          setError(result.message);
         }
       } else if (!res.ok) {
         console.warn('Server returned non-JSON status:', res.status);
@@ -295,6 +297,7 @@ export function useGroceryList() {
     loading,
     processingInput,
     error,
+    clearError: () => setError(null),
     sendInput,
     toggleCheck,
     deleteItem,

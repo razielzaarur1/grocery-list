@@ -150,3 +150,46 @@ async def test_cached_items_processing_without_ai(test_db):
     assert "עגבניות" in names
     assert "מלפפונים" in names
 
+@pytest.mark.anyio
+async def test_local_commands(test_db):
+    from command_processor import process_user_input
+
+    cat_fruits = test_db.query(Category).filter(Category.name == "פירות וירקות").first()
+    # Add items
+    it1 = Item(name="עגבניות", category_id=cat_fruits.id, is_checked=False, global_add_order=1)
+    it2 = Item(name="מלפפונים", category_id=cat_fruits.id, is_checked=True, global_add_order=2)
+    test_db.add_all([it1, it2])
+    test_db.commit()
+
+    # Test "תמחק את כל המסומנים"
+    res = await process_user_input("תמחק את כל המסומנים", test_db)
+    assert res["success"] == True
+    remaining = test_db.query(Item).all()
+    assert len(remaining) == 1
+    assert remaining[0].name == "עגבניות"
+
+    # Test "תמחק את כל הפריטים"
+    res2 = await process_user_input("תמחק את כל הפריטים", test_db)
+    assert res2["success"] == True
+    remaining2 = test_db.query(Item).all()
+    assert len(remaining2) == 0
+
+@pytest.mark.anyio
+async def test_command_never_added_as_item(test_db, monkeypatch):
+    import command_processor
+
+    # Simulate AI rate limit 429
+    async def mock_call_gemini(*args, **kwargs):
+        return None, "התקבלה שגיאת הגבלת קצב (429)"
+
+    monkeypatch.setattr(command_processor, "call_gemini_with_fallback", mock_call_gemini)
+
+    # Complex command that requires AI
+    res = await command_processor.process_user_input("אם יש מלפפונים תוסיף 5 אם אין תמחק הכל", test_db)
+    assert res["success"] == False
+    assert "429" in res["message"]
+
+    # Verify that the command string was NOT added as a grocery item!
+    items = test_db.query(Item).all()
+    assert len(items) == 0
+

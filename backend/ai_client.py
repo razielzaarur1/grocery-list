@@ -146,16 +146,17 @@ async def call_gemini_with_fallback(
     db: Session,
     system_instruction: Optional[str] = None,
     json_mode: bool = True
-) -> Optional[str]:
+) -> tuple[Optional[str], Optional[str]]:
     """
     Calls Gemini API using verified active models in rank order.
     Disables thinking tokens (thinkingBudget=0) for instant 1-2s response on Gemini 3.
     Automatically falls back to secondary model if primary fails.
+    Returns (result_text, error_message).
     """
     api_key = get_api_key(db)
     if not api_key:
         logger.warning("No Gemini API key configured.")
-        return None
+        return None, "לא הוגדר מפתח Gemini API בהגדרות"
 
     # Fetch active models ordered by rank
     models = db.query(GeminiModel).filter(GeminiModel.is_active == True).order_by(GeminiModel.rank.asc()).all()
@@ -168,6 +169,8 @@ async def call_gemini_with_fallback(
     model_ids = [m.model_id for m in models] if models else [
         "models/gemini-3-flash-preview"
     ]
+
+    last_error_msg: Optional[str] = None
 
     async with httpx.AsyncClient(timeout=6.0) as client:
         for m_id in model_ids:
@@ -206,13 +209,24 @@ async def call_gemini_with_fallback(
                     if candidates:
                         parts = candidates[0].get("content", {}).get("parts", [])
                         if parts:
-                            return parts[0].get("text", "")
+                            return parts[0].get("text", ""), None
+                elif resp.status_code == 429:
+                    last_error_msg = "התקבלה שגיאת הגבלת קצב או חריגה ממכסה מה-AI (שגיאה 429). אנא נסה שוב בעוד מספר רגעים או בדוק את מפתח ה-API."
+                    logger.warning(f"Gemini 429 Rate Limit on {clean_id}: {resp.text[:120]}")
+                elif resp.status_code == 503:
+                    last_error_msg = "שרתי ה-AI של גוגל עמוסים זמנית (שגיאה 503). אנא נסה שוב בעוד מספר רגעים."
+                    logger.warning(f"Gemini 503 on {clean_id}: {resp.text[:120]}")
                 else:
-                    logger.warning(f"Gemini call to {clean_id} returned {resp.status_code}: {resp.text[:120]}. Trying next model...")
+                    last_error_msg = f"שגיאת AI משרת גוגל (קוד {resp.status_code})."
+                    logger.warning(f"Gemini call to {clean_id} returned {resp.status_code}: {resp.text[:120]}.")
+            except httpx.TimeoutException:
+                last_error_msg = "זמן ההמתנה לשרת ה-AI פג (Timeout)."
+                logger.warning(f"Timeout calling Gemini model {clean_id}.")
             except Exception as e:
-                logger.warning(f"Error calling Gemini model {clean_id}: {e}. Trying next model...")
+                last_error_msg = f"שגיאת תקשורת עם ה-AI: {str(e)}"
+                logger.warning(f"Error calling Gemini model {clean_id}: {e}.")
 
-    return None
+    return None, (last_error_msg or "שירות ה-AI אינו זמין כרגע. אנא נסה שוב מאוחר יותר.")
 
 def extract_json(raw_text: str) -> Optional[Any]:
     """Robustly parses JSON from raw response text (handles markdown fences if present)."""
