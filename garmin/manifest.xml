@@ -1,6 +1,6 @@
 <!-- Garmin Connect IQ Manifest for Grocery List Device App -->
 <iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
-    <iq:application entry="GroceryApp" id="e94b21b7-a3a2-4c91-9e8a-028a38b1d441" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="3.2.0" name="@Strings.AppName" type="watch-app" version="2.0.0">
+    <iq:application entry="GroceryApp" id="e94b21b7-a3a2-4c91-9e8a-028a38b1d441" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="3.2.0" name="@Strings.AppName" type="watch-app" version="2.1.0">
         <iq:products>
             <iq:product id="fr970"/>
             <iq:product id="fr965"/>
