@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content" />
+    <script>
+      // Immediate trailing-slash redirect to ensure relative assets resolve properly
+      if (window.location.pathname === '/grocery_list') {
+        window.location.replace('/grocery_list/' + window.location.search + window.location.hash);
+      }
+    </script>
     
     <!-- PWA Standalone Meta Tags -->
     <meta name="theme-color" content="#f6f8f6" />
@@ -29,7 +35,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js').catch((err) => {
+          navigator.serviceWorker.register('./sw.js').catch((err) => {
             console.log('ServiceWorker registration failed: ', err);
           });
         });
