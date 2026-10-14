@@ -343,16 +343,15 @@ class GroceryView extends WatchUi.View {
 
             // Measure exact text pixel width
             var textWidth = dc.getTextWidthInPixels(item.shapedName, getMainFont());
-            var fontH = dc.getFontHeight(getMainFont());
-            var strikeY = nameY + (fontH / 2).toNumber() - 1;
+            // Exact vertical center of Hebrew glyphs: nameY + 18
+            var strikeY = nameY + 18;
 
             dc.drawLine(rightMargin, strikeY, rightMargin - textWidth, strikeY);
 
             // Strikethrough for note if present
             if (hasNote) {
                 var noteWidth = dc.getTextWidthInPixels(item.shapedNote, getSmallFont());
-                var noteFontH = dc.getFontHeight(getSmallFont());
-                var noteStrikeY = noteY + (noteFontH / 2).toNumber() - 1;
+                var noteStrikeY = noteY + 14;
                 dc.drawLine(rightMargin, noteStrikeY, rightMargin - noteWidth, noteStrikeY);
             }
 
