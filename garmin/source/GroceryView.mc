@@ -20,6 +20,8 @@ class GroceryView extends WatchUi.View {
     private var _cachedRemSuffix as String = "נותרו";
     private var _cachedLoading as String = "טוען נתונים...";
     private var _cachedEmpty as String = "הרשימה ריקה";
+    private var _cachedHeaderSubtitle as String = "";
+    private var _rowsMeasured as Boolean = false;
 
     function initialize() {
         View.initialize();
@@ -54,6 +56,7 @@ class GroceryView extends WatchUi.View {
     }
 
     function scrollPixels(delta as Number) as Void {
+        var oldScroll = scrollY;
         scrollY += delta;
         var max = getMaxScroll();
         if (scrollY > max) {
@@ -62,49 +65,60 @@ class GroceryView extends WatchUi.View {
         if (scrollY < 0) {
             scrollY = 0;
         }
-        WatchUi.requestUpdate();
+        if (scrollY != oldScroll) {
+            updateSelectionFromScroll();
+            WatchUi.requestUpdate();
+        }
     }
 
-    private function truncateStringToWidth(
-        dc as Graphics.Dc,
-        text as String,
-        font as Graphics.FontDefinition,
-        maxWidth as Number
-    ) as String {
-        if (text == null || text.length() == 0) {
-            return "";
-        }
-        var fullW = dc.getTextWidthInPixels(text, font);
-        if (fullW <= maxWidth) {
-            return text;
+    function updateSelectionFromScroll() as Void {
+        if (rows.size() == 0) {
+            return;
         }
 
-        var ell = "..";
-        var ellW = dc.getTextWidthInPixels(ell, font);
-        var targetW = maxWidth - ellW;
-        if (targetW <= 10) {
-            return text;
-        }
+        // When scrollY == 0, targetY is 165 (first item center).
+        // As scrollY increases, targetY smoothly moves to 235 (screen center).
+        var targetY = 165 + (scrollY > 70 ? 70 : scrollY);
 
-        var chars = text.toCharArray();
-        var numChars = chars.size();
-        var curStr = "";
-
-        for (var i = 0; i < numChars; i++) {
-            var nextStr = curStr + chars[i].toString();
-            var nextW = dc.getTextWidthInPixels(nextStr, font);
-            if (nextW > targetW) {
-                return curStr + ell;
+        var maxScroll = getMaxScroll();
+        if (maxScroll > 0) {
+            var distToBottom = maxScroll - scrollY;
+            if (distToBottom < 70) {
+                targetY += (70 - distToBottom);
             }
-            curStr = nextStr;
         }
 
-        return curStr + ell;
+        var curY = _headerHeight + 6 - scrollY;
+        var bestIndex = -1;
+        var minDistance = 999999;
+
+        for (var i = 0; i < rows.size(); i++) {
+            var row = rows[i];
+            var rHeight = row.rowHeight;
+            if (!row.isHeader && row.item != null) {
+                var rowCenter = curY + (rHeight / 2);
+                var diff = rowCenter - targetY;
+                var dist = diff < 0 ? -diff : diff;
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    bestIndex = i;
+                }
+            }
+            curY += rHeight + 6;
+        }
+
+        if (bestIndex != -1 && bestIndex != selectedIndex) {
+            selectedIndex = bestIndex;
+        }
     }
 
     // Rebuilds rows: category headers first, unchecked items, then checked items at the bottom of the category!
     function rebuildRows() as Void {
         rows = [] as Array<GroceryRow>;
+        _rowsMeasured = false;
+
+        var totalRem = 0;
+        var totalCount = 0;
 
         for (var c = 0; c < categories.size(); c++) {
             var cat = categories[c];
@@ -126,6 +140,8 @@ class GroceryView extends WatchUi.View {
 
             cat.remainingCount = uncheckedList.size();
             cat.totalCount = cat.items.size();
+            totalRem += cat.remainingCount;
+            totalCount += cat.totalCount;
 
             // 1. Category Header Row
             var countStr = cat.remainingCount + "/" + cat.totalCount;
@@ -148,7 +164,9 @@ class GroceryView extends WatchUi.View {
             }
         }
 
-        // Calculate total content height with 6px row gap
+        _cachedHeaderSubtitle = totalRem + "/" + totalCount + " " + _cachedRemSuffix;
+
+        // Default initial height calculation
         totalContentHeight = 0;
         for (var r = 0; r < rows.size(); r++) {
             totalContentHeight += rows[r].rowHeight + 6;
@@ -179,7 +197,7 @@ class GroceryView extends WatchUi.View {
         if (rows[selectedIndex].isHeader) {
             var found = false;
             for (var i = selectedIndex + 1; i < rows.size(); i++) {
-                if (!rows[i].isHeader) {
+                if (!rows[i].isHeader && rows[i].item != null) {
                     selectedIndex = i;
                     found = true;
                     break;
@@ -187,14 +205,13 @@ class GroceryView extends WatchUi.View {
             }
             if (!found) {
                 for (var i = selectedIndex - 1; i >= 0; i--) {
-                    if (!rows[i].isHeader) {
+                    if (!rows[i].isHeader && rows[i].item != null) {
                         selectedIndex = i;
                         break;
                     }
                 }
             }
         }
-        snapScrollToSelection();
     }
 
     function onUpdate(dc as Graphics.Dc) as Void {
@@ -229,9 +246,24 @@ class GroceryView extends WatchUi.View {
             return;
         }
 
+        var rowWidth = (_screenWidth * 0.84).toNumber();
+
+        // Pre-calculate exact multiline layout on first frame after data change (0 text computations in drag frames!)
+        if (!_rowsMeasured && rows.size() > 0) {
+            var availW = rowWidth - 18;
+            var mainF = getMainFont();
+            var smallF = getSmallFont();
+
+            totalContentHeight = 0;
+            for (var r = 0; r < rows.size(); r++) {
+                rows[r].measure(dc, availW, mainF, smallF);
+                totalContentHeight += rows[r].rowHeight + 6;
+            }
+            _rowsMeasured = true;
+        }
+
         // 1. Draw Visible Rows (natural clipping via header overlay for smooth 60FPS)
         var startX = (_screenWidth * 0.08).toNumber();
-        var rowWidth = (_screenWidth * 0.84).toNumber();
         var curY = _headerHeight + 6 - scrollY;
 
         for (var i = 0; i < rows.size(); i++) {
@@ -244,7 +276,7 @@ class GroceryView extends WatchUi.View {
                     drawCategoryHeader(dc, row, startX, curY, rowWidth, rHeight);
                 } else if (row.item != null) {
                     var isFocused = (i == selectedIndex);
-                    drawItemRow(dc, row.item, startX, curY, rowWidth, rHeight, isFocused);
+                    drawItemRow(dc, row, startX, curY, rowWidth, rHeight, isFocused);
                 }
             }
 
@@ -262,13 +294,6 @@ class GroceryView extends WatchUi.View {
     }
 
     private function drawHeader(dc as Graphics.Dc) as Void {
-        var totalRem = 0;
-        var totalCount = 0;
-        for (var c = 0; c < categories.size(); c++) {
-            totalRem += categories[c].remainingCount;
-            totalCount += categories[c].totalCount;
-        }
-
         // Opaque AMOLED Black background to cleanly cover scrolling rows
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
         dc.fillRectangle(0, 0, _screenWidth, _headerHeight);
@@ -285,12 +310,11 @@ class GroceryView extends WatchUi.View {
 
         // Subtitle: Y = 50 ("X/Y נותרו")
         dc.setColor(0x94a3b8, Graphics.COLOR_TRANSPARENT);
-        var subText = totalRem + "/" + totalCount + " " + _cachedRemSuffix;
         dc.drawText(
             _screenWidth / 2,
             50,
             getSmallFont(),
-            subText,
+            _cachedHeaderSubtitle,
             Graphics.TEXT_JUSTIFY_CENTER
         );
 
@@ -309,52 +333,53 @@ class GroceryView extends WatchUi.View {
     ) as Void {
         var rightMargin = x + width - 6;
         var leftMargin = x + 6;
-        var textY = y + 14;
+        var smallFont = getSmallFont();
+        var smallH = dc.getFontHeight(smallFont);
 
         // Subtle divider line above category
         dc.setColor(0x1e293b, Graphics.COLOR_TRANSPARENT);
         dc.drawLine(x, y + 2, x + width, y + 2);
 
-        // 1. Category Count (e.g. "10/11") on the LEFT
+        // 1. Category Count on the LEFT (vertically centered in header row)
+        var countY = y + (height - smallH) / 2;
         dc.setColor(0x64748b, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             leftMargin,
-            textY,
-            getSmallFont(),
+            countY,
+            smallFont,
             row.headerCount,
             Graphics.TEXT_JUSTIFY_LEFT
         );
 
-        // 2. Category Title on the RIGHT - safely truncated so it NEVER cuts the count on the left!
-        var countW = dc.getTextWidthInPixels(row.headerCount, getSmallFont());
-        var maxTitleW = (rightMargin - leftMargin) - countW - 16;
-        if (maxTitleW < 20) {
-            maxTitleW = 20;
-        }
-
-        if (row.fittedTitle.length() == 0) {
-            row.fittedTitle = truncateStringToWidth(dc, row.headerTitle, getSmallFont(), maxTitleW);
-        }
-
+        // 2. Category Title on the RIGHT (multiline wrapped if needed)
         dc.setColor(0x38bdf8, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(
-            rightMargin,
-            textY,
-            getSmallFont(),
-            row.fittedTitle,
-            Graphics.TEXT_JUSTIFY_RIGHT
-        );
+        var curY = (row.headerLines.size() <= 1) ? (y + 14) : (y + 8);
+        for (var l = 0; l < row.headerLines.size(); l++) {
+            dc.drawText(
+                rightMargin,
+                curY,
+                smallFont,
+                row.headerLines[l],
+                Graphics.TEXT_JUSTIFY_RIGHT
+            );
+            curY += smallH + 2;
+        }
     }
 
     private function drawItemRow(
         dc as Graphics.Dc,
-        item as GroceryItem,
+        row as GroceryRow,
         x as Number,
         y as Number,
         width as Number,
         height as Number,
         isFocused as Boolean
     ) as Void {
+        var item = row.item;
+        if (item == null) {
+            return;
+        }
+
         // Selection highlight box
         if (isFocused) {
             dc.setColor(0x13233c, Graphics.COLOR_TRANSPARENT);
@@ -367,14 +392,17 @@ class GroceryView extends WatchUi.View {
 
         var rightMargin = x + width - 12;
         var leftMargin = x + 6;
-        var availWidth = rightMargin - leftMargin;
 
-        var hasNote = (item.shapedNote.length() > 0);
+        var mainFont = getMainFont();
+        var smallFont = getSmallFont();
+        var mainH = dc.getFontHeight(mainFont);
+        var smallH = dc.getFontHeight(smallFont);
+
+        var hasNote = (row.noteLines.size() > 0);
         var hasQuantity = (item.shapedQuantity.length() > 0);
 
-        var fontH = dc.getFontHeight(getMainFont());
-        var nameY = hasNote ? (y + 6) : (y + (height - fontH) / 2);
-        var noteY = y + 44;
+        var nameBlockH = (row.nameLines.size() * mainH) + ((row.nameLines.size() - 1) * 3);
+        var nameStartY = hasNote ? (y + 8) : (y + (height - nameBlockH) / 2);
 
         // Colors
         var nameColor;
@@ -391,78 +419,69 @@ class GroceryView extends WatchUi.View {
         }
 
         // 1. Quantity on the LEFT
-        var qtyW = 0;
         if (hasQuantity) {
-            qtyW = dc.getTextWidthInPixels(item.shapedQuantity, getSmallFont());
-            var maxQtyW = (availWidth * 0.38).toNumber();
-            if (qtyW > maxQtyW) {
-                item.shapedQuantity = truncateStringToWidth(dc, item.shapedQuantity, getSmallFont(), maxQtyW);
-                qtyW = dc.getTextWidthInPixels(item.shapedQuantity, getSmallFont());
-            }
-
             dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 leftMargin,
-                nameY,
-                getSmallFont(),
+                nameStartY,
+                smallFont,
                 item.shapedQuantity,
                 Graphics.TEXT_JUSTIFY_LEFT
             );
         }
 
-        // 2. Item Name on the RIGHT - safely truncated so it never overlaps quantity!
-        var maxNameW = availWidth - (hasQuantity ? (qtyW + 14) : 0);
-        if (maxNameW < 30) {
-            maxNameW = 30;
-        }
-
-        if (item.fittedName.length() == 0) {
-            item.fittedName = truncateStringToWidth(dc, item.shapedName, getMainFont(), maxNameW);
-            item.nameWidth = dc.getTextWidthInPixels(item.fittedName, getMainFont());
-        }
-
+        // 2. Item Name Lines on the RIGHT
         dc.setColor(nameColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(
-            rightMargin,
-            nameY,
-            getMainFont(),
-            item.fittedName,
-            Graphics.TEXT_JUSTIFY_RIGHT
-        );
-
-        // 3. Note directly underneath item name with generous vertical gap
-        if (hasNote) {
-            if (item.fittedNote.length() == 0) {
-                item.fittedNote = truncateStringToWidth(dc, item.shapedNote, getSmallFont(), availWidth);
-                item.noteWidth = dc.getTextWidthInPixels(item.fittedNote, getSmallFont());
-            }
-
-            dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
+        var curNameY = nameStartY;
+        for (var i = 0; i < row.nameLines.size(); i++) {
             dc.drawText(
                 rightMargin,
-                noteY,
-                getSmallFont(),
-                item.fittedNote,
+                curNameY,
+                mainFont,
+                row.nameLines[i],
                 Graphics.TEXT_JUSTIFY_RIGHT
             );
-        }
 
-        // 4. Strikethrough line: positioned EXACTLY in the vertical center of the letters!
-        if (item.isChecked) {
-            dc.setColor(0x64748b, Graphics.COLOR_TRANSPARENT);
-            dc.setPenWidth(2);
-
-            var strikeY = nameY + (fontH / 2);
-            dc.drawLine(rightMargin, strikeY, rightMargin - item.nameWidth, strikeY);
-
-            // Strikethrough for note if present
-            if (hasNote) {
-                var noteH = dc.getFontHeight(getSmallFont());
-                var noteStrikeY = noteY + (noteH / 2);
-                dc.drawLine(rightMargin, noteStrikeY, rightMargin - item.noteWidth, noteStrikeY);
+            // Strikethrough line per name line if checked
+            if (item.isChecked) {
+                dc.setColor(0x64748b, Graphics.COLOR_TRANSPARENT);
+                dc.setPenWidth(2);
+                var strikeY = curNameY + (mainH / 2);
+                var lineW = (i < row.nameLineWidths.size()) ? row.nameLineWidths[i] : 40;
+                dc.drawLine(rightMargin, strikeY, rightMargin - lineW, strikeY);
+                dc.setColor(nameColor, Graphics.COLOR_TRANSPARENT);
+                dc.setPenWidth(1);
             }
 
-            dc.setPenWidth(1);
+            curNameY += mainH + 3;
+        }
+
+        // 3. Note Lines on the RIGHT (12px generous gap below name block)
+        if (hasNote) {
+            dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
+            var curNoteY = nameStartY + nameBlockH + 12;
+            for (var j = 0; j < row.noteLines.size(); j++) {
+                dc.drawText(
+                    rightMargin,
+                    curNoteY,
+                    smallFont,
+                    row.noteLines[j],
+                    Graphics.TEXT_JUSTIFY_RIGHT
+                );
+
+                // Strikethrough for note if checked
+                if (item.isChecked) {
+                    dc.setColor(0x64748b, Graphics.COLOR_TRANSPARENT);
+                    dc.setPenWidth(2);
+                    var noteStrikeY = curNoteY + (smallH / 2);
+                    var noteLineW = (j < row.noteLineWidths.size()) ? row.noteLineWidths[j] : 30;
+                    dc.drawLine(rightMargin, noteStrikeY, rightMargin - noteLineW, noteStrikeY);
+                    dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
+                    dc.setPenWidth(1);
+                }
+
+                curNoteY += smallH + 2;
+            }
         }
     }
 
@@ -487,7 +506,7 @@ class GroceryView extends WatchUi.View {
         dc.fillRoundedRectangle(_screenWidth - 8, indicatorY, 3, indicatorHeight, 2);
     }
 
-    // Navigation and Selection: Moves the blue highlight item by item, with screen locked to it
+    // Navigation and Selection (Physical Buttons & D-pad)
     function selectNextItem() as Void {
         if (rows.size() == 0) {
             return;
@@ -564,7 +583,6 @@ class GroceryView extends WatchUi.View {
             if (touchY >= curY && touchY <= curY + rHeight) {
                 if (!row.isHeader && row.item != null) {
                     selectedIndex = i;
-                    snapScrollToSelection();
                     return row.item;
                 }
                 return null;
@@ -586,6 +604,7 @@ class GroceryView extends WatchUi.View {
         categories = newCategories;
         isLoading = false;
         statusMessage = msg;
+        _rowsMeasured = false;
         rebuildRows();
         WatchUi.requestUpdate();
     }

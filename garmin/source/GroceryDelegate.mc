@@ -13,11 +13,9 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
     }
 
     private var _lastDragY as Number? = null;
-    private var _accumulatedDragY as Number = 0;
     private var _wasDragging as Boolean = false;
-    private const DRAG_STEP_THRESHOLD as Number = 24;
 
-    // Smooth touch selection via onDrag: moves the blue highlight item by item and anchors the screen
+    // Smooth 1:1 touch scrolling following the finger directly
     function onDrag(dragEvent as WatchUi.DragEvent) as Boolean {
         var coords = dragEvent.getCoordinates();
         var y = coords[1];
@@ -25,29 +23,20 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
 
         if (dragType == WatchUi.DRAG_TYPE_START) {
             _lastDragY = y;
-            _accumulatedDragY = 0;
             _wasDragging = false;
         } else if (dragType == WatchUi.DRAG_TYPE_CONTINUE) {
             if (_lastDragY != null) {
                 var delta = y - _lastDragY;
-                _accumulatedDragY += delta;
-                _lastDragY = y;
-
-                if (_accumulatedDragY <= -DRAG_STEP_THRESHOLD) {
+                if (delta != 0) {
                     _wasDragging = true;
-                    _view.selectNextItem();
-                    _accumulatedDragY = 0;
-                } else if (_accumulatedDragY >= DRAG_STEP_THRESHOLD) {
-                    _wasDragging = true;
-                    _view.selectPreviousItem();
-                    _accumulatedDragY = 0;
+                    _view.scrollPixels(-delta);
+                    _lastDragY = y;
                 }
             } else {
                 _lastDragY = y;
             }
         } else if (dragType == WatchUi.DRAG_TYPE_STOP) {
             _lastDragY = null;
-            _accumulatedDragY = 0;
         }
         return true;
     }
@@ -76,7 +65,7 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
         return false;
     }
 
-    // Touch screen swipe: step selection item by item
+    // Touch screen swipe: smooth flick scroll
     function onSwipe(swipeEvent as WatchUi.SwipeEvent) as Boolean {
         if (_wasDragging) {
             _wasDragging = false;
@@ -84,10 +73,10 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
         }
         var direction = swipeEvent.getDirection();
         if (direction == WatchUi.SWIPE_UP) {
-            _view.selectNextItem();
+            _view.scrollPixels(80);
             return true;
         } else if (direction == WatchUi.SWIPE_DOWN) {
-            _view.selectPreviousItem();
+            _view.scrollPixels(-80);
             return true;
         }
         return false;
