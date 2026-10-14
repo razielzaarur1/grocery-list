@@ -14,8 +14,8 @@ class GroceryView extends WatchUi.View {
     private var _headerHeight as Number = 70;
     private var _screenWidth as Number = 454;
     private var _screenHeight as Number = 454;
-    private var _itemRowHeight as Number = 64;
-    private var _categoryRowHeight as Number = 40;
+    private var _itemRowHeight as Number = 52;
+    private var _categoryRowHeight as Number = 36;
 
     function initialize() {
         View.initialize();
@@ -24,15 +24,15 @@ class GroceryView extends WatchUi.View {
     function onLayout(dc as Graphics.Dc) as Void {
         _screenWidth = dc.getWidth();
         _screenHeight = dc.getHeight();
-        _headerHeight = (_screenHeight * 0.17).toNumber();
+        _headerHeight = (_screenHeight * 0.15).toNumber();
     }
 
     function getMainFont() {
-        return Graphics.FONT_MEDIUM;
+        return Graphics.FONT_SMALL;
     }
 
     function getSmallFont() {
-        return Graphics.FONT_TINY;
+        return Graphics.FONT_XTINY;
     }
 
     // Rebuilds rows: category headers first, unchecked items, then checked items at the bottom of the category!
@@ -125,11 +125,12 @@ class GroceryView extends WatchUi.View {
 
         if (isLoading) {
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            var loadText = WatchUi.loadResource(Rez.Strings.LoadingText) as String;
             dc.drawText(
                 _screenWidth / 2,
                 _screenHeight / 2,
                 getMainFont(),
-                BidiHelper.shapeHebrew("טוען נתונים..."),
+                loadText,
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
             );
             return;
@@ -137,12 +138,13 @@ class GroceryView extends WatchUi.View {
 
         if (rows.size() == 0) {
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            var msg = (statusMessage != null && statusMessage.length() > 0) ? statusMessage : "הרשימה ריקה";
+            var emptyText = WatchUi.loadResource(Rez.Strings.EmptyText) as String;
+            var msg = (statusMessage != null && statusMessage.length() > 0) ? statusMessage : emptyText;
             dc.drawText(
                 _screenWidth / 2,
                 _screenHeight / 2,
                 getMainFont(),
-                BidiHelper.shapeHebrew(msg),
+                msg,
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
             );
             return;
@@ -185,10 +187,10 @@ class GroceryView extends WatchUi.View {
 
         // Title
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        var titleText = BidiHelper.shapeHebrew("רשימת קניות");
+        var titleText = WatchUi.loadResource(Rez.Strings.AppName) as String;
         dc.drawText(
             _screenWidth / 2,
-            12,
+            14,
             getMainFont(),
             titleText,
             Graphics.TEXT_JUSTIFY_CENTER
@@ -196,10 +198,11 @@ class GroceryView extends WatchUi.View {
 
         // Subtitle: "X/Y נותרו"
         dc.setColor(0x94a3b8, Graphics.COLOR_TRANSPARENT);
-        var subText = BidiHelper.shapeHebrew(totalRem + "/" + totalCount + " נותרו");
+        var remSuffix = WatchUi.loadResource(Rez.Strings.RemainingSuffix) as String;
+        var subText = totalRem + "/" + totalCount + " " + remSuffix;
         dc.drawText(
             _screenWidth / 2,
-            42,
+            38,
             getSmallFont(),
             subText,
             Graphics.TEXT_JUSTIFY_CENTER
@@ -273,8 +276,9 @@ class GroceryView extends WatchUi.View {
         var hasNote = (item.shapedNote.length() > 0);
         var hasQuantity = (item.shapedQuantity.length() > 0);
 
-        var nameY = hasNote ? (y + 5) : (y + (height / 2) - 15);
-        var noteY = nameY + 25;
+        var fontH = dc.getFontHeight(getMainFont());
+        var nameY = hasNote ? (y + 4) : (y + (height - fontH) / 2);
+        var noteY = nameY + fontH + 1;
 
         // Colors
         var nameColor;
@@ -331,7 +335,6 @@ class GroceryView extends WatchUi.View {
 
             // Measure exact text pixel width
             var textWidth = dc.getTextWidthInPixels(item.shapedName, getMainFont());
-            var fontH = dc.getFontHeight(getMainFont());
             var strikeY = nameY + (fontH / 2);
 
             dc.drawLine(rightMargin, strikeY, rightMargin - textWidth, strikeY);
