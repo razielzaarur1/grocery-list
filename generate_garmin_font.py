@@ -89,7 +89,7 @@ def generate_bmfont(output_prefix, font_size, line_height, is_bold=False):
 if __name__ == "__main__":
     out_dir = "c:\\Users\\razie\\Development\\Grocery list\\garmin\\resources\\fonts"
     os.makedirs(out_dir, exist_ok=True)
-    # Main font: 22px (crisp, modern, highly legible)
-    generate_bmfont(os.path.join(out_dir, "hebrew_font"), 22, 28, is_bold=False)
-    # Small font: 16px (for notes, quantities, counts)
-    generate_bmfont(os.path.join(out_dir, "hebrew_small"), 16, 20, is_bold=False)
+    # Main font: 26px (increased from 22px for better readability on watch AMOLED)
+    generate_bmfont(os.path.join(out_dir, "hebrew_font"), 26, 32, is_bold=False)
+    # Small font: 19px (increased from 16px for notes, quantities, counts)
+    generate_bmfont(os.path.join(out_dir, "hebrew_small"), 19, 24, is_bold=False)

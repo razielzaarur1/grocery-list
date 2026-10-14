@@ -48,10 +48,10 @@ class GroceryView extends WatchUi.View {
     var _screenHeight as Number = 454;
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryView.mc"; @line = 17; @position = 16; @symbol_vardef = [_itemRowHeight,17,16,30]; @symbol_type<0> = [Number,17,34,40]; ]
     private
-    var _itemRowHeight as Number = 56;
+    var _itemRowHeight as Number = 64;
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryView.mc"; @line = 18; @position = 16; @symbol_vardef = [_categoryRowHeight,18,16,34]; @symbol_type<0> = [Number,18,38,44]; ]
     private
-    var _categoryRowHeight as Number = 36;
+    var _categoryRowHeight as Number = 40;
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryView.mc"; @line = 19; @position = 16; @symbol_vardef = [_font,19,16,21]; @symbol_type<0> = [Object,19,25,31]; ]
     private
     var _font as Object or Null = null;
@@ -91,7 +91,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryView_mc_26_49_40_4_
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryView.mc" 29 8 ]
         symbol [ _screenHeight %tmp.8 29 25 38 ];
         %tmp.8 = getv ? :_screenHeight;
-        %tmp.9 = 0.16;
+        %tmp.9 = 0.17;
         %tmp.10 = mul %tmp.8 %tmp.9;
         symbol [ toNumber %tmp.11 29 47 55 ];
         %tmp.11 = getv function %tmp.10 :toNumber;
@@ -1369,7 +1369,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryView_mc_193_8_196_8
         %tmp.71 = getv ? :_screenWidth;
         %tmp.72 = 2;
         %tmp.73 = div %tmp.71 %tmp.72;
-        %tmp.74 = 38;
+        %tmp.74 = 42;
         %tmp.75 = self;
         symbol [ getSmallFont %tmp.76 215 12 24 ];
         %tmp.76 = getv function %tmp.75 :getSmallFont;
@@ -1455,7 +1455,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryView_mc_232_14_260_
         symbol [ textY %textY.3 235 12 17 ];
         %tmp.9 = lgetv %y;
         symbol [ y %tmp.9 235 20 21 ];
-        %tmp.10 = 8;
+        %tmp.10 = 9;
         %tmp.11 = add %tmp.9 %tmp.10;
         lputv %textY.3 %tmp.11;
         symbol [ textY %textY.3 235 12 17 ];
@@ -1715,7 +1715,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryView_mc_288_20_288_
         %tmp.66 = 2;
         %tmp.67 = div %tmp.65 %tmp.66;
         %tmp.68 = add %tmp.64 %tmp.67;
-        %tmp.69 = 13;
+        %tmp.69 = 15;
         %tmp.70 = sub %tmp.68 %tmp.69;
         push %tmp.70;
 C__Users_razie_Development_Grocery_list_garmin_source_GroceryView_mc_288_20_288_62_end:
@@ -1728,7 +1728,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryView_mc_288_20_288_
         symbol [ noteY %noteY.6 289 12 17 ];
         %tmp.72 = lgetv %nameY.5;
         symbol [ nameY %tmp.72 289 20 25 ];
-        %tmp.73 = 22;
+        %tmp.73 = 25;
         %tmp.74 = add %tmp.72 %tmp.73;
         lputv %noteY.6 %tmp.74;
         symbol [ noteY %noteY.6 289 12 17 ];
@@ -1969,7 +1969,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryView_mc_340_28_359_
         symbol [ strikeY %strikeY.10 347 16 23 ];
         %tmp.155 = lgetv %nameY.5;
         symbol [ nameY %tmp.155 347 26 31 ];
-        %tmp.156 = 18;
+        %tmp.156 = 21;
         %tmp.157 = add %tmp.155 %tmp.156;
         lputv %strikeY.10 %tmp.157;
         symbol [ strikeY %strikeY.10 347 16 23 ];
@@ -2022,7 +2022,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryView_mc_352_25_356_
         symbol [ noteStrikeY %noteStrikeY.12 354 20 31 ];
         %tmp.175 = lgetv %noteY.6;
         symbol [ noteY %tmp.175 354 34 39 ];
-        %tmp.176 = 14;
+        %tmp.176 = 16;
         %tmp.177 = add %tmp.175 %tmp.176;
         lputv %noteStrikeY.12 %tmp.177;
         symbol [ noteStrikeY %noteStrikeY.12 354 20 31 ];

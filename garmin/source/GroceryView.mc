@@ -14,8 +14,8 @@ class GroceryView extends WatchUi.View {
     private var _headerHeight as Number = 70;
     private var _screenWidth as Number = 454;
     private var _screenHeight as Number = 454;
-    private var _itemRowHeight as Number = 56;
-    private var _categoryRowHeight as Number = 36;
+    private var _itemRowHeight as Number = 64;
+    private var _categoryRowHeight as Number = 40;
     private var _font as Object? = null;
     private var _fontSmall as Object? = null;
 
@@ -26,7 +26,7 @@ class GroceryView extends WatchUi.View {
     function onLayout(dc as Graphics.Dc) as Void {
         _screenWidth = dc.getWidth();
         _screenHeight = dc.getHeight();
-        _headerHeight = (_screenHeight * 0.16).toNumber();
+        _headerHeight = (_screenHeight * 0.17).toNumber();
 
         try {
             _font = WatchUi.loadResource(Rez.Fonts.HebrewFont);
@@ -211,7 +211,7 @@ class GroceryView extends WatchUi.View {
         var subText = BidiHelper.shapeHebrew(totalRem + "/" + totalCount + " נותרו");
         dc.drawText(
             _screenWidth / 2,
-            38,
+            42,
             getSmallFont(),
             subText,
             Graphics.TEXT_JUSTIFY_CENTER
@@ -232,7 +232,7 @@ class GroceryView extends WatchUi.View {
     ) as Void {
         var rightMargin = x + width - 4;
         var leftMargin = x + 4;
-        var textY = y + 8;
+        var textY = y + 9;
 
         // Subtle divider line above category
         dc.setColor(0x1e293b, Graphics.COLOR_TRANSPARENT);
@@ -285,8 +285,8 @@ class GroceryView extends WatchUi.View {
         var hasNote = (item.shapedNote.length() > 0);
         var hasQuantity = (item.shapedQuantity.length() > 0);
 
-        var nameY = hasNote ? (y + 5) : (y + (height / 2) - 13);
-        var noteY = nameY + 22;
+        var nameY = hasNote ? (y + 5) : (y + (height / 2) - 15);
+        var noteY = nameY + 25;
 
         // Colors
         var nameColor;
@@ -343,15 +343,15 @@ class GroceryView extends WatchUi.View {
 
             // Measure exact text pixel width
             var textWidth = dc.getTextWidthInPixels(item.shapedName, getMainFont());
-            // Exact vertical center of Hebrew glyphs: nameY + 18
-            var strikeY = nameY + 18;
+            // Exact vertical center of 26px Hebrew glyphs: nameY + 21
+            var strikeY = nameY + 21;
 
             dc.drawLine(rightMargin, strikeY, rightMargin - textWidth, strikeY);
 
             // Strikethrough for note if present
             if (hasNote) {
                 var noteWidth = dc.getTextWidthInPixels(item.shapedNote, getSmallFont());
-                var noteStrikeY = noteY + 14;
+                var noteStrikeY = noteY + 16;
                 dc.drawLine(rightMargin, noteStrikeY, rightMargin - noteWidth, noteStrikeY);
             }
 
