@@ -1,6 +1,5 @@
 import Toybox.WatchUi;
 import Toybox.System;
-import Toybox.Attention;
 import Toybox.Lang;
 
 class GroceryDelegate extends WatchUi.BehaviorDelegate {
@@ -87,17 +86,10 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
         return false;
     }
 
-    // Common toggle handler with haptic feedback
+    // Common toggle handler (no vibration)
     private function toggleItemState(item as GroceryItem) as Void {
         item.toggleChecked();
         _service.toggleItem(item);
-
-        // Gentle haptic confirmation
-        if (Attention has :vibrate) {
-            var vibeProfile = [ new Attention.VibeProfile(50, 100) ];
-            Attention.vibrate(vibeProfile);
-        }
-
         _view.onItemToggled(item);
     }
 }
