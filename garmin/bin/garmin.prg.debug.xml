@@ -4,7 +4,7 @@
 <pcToLineNum>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="1" lineNum="6" parent="globals/GroceryView" pc="268435460" symbol="&lt;init&gt;"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="1" lineNum="7" parent="globals/GroceryView" pc="268435471" symbol="&lt;init&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\bin\\gen\\006-B4536-00\\source\\Rez.mcgen" id="2" lineNum="7" parent="globals/Rez" pc="268435481" symbol="&lt;init&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\bin\\gen\\006-B4565-00\\source\\Rez.mcgen" id="2" lineNum="7" parent="globals/Rez" pc="268435481" symbol="&lt;init&gt;"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="3" lineNum="6" parent="globals/GroceryDelegate" pc="268435501" symbol="&lt;init&gt;"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="4" lineNum="5" parent="globals/GroceryApp" pc="268435513" symbol="&lt;init&gt;"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="271" parent="globals/GroceryView" pc="268435525" symbol="getItemAtCoordinates"/>
@@ -490,7 +490,7 @@
 <entry arg="true" endPc="268439950" name="items" stackId="2" startPc="268439918"/>
 <entry arg="true" endPc="268439950" name="errorMsg" stackId="3" startPc="268439918"/>
 </localVars>
-<deviceInfo deviceVersion="69f9c27a08d175c50b86464a70c24d15718945cb" partNumber="006-B4536-00"/>
+<deviceInfo deviceVersion="2a089d06d343f3feda75c93ddf12e1fa29abe918" partNumber="006-B4565-00"/>
 <annotations>
 <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="LauncherIcon"/>
 <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ServerUrlPrompt"/>
