@@ -7,15 +7,14 @@ class GroceryView extends WatchUi.View {
     var categories as Array<GroceryCategoryData> = [] as Array<GroceryCategoryData>;
     var rows as Array<GroceryRow> = [] as Array<GroceryRow>;
     var selectedIndex as Number = 0;
-    var topIndex as Number = 0;
+    var scrollY as Number = 0;
+    var totalContentHeight as Number = 0;
     var isLoading as Boolean = true;
     var statusMessage as String? = null;
 
-    private var _headerHeight as Number = 70;
+    private var _headerHeight as Number = 72;
     private var _screenWidth as Number = 454;
     private var _screenHeight as Number = 454;
-    private var _itemRowHeight as Number = 52;
-    private var _categoryRowHeight as Number = 36;
 
     function initialize() {
         View.initialize();
@@ -24,15 +23,33 @@ class GroceryView extends WatchUi.View {
     function onLayout(dc as Graphics.Dc) as Void {
         _screenWidth = dc.getWidth();
         _screenHeight = dc.getHeight();
-        _headerHeight = (_screenHeight * 0.15).toNumber();
+        _headerHeight = 72;
     }
 
     function getMainFont() {
-        return Graphics.FONT_SMALL;
+        return Graphics.FONT_TINY;
     }
 
     function getSmallFont() {
         return Graphics.FONT_XTINY;
+    }
+
+    function getMaxScroll() as Number {
+        var visibleArea = _screenHeight - _headerHeight - 16;
+        var max = totalContentHeight - visibleArea;
+        return max > 0 ? max : 0;
+    }
+
+    function scrollPixels(delta as Number) as Void {
+        scrollY += delta;
+        var max = getMaxScroll();
+        if (scrollY > max) {
+            scrollY = max;
+        }
+        if (scrollY < 0) {
+            scrollY = 0;
+        }
+        WatchUi.requestUpdate();
     }
 
     // Rebuilds rows: category headers first, unchecked items, then checked items at the bottom of the category!
@@ -81,6 +98,20 @@ class GroceryView extends WatchUi.View {
             }
         }
 
+        // Calculate total content height
+        totalContentHeight = 0;
+        for (var r = 0; r < rows.size(); r++) {
+            totalContentHeight += rows[r].rowHeight + 4;
+        }
+
+        var max = getMaxScroll();
+        if (scrollY > max) {
+            scrollY = max;
+        }
+        if (scrollY < 0) {
+            scrollY = 0;
+        }
+
         ensureValidSelection();
     }
 
@@ -120,10 +151,8 @@ class GroceryView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
         dc.clear();
 
-        // 1. Draw Persistent Header
-        drawHeader(dc);
-
         if (isLoading) {
+            drawHeader(dc);
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             var loadText = WatchUi.loadResource(Rez.Strings.LoadingText) as String;
             dc.drawText(
@@ -137,6 +166,7 @@ class GroceryView extends WatchUi.View {
         }
 
         if (rows.size() == 0) {
+            drawHeader(dc);
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
             var emptyText = WatchUi.loadResource(Rez.Strings.EmptyText) as String;
             var msg = (statusMessage != null && statusMessage.length() > 0) ? statusMessage : emptyText;
@@ -150,31 +180,39 @@ class GroceryView extends WatchUi.View {
             return;
         }
 
-        // 2. Draw Visible Rows
-        var startX = (_screenWidth * 0.10).toNumber();
-        var rowWidth = (_screenWidth * 0.80).toNumber();
-        var curY = _headerHeight;
+        // 1. Draw Visible Rows with clipping to prevent any overlap outside content area
+        var clipY = _headerHeight;
+        var clipH = _screenHeight - _headerHeight - 12;
+        dc.setClip(0, clipY, _screenWidth, clipH);
 
-        for (var i = topIndex; i < rows.size(); i++) {
+        var startX = (_screenWidth * 0.08).toNumber();
+        var rowWidth = (_screenWidth * 0.84).toNumber();
+        var curY = _headerHeight + 4 - scrollY;
+
+        for (var i = 0; i < rows.size(); i++) {
             var row = rows[i];
-            var rHeight = row.isHeader ? _categoryRowHeight : _itemRowHeight;
+            var rHeight = row.rowHeight;
 
-            if (curY + rHeight > _screenHeight - 8) {
-                break;
+            // Only draw if within visible screen bounds
+            if (curY + rHeight >= _headerHeight && curY <= _screenHeight - 10) {
+                if (row.isHeader) {
+                    drawCategoryHeader(dc, row, startX, curY, rowWidth, rHeight);
+                } else if (row.item != null) {
+                    var isFocused = (i == selectedIndex);
+                    drawItemRow(dc, row.item, startX, curY, rowWidth, rHeight, isFocused);
+                }
             }
 
-            if (row.isHeader) {
-                drawCategoryHeader(dc, row, startX, curY, rowWidth, rHeight);
-            } else if (row.item != null) {
-                var isFocused = (i == selectedIndex);
-                drawItemRow(dc, row.item, startX, curY, rowWidth, rHeight, isFocused);
-            }
-
-            curY += rHeight + 3;
+            curY += rHeight + 4;
         }
 
-        // 3. Scroll Indicator on the right edge
+        dc.clearClip();
+
+        // 2. Scroll Indicator on the right edge
         drawScrollIndicator(dc);
+
+        // 3. Persistent Fixed Header (drawn last so rows scroll cleanly underneath it)
+        drawHeader(dc);
     }
 
     private function drawHeader(dc as Graphics.Dc) as Void {
@@ -185,7 +223,11 @@ class GroceryView extends WatchUi.View {
             totalCount += categories[c].totalCount;
         }
 
-        // Title
+        // Opaque AMOLED Black background to cleanly cover scrolling rows
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
+        dc.fillRectangle(0, 0, _screenWidth, _headerHeight);
+
+        // Title: Y = 14
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         var titleText = WatchUi.loadResource(Rez.Strings.AppName) as String;
         dc.drawText(
@@ -196,13 +238,13 @@ class GroceryView extends WatchUi.View {
             Graphics.TEXT_JUSTIFY_CENTER
         );
 
-        // Subtitle: "X/Y נותרו"
+        // Subtitle: "X/Y נותרו", Y = 42
         dc.setColor(0x94a3b8, Graphics.COLOR_TRANSPARENT);
         var remSuffix = WatchUi.loadResource(Rez.Strings.RemainingSuffix) as String;
         var subText = totalRem + "/" + totalCount + " " + remSuffix;
         dc.drawText(
             _screenWidth / 2,
-            38,
+            42,
             getSmallFont(),
             subText,
             Graphics.TEXT_JUSTIFY_CENTER
@@ -210,7 +252,7 @@ class GroceryView extends WatchUi.View {
 
         // Header separator
         dc.setColor(0x1e293b, Graphics.COLOR_TRANSPARENT);
-        dc.drawLine((_screenWidth * 0.20).toNumber(), _headerHeight - 6, (_screenWidth * 0.80).toNumber(), _headerHeight - 6);
+        dc.drawLine((_screenWidth * 0.20).toNumber(), _headerHeight - 2, (_screenWidth * 0.80).toNumber(), _headerHeight - 2);
     }
 
     private function drawCategoryHeader(
@@ -352,25 +394,27 @@ class GroceryView extends WatchUi.View {
     }
 
     private function drawScrollIndicator(dc as Graphics.Dc) as Void {
-        if (rows.size() <= 4) {
+        var maxScroll = getMaxScroll();
+        if (maxScroll <= 0) {
             return;
         }
 
         var indicatorHeight = 36;
         var trackHeight = _screenHeight * 0.40;
         var trackY = _screenHeight * 0.30;
-        var maxTop = rows.size() > 4 ? (rows.size() - 4) : 1;
-        var progress = topIndex.toFloat() / maxTop.toFloat();
+        var progress = scrollY.toFloat() / maxScroll.toFloat();
         if (progress > 1.0) {
             progress = 1.0;
+        } else if (progress < 0.0) {
+            progress = 0.0;
         }
         var indicatorY = trackY + (progress * (trackHeight - indicatorHeight)).toNumber();
 
         dc.setColor(0x334155, Graphics.COLOR_TRANSPARENT);
-        dc.fillRoundedRectangle(_screenWidth - 10, indicatorY, 3, indicatorHeight, 2);
+        dc.fillRoundedRectangle(_screenWidth - 8, indicatorY, 3, indicatorHeight, 2);
     }
 
-    // Navigation and Scrolling
+    // Navigation and Scrolling (Hardware Buttons & D-pad)
     function scrollDown() as Void {
         if (rows.size() == 0) {
             return;
@@ -380,9 +424,7 @@ class GroceryView extends WatchUi.View {
         for (var i = selectedIndex + 1; i < rows.size(); i++) {
             if (!rows[i].isHeader) {
                 selectedIndex = i;
-                if (selectedIndex >= topIndex + 4) {
-                    topIndex = selectedIndex - 3;
-                }
+                ensureSelectionVisible();
                 WatchUi.requestUpdate();
                 return;
             }
@@ -398,12 +440,33 @@ class GroceryView extends WatchUi.View {
         for (var i = selectedIndex - 1; i >= 0; i--) {
             if (!rows[i].isHeader) {
                 selectedIndex = i;
-                if (selectedIndex < topIndex) {
-                    topIndex = selectedIndex;
-                }
+                ensureSelectionVisible();
                 WatchUi.requestUpdate();
                 return;
             }
+        }
+    }
+
+    private function ensureSelectionVisible() as Void {
+        var accY = 0;
+        for (var i = 0; i < rows.size(); i++) {
+            if (i == selectedIndex) {
+                var itemTop = accY;
+                var itemBottom = accY + rows[i].rowHeight;
+                var visibleTop = scrollY;
+                var visibleBottom = scrollY + (_screenHeight - _headerHeight - 20);
+
+                if (itemTop < visibleTop) {
+                    scrollY = itemTop;
+                } else if (itemBottom > visibleBottom) {
+                    scrollY = itemBottom - (_screenHeight - _headerHeight - 20);
+                }
+                var max = getMaxScroll();
+                if (scrollY > max) { scrollY = max; }
+                if (scrollY < 0) { scrollY = 0; }
+                return;
+            }
+            accY += rows[i].rowHeight + 4;
         }
     }
 
@@ -415,14 +478,14 @@ class GroceryView extends WatchUi.View {
     }
 
     function getItemAtCoordinates(touchY as Number) as GroceryItem? {
-        if (touchY < _headerHeight || touchY > _screenHeight - 12 || rows.size() == 0) {
+        if (touchY < _headerHeight || touchY > _screenHeight - 10 || rows.size() == 0) {
             return null;
         }
 
-        var curY = _headerHeight;
-        for (var i = topIndex; i < rows.size(); i++) {
+        var curY = _headerHeight + 4 - scrollY;
+        for (var i = 0; i < rows.size(); i++) {
             var row = rows[i];
-            var rHeight = row.isHeader ? _categoryRowHeight : _itemRowHeight;
+            var rHeight = row.rowHeight;
 
             if (touchY >= curY && touchY <= curY + rHeight) {
                 if (!row.isHeader && row.item != null) {
@@ -432,10 +495,7 @@ class GroceryView extends WatchUi.View {
                 return null;
             }
 
-            curY += rHeight + 3;
-            if (curY > _screenHeight) {
-                break;
-            }
+            curY += rHeight + 4;
         }
 
         return null;

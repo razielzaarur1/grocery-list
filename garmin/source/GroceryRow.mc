@@ -6,6 +6,7 @@ class GroceryRow {
     var headerTitle as String = "";
     var headerCount as String = "";
     var item as GroceryItem? = null;
+    var rowHeight as Number = 38;
 
     function initializeAsHeader(catId as Number, title as String, countStr as String) {
         isHeader = true;
@@ -13,6 +14,7 @@ class GroceryRow {
         headerTitle = BidiHelper.shapeHebrew(title);
         headerCount = countStr;
         item = null;
+        rowHeight = 32;
     }
 
     function initializeAsItem(groceryItem as GroceryItem) {
@@ -21,5 +23,7 @@ class GroceryRow {
         categoryId = groceryItem.categoryId;
         headerTitle = "";
         headerCount = "";
+        var hasNote = (groceryItem.note.length() > 0);
+        rowHeight = hasNote ? 48 : 38;
     }
 }

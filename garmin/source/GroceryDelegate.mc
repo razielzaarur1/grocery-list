@@ -12,8 +12,42 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
         _service = service;
     }
 
+    private var _lastDragY as Number? = null;
+    private var _wasDragging as Boolean = false;
+
+    // Smooth touch scrolling via onDrag
+    function onDrag(dragEvent as WatchUi.DragEvent) as Boolean {
+        var coords = dragEvent.getCoordinates();
+        var y = coords[1];
+        var dragType = dragEvent.getType();
+
+        if (dragType == WatchUi.DRAG_TYPE_START) {
+            _lastDragY = y;
+            _wasDragging = false;
+        } else if (dragType == WatchUi.DRAG_TYPE_CONTINUE) {
+            if (_lastDragY != null) {
+                var delta = y - _lastDragY;
+                if (delta != 0) {
+                    _wasDragging = true;
+                    _view.scrollPixels(-delta);
+                    _lastDragY = y;
+                }
+            } else {
+                _lastDragY = y;
+            }
+        } else if (dragType == WatchUi.DRAG_TYPE_STOP) {
+            _lastDragY = null;
+        }
+        return true;
+    }
+
     // Touch screen tap on an item (or tap to retry when empty)
     function onTap(clickEvent as WatchUi.ClickEvent) as Boolean {
+        if (_wasDragging) {
+            _wasDragging = false;
+            return true;
+        }
+
         if (_view.rows.size() == 0) {
             _view.isLoading = true;
             WatchUi.requestUpdate();
@@ -31,14 +65,14 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
         return false;
     }
 
-    // Touch screen swipe
+    // Touch screen swipe fallback
     function onSwipe(swipeEvent as WatchUi.SwipeEvent) as Boolean {
         var direction = swipeEvent.getDirection();
         if (direction == WatchUi.SWIPE_UP) {
-            _view.scrollDown();
+            _view.scrollPixels(100);
             return true;
         } else if (direction == WatchUi.SWIPE_DOWN) {
-            _view.scrollUp();
+            _view.scrollPixels(-100);
             return true;
         }
         return false;
