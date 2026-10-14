@@ -629,12 +629,14 @@ class GroceryView extends WatchUi.View {
         WatchUi.requestUpdate();
     }
 
-    function setCategories(newCategories as Array<GroceryCategoryData>, msg as String?) as Void {
-        categories = newCategories;
+    function setCategories(newCategories as Array<GroceryCategoryData>?, msg as String?) as Void {
+        if (newCategories != null) {
+            categories = newCategories;
+            _rowsMeasured = false;
+            rebuildRows();
+        }
         isLoading = false;
         statusMessage = msg;
-        _rowsMeasured = false;
-        rebuildRows();
         WatchUi.requestUpdate();
     }
 }

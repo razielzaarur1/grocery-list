@@ -172,19 +172,45 @@ def add_item_manual(req: ManualItemCreate, db: Session = Depends(get_db)):
     sync_notifier.notify()
     return {"success": True, "item_id": new_item.id}
 
+class ItemToggleRequest(BaseModel):
+    is_checked: Optional[bool] = None
+
+@router.get("/{item_id}/toggle")
 @router.post("/{item_id}/toggle")
-def toggle_item_checked(item_id: int, db: Session = Depends(get_db)):
+@router.put("/{item_id}/toggle")
+def toggle_item_checked(
+    item_id: int,
+    is_checked: Optional[bool] = None,
+    req: Optional[ItemToggleRequest] = None,
+    db: Session = Depends(get_db)
+):
     """Simple toggle endpoint ideal for Garmin watches and quick tap actions."""
     item = db.query(Item).filter(Item.id == item_id).first()
     if not item:
         raise HTTPException(status_code=404, detail="פריט לא נמצא")
 
-    item.is_checked = not item.is_checked
+    target_state = None
+    if req is not None and req.is_checked is not None:
+        target_state = req.is_checked
+    elif is_checked is not None:
+        target_state = is_checked
+
+    if target_state is not None:
+        item.is_checked = target_state
+    else:
+        item.is_checked = not item.is_checked
+
     item.checked_at = datetime.utcnow() if item.is_checked else None
     db.commit()
     sync_notifier.notify()
-    return {"success": True, "item_id": item.id, "is_checked": item.is_checked}
+    return {
+        "success": True,
+        "item_id": item.id,
+        "is_checked": item.is_checked,
+        "version": sync_notifier.version
+    }
 
+@router.put("/{item_id}")
 @router.patch("/{item_id}")
 def update_item(item_id: int, update_data: ItemUpdate, db: Session = Depends(get_db)):
     """Update an item (checkbox toggle, long-press edit, etc.)."""

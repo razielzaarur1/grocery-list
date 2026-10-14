@@ -6,11 +6,20 @@ import Toybox.System;
 class GroceryService {
     private var _callback as Method;
     private var _lastVersion as Number = -1;
-    private var _isFetching as Boolean = false;
-    private var _isCheckingVersion as Boolean = false;
+    private var _isBusy as Boolean = false;
+    private var _pendingToggles as Array<Dictionary> = [] as Array<Dictionary>;
+    private var _lastCategories as Array<GroceryCategoryData> = [] as Array<GroceryCategoryData>;
 
     function initialize(callback as Method) {
         _callback = callback;
+    }
+
+    function isBusy() as Boolean {
+        return _isBusy || (_pendingToggles.size() > 0);
+    }
+
+    function hasPendingToggles() as Boolean {
+        return _pendingToggles.size() > 0;
     }
 
     private function getBaseUrl() as String {
@@ -38,10 +47,10 @@ class GroceryService {
 
     // Check lightweight 15-byte version for real-time live sync
     function checkVersion() as Void {
-        if (_isFetching || _isCheckingVersion) {
+        if (_isBusy || _pendingToggles.size() > 0) {
             return;
         }
-        _isCheckingVersion = true;
+        _isBusy = true;
         var url = getBaseUrl() + "/api/items/version";
         var options = {
             :method => Communications.HTTP_REQUEST_METHOD_GET,
@@ -53,7 +62,14 @@ class GroceryService {
     }
 
     function onReceiveVersion(responseCode as Number, data as Dictionary?) as Void {
-        _isCheckingVersion = false;
+        _isBusy = false;
+
+        // If user queued toggles while checkVersion was in flight, execute toggles immediately!
+        if (_pendingToggles.size() > 0) {
+            processQueue();
+            return;
+        }
+
         if (responseCode == 200 && data != null) {
             var v = data.get("version");
             if (v != null) {
@@ -67,10 +83,10 @@ class GroceryService {
 
     // Fetch items grouped by category from backend API
     function fetchItems() as Void {
-        if (_isFetching) {
+        if (_isBusy || _pendingToggles.size() > 0) {
             return;
         }
-        _isFetching = true;
+        _isBusy = true;
         var url = getBaseUrl() + "/api/items";
         System.println("Fetching from URL: " + url);
         var options = {
@@ -83,7 +99,7 @@ class GroceryService {
     }
 
     function onReceiveItems(responseCode as Number, data as Dictionary?) as Void {
-        _isFetching = false;
+        _isBusy = false;
         System.println("onReceiveItems code: " + responseCode);
         if (responseCode == 200 && data != null) {
             var v = data.get("version");
@@ -104,29 +120,96 @@ class GroceryService {
             }
 
             System.println("Parsed categories count: " + categoriesList.size());
+            _lastCategories = categoriesList;
             saveOfflineCategories(categoriesList);
             _callback.invoke(true, categoriesList, null);
         } else {
             var cached = loadOfflineCategories();
+            _lastCategories = cached;
             _callback.invoke(false, cached, "שגיאת חיבור (" + responseCode + ")");
         }
+
+        // Process any queued user actions
+        processQueue();
     }
 
-    // Toggle item checked state
+    // Toggle item checked state: queues request to ensure 100% reliable BLE transmission
     function toggleItem(item as GroceryItem) as Void {
-        var url = getBaseUrl() + "/api/items/" + item.id + "/toggle";
+        var req = {
+            "id" => item.id,
+            "isChecked" => item.isChecked,
+            "item" => item,
+            "retries" => 0
+        };
+        _pendingToggles.add(req);
+
+        // Update local offline cache immediately
+        if (_lastCategories.size() > 0) {
+            saveOfflineCategories(_lastCategories);
+        }
+
+        processQueue();
+    }
+
+    private function processQueue() as Void {
+        if (_isBusy || _pendingToggles.size() == 0) {
+            return;
+        }
+
+        _isBusy = true;
+        var nextReq = _pendingToggles[0];
+        var itemId = nextReq.get("id");
+        var isChecked = nextReq.get("isChecked") as Boolean;
+
+        var url = getBaseUrl() + "/api/items/" + itemId + "/toggle";
+        // Non-null Dictionary for JSON POST is required by Garmin Connect Mobile
+        var params = {
+            "is_checked" => isChecked
+        };
         var options = {
             :method => Communications.HTTP_REQUEST_METHOD_POST,
             :headers => getHeaders(),
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
         };
 
-        Communications.makeWebRequest(url, null, options, method(:onToggleResponse));
+        Communications.makeWebRequest(url, params, options, method(:onToggleResponse));
     }
 
     function onToggleResponse(responseCode as Number, data as Dictionary?) as Void {
+        _isBusy = false;
         System.println("Item toggle response: " + responseCode);
-        checkVersion();
+
+        if (_pendingToggles.size() == 0) {
+            return;
+        }
+
+        var currentReq = _pendingToggles[0];
+
+        if (responseCode == 200) {
+            // Update version so subsequent checkVersion won't trigger redundant fetch
+            if (data != null && data.get("version") != null) {
+                var v = data.get("version");
+                _lastVersion = (v has :toNumber) ? v.toNumber() : _lastVersion;
+            }
+            _pendingToggles.remove(currentReq);
+            processQueue();
+        } else {
+            var retries = currentReq.get("retries") as Number;
+            if (retries < 2) {
+                currentReq.put("retries", retries + 1);
+                processQueue();
+            } else {
+                // Permanently failed after 2 retries: revert item state and alert
+                _pendingToggles.remove(currentReq);
+                var it = currentReq.get("item") as GroceryItem;
+                if (it != null) {
+                    var prevChecked = currentReq.get("isChecked") as Boolean;
+                    it.isChecked = !prevChecked;
+                }
+                _callback.invoke(false, null, "שגיאה בסימון (" + responseCode + ")");
+                processQueue();
+            }
+        }
     }
 
     // Persistent storage caching for offline supermarket use
