@@ -134,50 +134,75 @@ class GroceryView extends WatchUi.View {
             dc.drawRoundedRectangle(x - 6, y, width + 12, height - 4, 8);
         }
 
-        var textCenterY = y + (height / 2);
-        var hasDetails = (item.shapedDetails.length() > 0);
+        var rightMargin = x + width - 6;
+        var leftMargin = x + 6;
 
-        // Colors
-        var textColor = item.isChecked ? Graphics.COLOR_DK_GRAY : Graphics.COLOR_WHITE;
-        var subColor = item.isChecked ? Graphics.COLOR_DK_GRAY : 0x94a3b8;
+        var hasNote = (item.shapedNote.length() > 0);
+        var hasQuantity = (item.shapedQuantity.length() > 0);
 
-        // Draw Text (Center Justified for curved AMOLED display)
-        var nameY = hasDetails ? (y + 4) : (textCenterY - 10);
-        dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
+        var nameY = hasNote ? (y + 4) : (y + (height / 2) - 12);
+
+        // Colors matching the web app:
+        // Name: white (or dark gray when checked)
+        // Quantity & Note: small grayish (0x94a3b8)
+        var nameColor = item.isChecked ? Graphics.COLOR_DK_GRAY : Graphics.COLOR_WHITE;
+        var grayColor = item.isChecked ? Graphics.COLOR_DK_GRAY : 0x94a3b8;
+
+        // 1. Draw Item Name on the RIGHT (RTL)
+        dc.setColor(nameColor, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
-            _screenWidth / 2,
+            rightMargin,
             nameY,
             Graphics.FONT_SMALL,
             item.shapedName,
-            Graphics.TEXT_JUSTIFY_CENTER
+            Graphics.TEXT_JUSTIFY_RIGHT
         );
 
-        // Draw Subtext (Quantity / Unit / Note)
-        if (hasDetails) {
-            dc.setColor(subColor, Graphics.COLOR_TRANSPARENT);
+        // 2. Draw Quantity on the LEFT (in small grayish, like web app)
+        if (hasQuantity) {
+            dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
-                _screenWidth / 2,
-                nameY + 24,
+                leftMargin,
+                nameY + 2,
                 Graphics.FONT_SYSTEM_XTINY,
-                item.shapedDetails,
-                Graphics.TEXT_JUSTIFY_CENTER
+                item.shapedQuantity,
+                Graphics.TEXT_JUSTIFY_LEFT
             );
         }
 
-        // Strikethrough Line (קו מעל/חוצה - ללא צ'קבוקס!)
+        // 3. Draw Note directly UNDERNEATH the item name (in small grayish, like web app)
+        if (hasNote) {
+            dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(
+                rightMargin,
+                nameY + 24,
+                Graphics.FONT_SYSTEM_XTINY,
+                item.shapedNote,
+                Graphics.TEXT_JUSTIFY_RIGHT
+            );
+        }
+
+        // 4. Strikethrough Line (קו חוצה מעל הטקסט - ללא צ'קבוקס!)
         if (item.isChecked) {
             dc.setColor(0x64748b, Graphics.COLOR_TRANSPARENT);
-            // Draw clean strikethrough line across the item name
-            var strikeY = nameY + 12;
-            var textWidth = (item.name.length() * 14); // approximate width
-            if (textWidth > width - 20) {
-                textWidth = width - 20;
-            }
-            var lineStartX = (_screenWidth / 2) - (textWidth / 2);
-            var lineEndX = lineStartX + textWidth;
-
             dc.setPenWidth(2);
-            dc.drawLine(lineStartX, strikeY, lineEndX, strikeY);
+
+            // Strikethrough over name
+            var nameLen = (item.name.length() * 12);
+            if (nameLen > (width * 0.65).toNumber()) {
+                nameLen = (width * 0.65).toNumber();
+            }
+            dc.drawLine(rightMargin, nameY + 11, rightMargin - nameLen, nameY + 11);
+
+            // Strikethrough over note if present
+            if (hasNote) {
+                var noteLen = (item.note.length() * 9);
+                if (noteLen > (width * 0.65).toNumber()) {
+                    noteLen = (width * 0.65).toNumber();
+                }
+                dc.drawLine(rightMargin, nameY + 31, rightMargin - noteLen, nameY + 31);
+            }
+
             dc.setPenWidth(1);
         }
     }

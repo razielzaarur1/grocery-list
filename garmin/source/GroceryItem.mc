@@ -11,7 +11,8 @@ class GroceryItem {
 
     // Pre-calculated shaped text for fast drawing
     var shapedName as String;
-    var shapedDetails as String;
+    var shapedQuantity as String;
+    var shapedNote as String;
 
     function initialize(dict as Dictionary) {
         id = dict.get("id") as Number;
@@ -28,25 +29,18 @@ class GroceryItem {
     function updateShapedText() as Void {
         shapedName = BidiHelper.shapeHebrew(name);
 
-        var details = "";
+        var q = "";
         if (quantity.length() > 0) {
-            details += quantity;
+            q += quantity;
             if (unit.length() > 0) {
-                details += " " + unit;
+                q += " " + unit;
             }
         } else if (unit.length() > 0) {
-            details += unit;
+            q += unit;
         }
+        shapedQuantity = BidiHelper.shapeHebrew(q);
 
-        if (note.length() > 0) {
-            if (details.length() > 0) {
-                details += " • " + note;
-            } else {
-                details += note;
-            }
-        }
-
-        shapedDetails = BidiHelper.shapeHebrew(details);
+        shapedNote = (note.length() > 0) ? BidiHelper.shapeHebrew(note) : "";
     }
 
     function toggleChecked() as Void {
