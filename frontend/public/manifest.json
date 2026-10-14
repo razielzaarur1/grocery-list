@@ -1,10 +1,10 @@
 {
-  "id": "/",
+  "id": "/grocery_list/",
   "name": "רשימת קניות",
   "short_name": "רשימת קניות",
   "description": "אפליקציית רשימת קניות חכמה",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "/grocery_list/",
+  "scope": "/grocery_list/",
   "display": "standalone",
   "display_override": ["standalone", "window-controls-overlay", "minimal-ui"],
   "orientation": "portrait",

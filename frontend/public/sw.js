@@ -1,10 +1,10 @@
-const CACHE_NAME = 'grocery-pwa-v3';
+const CACHE_NAME = 'grocery-pwa-v4';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png'
+  './',
+  './index.html',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
