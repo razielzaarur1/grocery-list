@@ -13,7 +13,7 @@ class GroceryService {
     private function getBaseUrl() as String {
         var url = Application.Properties.getValue("serverUrl");
         if (url == null || url.length() == 0) {
-            url = "https://YOUR_TAILSCALE_DOMAIN.ts.net/grocery_list";
+            url = "https://zaarur-server.tiffany-minor.ts.net/grocery_list";
         }
         // Remove trailing slash if present
         if (url.substring(url.length() - 1, url.length()).equals("/")) {

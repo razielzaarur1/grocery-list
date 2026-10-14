@@ -1,4 +1,4 @@
 <properties>
-    <property id="serverUrl" type="string">https://YOUR_TAILSCALE_DOMAIN.ts.net/grocery_list</property>
+    <property id="serverUrl" type="string">https://zaarur-server.tiffany-minor.ts.net/grocery_list</property>
     <property id="deviceToken" type="string"></property>
 </properties>

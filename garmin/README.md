@@ -58,7 +58,7 @@ tailscale funnel --bg --set-path /grocery_list on
 ```
 
 בדיקת תקינות מהדפדפן או מהטלפון:
-`https://<your-tailnet-domain>.ts.net/grocery_list`
+`https://zaarur-server.tiffany-minor.ts.net/grocery_list`
 
 ---
 
