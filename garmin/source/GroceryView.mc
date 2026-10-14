@@ -32,7 +32,9 @@ class GroceryView extends WatchUi.View {
         try {
             _font = WatchUi.loadResource(Rez.Fonts.HebrewFont);
             _fontSmall = WatchUi.loadResource(Rez.Fonts.HebrewSmall);
+            System.println("Hebrew fonts loaded successfully!");
         } catch (ex) {
+            System.println("Font load error: " + ex.getErrorMessage());
             _font = null;
             _fontSmall = null;
         }

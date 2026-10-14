@@ -13,8 +13,15 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
         _service = service;
     }
 
-    // Touch screen tap on an item
+    // Touch screen tap on an item (or tap to retry when empty)
     function onTap(clickEvent as WatchUi.ClickEvent) as Boolean {
+        if (_view.items.size() == 0) {
+            _view.isLoading = true;
+            WatchUi.requestUpdate();
+            _service.fetchItems();
+            return true;
+        }
+
         var coords = clickEvent.getCoordinates();
         var clickedItem = _view.getItemAtCoordinates(coords[1]);
 
