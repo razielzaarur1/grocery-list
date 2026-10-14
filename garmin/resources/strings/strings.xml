@@ -1,0 +1,8 @@
+<resources>
+    <string id="AppName">רשימת קניות</string>
+    <string id="LoadingText">טוען נתונים...</string>
+    <string id="EmptyText">הרשימה ריקה</string>
+    <string id="ErrorText">שגיאת תקשורת</string>
+    <string id="ServerUrlTitle">כתובת שרת</string>
+    <string id="ServerUrlPrompt">הזן כתובת Tailscale Funnel מלאה</string>
+</resources>

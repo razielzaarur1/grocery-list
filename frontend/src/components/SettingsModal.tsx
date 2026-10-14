@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AppSettings, Category } from '../types';
-import { ChevronDown, ChevronUp, ArrowUp, ArrowDown, Trash2, Download, Loader2, AlertTriangle, Clock } from 'lucide-react';
+import { ChevronDown, ChevronUp, ArrowUp, ArrowDown, Trash2, Download, Loader2, AlertTriangle, Clock, Lock } from 'lucide-react';
+import { apiFetch } from '../api';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -43,6 +44,40 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const [tgStatus, setTgStatus] = useState<string | null>(null);
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
   const [canInstall, setCanInstall] = useState(false);
+  const [newPin, setNewPin] = useState('');
+  const [pinMessage, setPinMessage] = useState<string | null>(null);
+  const [pinError, setPinError] = useState<string | null>(null);
+  const [isUpdatingPin, setIsUpdatingPin] = useState(false);
+
+  const handleUpdatePin = async () => {
+    const clean = newPin.trim();
+    if (!clean || clean.length < 4 || clean.length > 6 || !/^\d+$/.test(clean)) {
+      setPinError('קוד ה-PIN חייב להכיל בין 4 ל-6 ספרות בלבד');
+      setPinMessage(null);
+      return;
+    }
+    setIsUpdatingPin(true);
+    setPinError(null);
+    setPinMessage(null);
+    try {
+      const res = await apiFetch('/api/auth/change-pin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ new_pin: clean }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setPinMessage(`קוד ה-PIN עודכן בהצלחה (${clean.length} ספרות)`);
+        setNewPin('');
+      } else {
+        setPinError(data.detail || 'שגיאה בעדכון הסיסמה');
+      }
+    } catch (err: any) {
+      setPinError('שגיאת תקשורת עם השרת');
+    } finally {
+      setIsUpdatingPin(false);
+    }
+  };
 
   useEffect(() => {
     if (settings) {
@@ -208,6 +243,49 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               <Download size={14} />
               <span>התקן אפליקציה</span>
             </button>
+          </div>
+
+          {/* PIN Security Management Card */}
+          <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <Lock size={15} className="text-slate-700" />
+                <h3 className="text-xs font-bold text-slate-800">אבטחה וקוד כניסה (PIN)</h3>
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-500 leading-normal">
+              שינוי קוד ה-PIN (4 עד 6 ספרות). קוד זה נדרש בעת כניסה ראשונית ממכשיר חדש ומאומת אוטומטית.
+            </p>
+            <div className="flex gap-2">
+              <input
+                type="password"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={6}
+                value={newPin}
+                onChange={(e) => setNewPin(e.target.value.replace(/\D/g, ''))}
+                placeholder="הזן PIN חדש (4-6 ספרות)"
+                className="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-center font-mono tracking-widest text-slate-800 focus:outline-none focus:border-emerald-600"
+              />
+              <button
+                type="button"
+                onClick={handleUpdatePin}
+                disabled={isUpdatingPin || !newPin}
+                className="px-3 py-1.5 bg-[#1e232a] text-white rounded-lg text-xs font-medium hover:bg-black transition-colors disabled:opacity-50 whitespace-nowrap"
+              >
+                {isUpdatingPin ? 'מעדכן...' : 'עדכן סיסמה'}
+              </button>
+            </div>
+            {pinMessage && (
+              <p className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 p-2 rounded-lg border border-emerald-200/60">
+                {pinMessage}
+              </p>
+            )}
+            {pinError && (
+              <p className="text-[11px] font-semibold text-rose-700 bg-rose-50 p-2 rounded-lg border border-rose-200/60">
+                {pinError}
+              </p>
+            )}
           </div>
 
           {/* Gemini AI Settings */}

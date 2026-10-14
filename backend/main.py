@@ -8,6 +8,7 @@ from telegram_bot import bot_runner
 from routes.items import router as items_router
 from routes.categories import router as categories_router
 from routes.settings import router as settings_router
+from routes.auth import router as auth_router
 
 logging.basicConfig(
     level=logging.INFO,
@@ -47,10 +48,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include routers
+# Include routers (both standard /api and subpath /grocery_list/api)
 app.include_router(items_router)
 app.include_router(categories_router)
 app.include_router(settings_router)
+app.include_router(auth_router)
+
+# Subpath support for Tailscale Funnel / reverse proxies
+app.include_router(items_router, prefix="/grocery_list")
+app.include_router(categories_router, prefix="/grocery_list")
+app.include_router(settings_router, prefix="/grocery_list")
+app.include_router(auth_router, prefix="/grocery_list")
 
 @app.get("/health")
 def health_check():

@@ -131,6 +131,18 @@ def add_item_manual(req: ManualItemCreate, db: Session = Depends(get_db)):
 
     return {"success": True, "item_id": new_item.id}
 
+@router.post("/{item_id}/toggle")
+def toggle_item_checked(item_id: int, db: Session = Depends(get_db)):
+    """Simple toggle endpoint ideal for Garmin watches and quick tap actions."""
+    item = db.query(Item).filter(Item.id == item_id).first()
+    if not item:
+        raise HTTPException(status_code=404, detail="פריט לא נמצא")
+
+    item.is_checked = not item.is_checked
+    item.checked_at = datetime.utcnow() if item.is_checked else None
+    db.commit()
+    return {"success": True, "item_id": item.id, "is_checked": item.is_checked}
+
 @router.patch("/{item_id}")
 def update_item(item_id: int, update_data: ItemUpdate, db: Session = Depends(get_db)):
     """Update an item (checkbox toggle, long-press edit, etc.)."""

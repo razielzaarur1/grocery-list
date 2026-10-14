@@ -19,6 +19,7 @@ services:
     container_name: grocery_frontend
     ports:
       - "8888:80"
+      - "8889:8889"
     depends_on:
       - backend
     restart: unless-stopped

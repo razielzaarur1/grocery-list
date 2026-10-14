@@ -62,3 +62,13 @@ class Setting(Base):
 
     key = Column(String(100), primary_key=True)
     value = Column(Text, default="")
+
+
+class DeviceToken(Base):
+    __tablename__ = "device_tokens"
+
+    token = Column(String(100), primary_key=True, index=True)
+    device_name = Column(String(200), default="מכשיר מורשה")
+    created_at = Column(DateTime, default=datetime.utcnow)
+    last_used_at = Column(DateTime, default=datetime.utcnow)
+

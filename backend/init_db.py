@@ -1,5 +1,6 @@
 from database import engine, SessionLocal, Base
-from models import Category, Setting
+import models
+from models import Category, Setting, DeviceToken
 
 DEFAULT_CATEGORIES = [
     "פירות וירקות",
@@ -16,6 +17,9 @@ DEFAULT_SETTINGS = {
     "telegram_bot_token": "",
     "telegram_chat_id_1": "",
     "telegram_chat_id_2": "",
+    "pin_code": "1234",
+    "failed_attempts": "0",
+    "is_locked": "false",
 }
 
 def init_db():

@@ -1,0 +1,8 @@
+<settings>
+    <setting propertyKey="@Properties.serverUrl" title="@Strings.ServerUrlTitle" prompt="@Strings.ServerUrlPrompt">
+        <settingConfig type="alphaNumeric" />
+    </setting>
+    <setting propertyKey="@Properties.deviceToken" title="טוקן מכשיר" prompt="הזן טוקן מכשיר מורשה (אופציונלי)">
+        <settingConfig type="alphaNumeric" />
+    </setting>
+</settings>

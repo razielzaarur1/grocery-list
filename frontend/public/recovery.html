@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>פאנל חילוץ מקומי - רשימת קניות</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Assistant', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center p-4">
+  <div class="max-w-md w-full bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl p-6 space-y-6">
+    
+    <!-- Header -->
+    <div class="text-center space-y-1">
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      </div>
+      <h1 class="text-xl font-bold text-white">פאנל חילוץ מקומי (פורט 8889)</h1>
+      <p class="text-xs text-slate-400">ניהול אבטחה ושחרור נעילות ברשת הביתית בלבד</p>
+    </div>
+
+    <!-- Status Card -->
+    <div id="statusCard" class="bg-slate-900/80 border border-slate-700/80 rounded-xl p-4 space-y-3">
+      <div class="flex items-center justify-between text-sm">
+        <span class="text-slate-400">סטטוס המערכת:</span>
+        <span id="lockStatus" class="font-bold px-2.5 py-0.5 rounded-full text-xs">טוען...</span>
+      </div>
+      <div class="flex items-center justify-between text-sm">
+        <span class="text-slate-400">ניסיונות שגויים:</span>
+        <span id="failedAttempts" class="font-bold text-amber-400">0 / 3</span>
+      </div>
+      <div class="flex items-center justify-between text-sm">
+        <span class="text-slate-400">סיסמת PIN נוכחית:</span>
+        <span id="currentPin" class="font-mono font-bold text-emerald-400 tracking-wider">****</span>
+      </div>
+      <div class="flex items-center justify-between text-sm">
+        <span class="text-slate-400">מכשירים מורשים שמורים:</span>
+        <span id="devicesCount" class="font-bold text-slate-200">0</span>
+      </div>
+    </div>
+
+    <!-- Action Alerts -->
+    <div id="alertBox" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+
+    <!-- Unlock Action Button -->
+    <button
+      id="unlockBtn"
+      onclick="unlockSystem()"
+      class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.98] text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+      </svg>
+      <span>שחרר נעילת מערכת עכשיו</span>
+    </button>
+
+    <!-- Change PIN Form -->
+    <div class="border-t border-slate-700/60 pt-5 space-y-3">
+      <h2 class="text-sm font-bold text-slate-200">שינוי סיסמת PIN (4 עד 6 ספרות)</h2>
+      <div class="flex gap-2">
+        <input
+          id="newPinInput"
+          type="password"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="6"
+          placeholder="סיסמה חדשה (4-6 ספרות)"
+          class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-center font-mono tracking-widest text-white focus:outline-none focus:border-emerald-500"
+        />
+        <button
+          onclick="changePin()"
+          class="px-4 py-2 bg-slate-700 hover:bg-slate-600 active:scale-[0.98] text-white text-xs font-semibold rounded-xl transition-all"
+        >
+          עדכן
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Note -->
+    <div class="p-3 bg-slate-900/50 rounded-xl border border-slate-800 text-[11px] text-slate-400 text-center leading-relaxed">
+      🔒 פורט זה מבודד לרשת הביתית ואינו עובר דרך ה-Funnel החיצוני.
+    </div>
+
+  </div>
+
+  <script>
+    async function loadStatus() {
+      try {
+        const res = await fetch('/api/auth/recovery-info');
+        const data = await res.json();
+        
+        const lockBadge = document.getElementById('lockStatus');
+        if (data.is_locked) {
+          lockBadge.textContent = 'מערכת נעולה';
+          lockBadge.className = 'font-bold px-2.5 py-0.5 rounded-full text-xs bg-rose-500/20 text-rose-400 border border-rose-500/30';
+        } else {
+          lockBadge.textContent = 'מערכת פעילה ותקינה';
+          lockBadge.className = 'font-bold px-2.5 py-0.5 rounded-full text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+        }
+
+        document.getElementById('failedAttempts').textContent = `${data.failed_attempts} / 3`;
+        document.getElementById('currentPin').textContent = data.current_pin;
+        document.getElementById('devicesCount').textContent = data.devices_count;
+      } catch (err) {
+        showAlert('שגיאה בחיבור לשרת: ' + err.message, 'error');
+      }
+    }
+
+    async function unlockSystem() {
+      try {
+        const res = await fetch('/api/auth/unlock', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          showAlert(data.message, 'success');
+          loadStatus();
+        } else {
+          showAlert('שגיאה בשחרור הנעילה', 'error');
+        }
+      } catch (err) {
+        showAlert('שגיאה בתקשורת: ' + err.message, 'error');
+      }
+    }
+
+    async function changePin() {
+      const pin = document.getElementById('newPinInput').value.trim();
+      if (!pin || pin.length < 4 || pin.length > 6 || !/^\d+$/.test(pin)) {
+        showAlert('הסיסמה חייבת להכיל בין 4 ל-6 ספרות בלבד', 'error');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/auth/change-pin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ new_pin: pin })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showAlert('קוד ה-PIN עודכן בהצלחה ל-' + pin, 'success');
+          document.getElementById('newPinInput').value = '';
+          loadStatus();
+        } else {
+          showAlert(data.detail || 'שגיאה בעדכון הסיסמה', 'error');
+        }
+      } catch (err) {
+        showAlert('שגיאה בתקשורת: ' + err.message, 'error');
+      }
+    }
+
+    function showAlert(msg, type) {
+      const box = document.getElementById('alertBox');
+      box.textContent = msg;
+      box.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-300', 'bg-rose-500/20', 'text-rose-300');
+      if (type === 'success') {
+        box.classList.add('bg-emerald-500/20', 'text-emerald-300');
+      } else {
+        box.classList.add('bg-rose-500/20', 'text-rose-300');
+      }
+      setTimeout(() => box.classList.add('hidden'), 5000);
+    }
+
+    loadStatus();
+  </script>
+</body>
+</html>

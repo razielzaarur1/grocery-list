@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { GroceryListResponse, Category, AppSettings, Item } from '../types';
+import { apiFetch } from '../api';
 
 export function useGroceryList() {
   const [data, setData] = useState<GroceryListResponse>({
@@ -15,7 +16,7 @@ export function useGroceryList() {
 
   const fetchItems = useCallback(async () => {
     try {
-      const res = await fetch('/api/items');
+      const res = await apiFetch('/api/items');
       if (res.ok) {
         const json = await res.json();
         setData(json);
@@ -27,7 +28,7 @@ export function useGroceryList() {
 
   const fetchCategories = useCallback(async () => {
     try {
-      const res = await fetch('/api/categories');
+      const res = await apiFetch('/api/categories');
       if (res.ok) {
         const json = await res.json();
         setCategories(json);
@@ -39,7 +40,7 @@ export function useGroceryList() {
 
   const fetchSettings = useCallback(async () => {
     try {
-      const res = await fetch('/api/settings');
+      const res = await apiFetch('/api/settings');
       if (res.ok) {
         const json = await res.json();
         setSettings(json);
@@ -67,7 +68,7 @@ export function useGroceryList() {
     setProcessingInput(true);
     setError(null);
     try {
-      const res = await fetch('/api/items/input', {
+      const res = await apiFetch('/api/items/input', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
@@ -146,7 +147,7 @@ export function useGroceryList() {
     });
 
     try {
-      await fetch(`/api/items/${item.id}`, {
+      await apiFetch(`/api/items/${item.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ is_checked: newChecked }),
@@ -160,7 +161,7 @@ export function useGroceryList() {
 
   const deleteItem = async (itemId: number) => {
     try {
-      await fetch(`/api/items/${itemId}`, { method: 'DELETE' });
+      await apiFetch(`/api/items/${itemId}`, { method: 'DELETE' });
       fetchItems();
     } catch (err) {
       console.error('Failed to delete item:', err);
@@ -169,7 +170,7 @@ export function useGroceryList() {
 
   const updateItem = async (itemId: number, updateData: Partial<Item>) => {
     try {
-      const res = await fetch(`/api/items/${itemId}`, {
+      const res = await apiFetch(`/api/items/${itemId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updateData),
@@ -192,7 +193,7 @@ export function useGroceryList() {
     category_id: number;
   }) => {
     try {
-      const res = await fetch('/api/items/manual', {
+      const res = await apiFetch('/api/items/manual', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(itemData),
@@ -209,7 +210,7 @@ export function useGroceryList() {
 
   const saveSettings = async (newSettings: Partial<AppSettings>) => {
     try {
-      const res = await fetch('/api/settings', {
+      const res = await apiFetch('/api/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSettings),
@@ -226,7 +227,7 @@ export function useGroceryList() {
 
   const scanGeminiModels = async () => {
     try {
-      const res = await fetch('/api/settings/gemini/scan', { method: 'POST' });
+      const res = await apiFetch('/api/settings/gemini/scan', { method: 'POST' });
       if (res.ok) {
         await fetchSettings();
         return true;
@@ -239,7 +240,7 @@ export function useGroceryList() {
 
   const testTelegram = async () => {
     try {
-      const res = await fetch('/api/settings/telegram/test', { method: 'POST' });
+      const res = await apiFetch('/api/settings/telegram/test', { method: 'POST' });
       return await res.json();
     } catch (err: any) {
       return { success: false, errors: [err.message] };
@@ -248,7 +249,7 @@ export function useGroceryList() {
 
   const addCategory = async (name: string) => {
     try {
-      const res = await fetch('/api/categories', {
+      const res = await apiFetch('/api/categories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name }),
@@ -266,7 +267,7 @@ export function useGroceryList() {
 
   const deleteCategory = async (id: number) => {
     try {
-      const res = await fetch(`/api/categories/${id}`, { method: 'DELETE' });
+      const res = await apiFetch(`/api/categories/${id}`, { method: 'DELETE' });
       if (res.ok) {
         await fetchCategories();
         await fetchItems();
@@ -280,7 +281,7 @@ export function useGroceryList() {
 
   const reorderCategories = async (newOrder: { id: number; order_index: number }[]) => {
     try {
-      const res = await fetch('/api/categories/reorder', {
+      const res = await apiFetch('/api/categories/reorder', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ categories: newOrder }),
