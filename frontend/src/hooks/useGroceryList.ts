@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { GroceryListResponse, Category, AppSettings, Item } from '../types';
-import { apiFetch } from '../api';
+import { apiFetch, getApiUrl } from '../api';
 
 export function useGroceryList() {
   const [data, setData] = useState<GroceryListResponse>({
@@ -56,11 +56,47 @@ export function useGroceryList() {
       setLoading(false);
     });
 
-    // Auto-refresh every 5 seconds to sync changes (e.g. from Telegram or other user)
-    const interval = setInterval(() => {
-      fetchItems();
-    }, 5000);
-    return () => clearInterval(interval);
+    // Real-time live sync via Server-Sent Events (SSE) with fast polling fallback
+    let eventSource: EventSource | null = null;
+    let fallbackInterval: ReturnType<typeof setInterval> | null = null;
+
+    try {
+      const sseUrl = getApiUrl('/api/items/events');
+      eventSource = new EventSource(sseUrl);
+
+      eventSource.onmessage = (event) => {
+        try {
+          const parsed = JSON.parse(event.data);
+          if (parsed && parsed.version) {
+            fetchItems();
+          }
+        } catch {
+          fetchItems();
+        }
+      };
+
+      eventSource.onerror = () => {
+        // Fallback polling if SSE is disconnected
+        if (!fallbackInterval) {
+          fallbackInterval = setInterval(() => {
+            fetchItems();
+          }, 2000);
+        }
+      };
+    } catch {
+      fallbackInterval = setInterval(() => {
+        fetchItems();
+      }, 2000);
+    }
+
+    return () => {
+      if (eventSource) {
+        eventSource.close();
+      }
+      if (fallbackInterval) {
+        clearInterval(fallbackInterval);
+      }
+    };
   }, [fetchItems, fetchCategories, fetchSettings]);
 
   const sendInput = async (text: string): Promise<boolean> => {

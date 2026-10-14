@@ -119,6 +119,8 @@ class TelegramBotRunner:
         db: Session = SessionLocal()
         try:
             res = await process_user_input(text, db)
+            from sync_notifier import sync_notifier
+            sync_notifier.notify()
             reply_msg = res.get("message", "עודכן!")
             await self._send_reply(token, chat_id, reply_msg)
         except Exception as e:

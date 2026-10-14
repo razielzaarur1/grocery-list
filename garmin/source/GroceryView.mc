@@ -112,7 +112,8 @@ class GroceryView extends WatchUi.View {
         }
     }
 
-    // Rebuilds rows: category headers first, unchecked items, then checked items at the bottom of the category!
+    // Rebuilds rows: Active categories first, Completed categories to the bottom!
+    // Inside each category: Unchecked items first, Checked items at the bottom.
     function rebuildRows() as Void {
         rows = [] as Array<GroceryRow>;
         _rowsMeasured = false;
@@ -120,51 +121,45 @@ class GroceryView extends WatchUi.View {
         var totalRem = 0;
         var totalCount = 0;
 
+        var activeCats = [] as Array<GroceryCategoryData>;
+        var completedCats = [] as Array<GroceryCategoryData>;
+
         for (var c = 0; c < categories.size(); c++) {
             var cat = categories[c];
             if (cat.items.size() == 0) {
                 continue;
             }
 
-            var uncheckedList = [] as Array<GroceryItem>;
-            var checkedList = [] as Array<GroceryItem>;
-
+            var uncheckCount = 0;
             for (var i = 0; i < cat.items.size(); i++) {
-                var it = cat.items[i];
-                if (it.isChecked) {
-                    checkedList.add(it);
-                } else {
-                    uncheckedList.add(it);
+                if (!cat.items[i].isChecked) {
+                    uncheckCount++;
                 }
             }
 
-            cat.remainingCount = uncheckedList.size();
+            cat.remainingCount = uncheckCount;
             cat.totalCount = cat.items.size();
             totalRem += cat.remainingCount;
             totalCount += cat.totalCount;
 
-            // 1. Category Header Row
-            var countStr = cat.remainingCount + "/" + cat.totalCount;
-            var headerRow = new GroceryRow();
-            headerRow.initializeAsHeader(cat.id, cat.name, countStr);
-            rows.add(headerRow);
-
-            // 2. Unchecked Items (appear right under header)
-            for (var u = 0; u < uncheckedList.size(); u++) {
-                var itemRow = new GroceryRow();
-                itemRow.initializeAsItem(uncheckedList[u]);
-                rows.add(itemRow);
-            }
-
-            // 3. Checked Items (placed at the bottom of the category!)
-            for (var k = 0; k < checkedList.size(); k++) {
-                var itemRow = new GroceryRow();
-                itemRow.initializeAsItem(checkedList[k]);
-                rows.add(itemRow);
+            if (cat.remainingCount > 0) {
+                activeCats.add(cat);
+            } else {
+                completedCats.add(cat);
             }
         }
 
         _cachedHeaderSubtitle = totalRem + "/" + totalCount + " " + _cachedRemSuffix;
+
+        // 1. Add all active categories first
+        for (var a = 0; a < activeCats.size(); a++) {
+            addCategoryRows(activeCats[a]);
+        }
+
+        // 2. Add all completed categories at the bottom!
+        for (var d = 0; d < completedCats.size(); d++) {
+            addCategoryRows(completedCats[d]);
+        }
 
         // Default initial height calculation
         totalContentHeight = 0;
@@ -181,6 +176,40 @@ class GroceryView extends WatchUi.View {
         }
 
         ensureValidSelection();
+    }
+
+    private function addCategoryRows(cat as GroceryCategoryData) as Void {
+        var uncheckedList = [] as Array<GroceryItem>;
+        var checkedList = [] as Array<GroceryItem>;
+
+        for (var i = 0; i < cat.items.size(); i++) {
+            var it = cat.items[i];
+            if (it.isChecked) {
+                checkedList.add(it);
+            } else {
+                uncheckedList.add(it);
+            }
+        }
+
+        // 1. Category Header Row
+        var countStr = cat.remainingCount + "/" + cat.totalCount;
+        var headerRow = new GroceryRow();
+        headerRow.initializeAsHeader(cat.id, cat.name, countStr);
+        rows.add(headerRow);
+
+        // 2. Unchecked Items (appear right under header)
+        for (var u = 0; u < uncheckedList.size(); u++) {
+            var itemRow = new GroceryRow();
+            itemRow.initializeAsItem(uncheckedList[u]);
+            rows.add(itemRow);
+        }
+
+        // 3. Checked Items (placed at the bottom of the category!)
+        for (var k = 0; k < checkedList.size(); k++) {
+            var itemRow = new GroceryRow();
+            itemRow.initializeAsItem(checkedList[k]);
+            rows.add(itemRow);
+        }
     }
 
     private function ensureValidSelection() as Void {

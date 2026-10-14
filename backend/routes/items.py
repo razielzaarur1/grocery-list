@@ -1,6 +1,9 @@
+import json
+import asyncio
 from datetime import datetime
 from typing import List, Optional
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import desc, asc
@@ -9,6 +12,7 @@ from database import get_db
 from models import Item, Category
 from command_processor import process_user_input, get_next_global_add_order
 from classifier import record_user_correction
+from sync_notifier import sync_notifier
 
 router = APIRouter(prefix="/api/items", tags=["items"])
 
@@ -93,15 +97,52 @@ def get_items(db: Session = Depends(get_db)):
     )
 
     return {
+        "version": sync_notifier.version,
         "categories": result_categories,
         "total_count": total_items_count,
         "remaining_count": remaining_items_count
     }
 
+@router.get("/version")
+def get_version():
+    """Ultra-lightweight version check endpoint for Garmin watches and periodic background sync."""
+    return {"version": sync_notifier.version}
+
+@router.get("/events")
+async def events_stream(request: Request):
+    """Server-Sent Events (SSE) stream for instant real-time live sync (<50ms)."""
+    q = await sync_notifier.subscribe()
+
+    async def event_generator():
+        try:
+            # Send initial version immediately
+            yield f"data: {json.dumps({'version': sync_notifier.version})}\n\n"
+            while True:
+                if await request.is_disconnected():
+                    break
+                try:
+                    version = await asyncio.wait_for(q.get(), timeout=15.0)
+                    yield f"data: {json.dumps({'version': version})}\n\n"
+                except asyncio.TimeoutError:
+                    yield ": ping\n\n"
+        finally:
+            sync_notifier.unsubscribe(q)
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache, no-transform",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no"
+        }
+    )
+
 @router.post("/input")
 async def handle_input(req: UserInputRequest, db: Session = Depends(get_db)):
     """Process natural language input or items list."""
     res = await process_user_input(req.text, db)
+    sync_notifier.notify()
     return res
 
 @router.post("/manual")
@@ -128,7 +169,7 @@ def add_item_manual(req: ManualItemCreate, db: Session = Depends(get_db)):
 
     # Learn user category selection
     record_user_correction(new_item.name, req.category_id, db)
-
+    sync_notifier.notify()
     return {"success": True, "item_id": new_item.id}
 
 @router.post("/{item_id}/toggle")
@@ -141,6 +182,7 @@ def toggle_item_checked(item_id: int, db: Session = Depends(get_db)):
     item.is_checked = not item.is_checked
     item.checked_at = datetime.utcnow() if item.is_checked else None
     db.commit()
+    sync_notifier.notify()
     return {"success": True, "item_id": item.id, "is_checked": item.is_checked}
 
 @router.patch("/{item_id}")
@@ -176,6 +218,7 @@ def update_item(item_id: int, update_data: ItemUpdate, db: Session = Depends(get
             item.checked_at = None
 
     db.commit()
+    sync_notifier.notify()
     return {"success": True}
 
 @router.delete("/{item_id}")
@@ -187,4 +230,5 @@ def delete_item(item_id: int, db: Session = Depends(get_db)):
 
     db.delete(item)
     db.commit()
+    sync_notifier.notify()
     return {"success": True}

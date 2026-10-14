@@ -5,6 +5,9 @@ import Toybox.System;
 
 class GroceryService {
     private var _callback as Method;
+    private var _lastVersion as Number = -1;
+    private var _isFetching as Boolean = false;
+    private var _isCheckingVersion as Boolean = false;
 
     function initialize(callback as Method) {
         _callback = callback;
@@ -33,8 +36,41 @@ class GroceryService {
         return headers;
     }
 
+    // Check lightweight 15-byte version for real-time live sync
+    function checkVersion() as Void {
+        if (_isFetching || _isCheckingVersion) {
+            return;
+        }
+        _isCheckingVersion = true;
+        var url = getBaseUrl() + "/api/items/version";
+        var options = {
+            :method => Communications.HTTP_REQUEST_METHOD_GET,
+            :headers => getHeaders(),
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+
+        Communications.makeWebRequest(url, null, options, method(:onReceiveVersion));
+    }
+
+    function onReceiveVersion(responseCode as Number, data as Dictionary?) as Void {
+        _isCheckingVersion = false;
+        if (responseCode == 200 && data != null) {
+            var v = data.get("version");
+            if (v != null) {
+                var verNum = (v has :toNumber) ? v.toNumber() : 0;
+                if (_lastVersion == -1 || verNum != _lastVersion) {
+                    fetchItems();
+                }
+            }
+        }
+    }
+
     // Fetch items grouped by category from backend API
     function fetchItems() as Void {
+        if (_isFetching) {
+            return;
+        }
+        _isFetching = true;
         var url = getBaseUrl() + "/api/items";
         System.println("Fetching from URL: " + url);
         var options = {
@@ -47,8 +83,14 @@ class GroceryService {
     }
 
     function onReceiveItems(responseCode as Number, data as Dictionary?) as Void {
+        _isFetching = false;
         System.println("onReceiveItems code: " + responseCode);
         if (responseCode == 200 && data != null) {
+            var v = data.get("version");
+            if (v != null) {
+                _lastVersion = (v has :toNumber) ? v.toNumber() : 0;
+            }
+
             var categoriesList = [] as Array<GroceryCategoryData>;
             var rawCategories = data.get("categories") as Array<Dictionary>?;
 
@@ -84,6 +126,7 @@ class GroceryService {
 
     function onToggleResponse(responseCode as Number, data as Dictionary?) as Void {
         System.println("Item toggle response: " + responseCode);
+        checkVersion();
     }
 
     // Persistent storage caching for offline supermarket use

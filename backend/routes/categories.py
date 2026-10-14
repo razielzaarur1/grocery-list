@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from database import get_db
 from models import Category, Item
+from sync_notifier import sync_notifier
 
 router = APIRouter(prefix="/api/categories", tags=["categories"])
 
@@ -44,6 +45,7 @@ def add_category(cat: CategoryCreate, db: Session = Depends(get_db)):
     db.add(new_cat)
     db.commit()
     db.refresh(new_cat)
+    sync_notifier.notify()
     return new_cat
 
 @router.patch("/reorder")
@@ -54,6 +56,7 @@ def reorder_categories(req: ReorderRequest, db: Session = Depends(get_db)):
         if cat:
             cat.order_index = item.order_index
     db.commit()
+    sync_notifier.notify()
     return {"success": True}
 
 @router.patch("/{category_id}")
@@ -73,6 +76,7 @@ def update_category(category_id: int, req: CategoryUpdate, db: Session = Depends
         cat.order_index = req.order_index
 
     db.commit()
+    sync_notifier.notify()
     return cat
 
 @router.delete("/{category_id}")
@@ -98,4 +102,5 @@ def delete_category(category_id: int, db: Session = Depends(get_db)):
 
     db.delete(cat)
     db.commit()
+    sync_notifier.notify()
     return {"success": True}
