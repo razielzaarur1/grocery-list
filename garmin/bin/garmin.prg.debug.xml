@@ -7,75 +7,75 @@
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\bin\\gen\\006-B4565-00\\source\\Rez.mcgen" id="2" lineNum="7" parent="globals/Rez" pc="268435481" symbol="&lt;init&gt;"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="3" lineNum="6" parent="globals/GroceryDelegate" pc="268435501" symbol="&lt;init&gt;"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="4" lineNum="5" parent="globals/GroceryApp" pc="268435513" symbol="&lt;init&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="271" parent="globals/GroceryView" pc="268435525" symbol="getItemAtCoordinates"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="272" parent="globals/GroceryView" pc="268435528" symbol="getItemAtCoordinates"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="273" parent="globals/GroceryView" pc="268435553" symbol="getItemAtCoordinates"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="276" parent="globals/GroceryView" pc="268435558" symbol="getItemAtCoordinates"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="277" parent="globals/GroceryView" pc="268435568" symbol="getItemAtCoordinates"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="278" parent="globals/GroceryView" pc="268435584" symbol="getItemAtCoordinates"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="280" parent="globals/GroceryView" pc="268435594" symbol="getItemAtCoordinates"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="281" parent="globals/GroceryView" pc="268435618" symbol="getItemAtCoordinates"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="282" parent="globals/GroceryView" pc="268435627" symbol="getItemAtCoordinates"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="284" parent="globals/GroceryView" pc="268435639" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="272" parent="globals/GroceryView" pc="268435525" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="273" parent="globals/GroceryView" pc="268435528" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="274" parent="globals/GroceryView" pc="268435553" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="277" parent="globals/GroceryView" pc="268435558" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="278" parent="globals/GroceryView" pc="268435568" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="279" parent="globals/GroceryView" pc="268435584" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="281" parent="globals/GroceryView" pc="268435594" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="282" parent="globals/GroceryView" pc="268435618" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="283" parent="globals/GroceryView" pc="268435627" symbol="getItemAtCoordinates"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="5" lineNum="285" parent="globals/GroceryView" pc="268435639" symbol="getItemAtCoordinates"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="6" lineNum="41" parent="globals/GroceryView" pc="268435641" symbol="&lt;globals/GroceryView/&lt;&gt;getMainFont&gt;"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="6" lineNum="42" parent="globals/GroceryView" pc="268435643" symbol="&lt;globals/GroceryView/&lt;&gt;getMainFont&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="254" parent="globals/GroceryView" pc="268435663" symbol="scrollUp"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="255" parent="globals/GroceryView" pc="268435665" symbol="scrollUp"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="256" parent="globals/GroceryView" pc="268435675" symbol="scrollUp"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="257" parent="globals/GroceryView" pc="268435690" symbol="scrollUp"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="258" parent="globals/GroceryView" pc="268435704" symbol="scrollUp"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="260" parent="globals/GroceryView" pc="268435719" symbol="scrollUp"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="287" parent="globals/GroceryView" pc="268435734" symbol="setItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="288" parent="globals/GroceryView" pc="268435736" symbol="setItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="289" parent="globals/GroceryView" pc="268435745" symbol="setItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="290" parent="globals/GroceryView" pc="268435753" symbol="setItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="291" parent="globals/GroceryView" pc="268435762" symbol="setItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="292" parent="globals/GroceryView" pc="268435782" symbol="setItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="294" parent="globals/GroceryView" pc="268435826" symbol="setItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="138" parent="globals/GroceryView" pc="268435838" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="148" parent="globals/GroceryView" pc="268435841" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="149" parent="globals/GroceryView" pc="268435846" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="150" parent="globals/GroceryView" pc="268435862" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="151" parent="globals/GroceryView" pc="268435891" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="152" parent="globals/GroceryView" pc="268435907" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="155" parent="globals/GroceryView" pc="268435939" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="156" parent="globals/GroceryView" pc="268435949" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="158" parent="globals/GroceryView" pc="268435956" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="159" parent="globals/GroceryView" pc="268435972" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="161" parent="globals/GroceryView" pc="268435988" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="166" parent="globals/GroceryView" pc="268436014" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="167" parent="globals/GroceryView" pc="268436037" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="170" parent="globals/GroceryView" pc="268436060" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="171" parent="globals/GroceryView" pc="268436074" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="180" parent="globals/GroceryView" pc="268436101" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="181" parent="globals/GroceryView" pc="268436106" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="182" parent="globals/GroceryView" pc="268436120" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="192" parent="globals/GroceryView" pc="268436154" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="193" parent="globals/GroceryView" pc="268436159" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="194" parent="globals/GroceryView" pc="268436173" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="204" parent="globals/GroceryView" pc="268436206" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="205" parent="globals/GroceryView" pc="268436215" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="206" parent="globals/GroceryView" pc="268436231" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="209" parent="globals/GroceryView" pc="268436243" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="210" parent="globals/GroceryView" pc="268436260" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="211" parent="globals/GroceryView" pc="268436280" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="213" parent="globals/GroceryView" pc="268436299" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="216" parent="globals/GroceryView" pc="268436326" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="217" parent="globals/GroceryView" pc="268436331" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="218" parent="globals/GroceryView" pc="268436348" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="219" parent="globals/GroceryView" pc="268436368" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="221" parent="globals/GroceryView" pc="268436387" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="224" parent="globals/GroceryView" pc="268436417" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="10" lineNum="264" parent="globals/GroceryView" pc="268436433" symbol="getSelectedItem"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="10" lineNum="265" parent="globals/GroceryView" pc="268436435" symbol="getSelectedItem"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="10" lineNum="266" parent="globals/GroceryView" pc="268436481" symbol="getSelectedItem"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="10" lineNum="268" parent="globals/GroceryView" pc="268436496" symbol="getSelectedItem"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="244" parent="globals/GroceryView" pc="268436498" symbol="scrollDown"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="245" parent="globals/GroceryView" pc="268436500" symbol="scrollDown"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="246" parent="globals/GroceryView" pc="268436523" symbol="scrollDown"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="247" parent="globals/GroceryView" pc="268436538" symbol="scrollDown"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="248" parent="globals/GroceryView" pc="268436558" symbol="scrollDown"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="250" parent="globals/GroceryView" pc="268436582" symbol="scrollDown"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="255" parent="globals/GroceryView" pc="268435663" symbol="scrollUp"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="256" parent="globals/GroceryView" pc="268435665" symbol="scrollUp"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="257" parent="globals/GroceryView" pc="268435675" symbol="scrollUp"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="258" parent="globals/GroceryView" pc="268435690" symbol="scrollUp"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="259" parent="globals/GroceryView" pc="268435704" symbol="scrollUp"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="7" lineNum="261" parent="globals/GroceryView" pc="268435719" symbol="scrollUp"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="288" parent="globals/GroceryView" pc="268435734" symbol="setItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="289" parent="globals/GroceryView" pc="268435736" symbol="setItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="290" parent="globals/GroceryView" pc="268435745" symbol="setItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="291" parent="globals/GroceryView" pc="268435753" symbol="setItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="292" parent="globals/GroceryView" pc="268435762" symbol="setItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="293" parent="globals/GroceryView" pc="268435782" symbol="setItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="8" lineNum="295" parent="globals/GroceryView" pc="268435826" symbol="setItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="139" parent="globals/GroceryView" pc="268435838" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="149" parent="globals/GroceryView" pc="268435841" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="150" parent="globals/GroceryView" pc="268435846" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="151" parent="globals/GroceryView" pc="268435862" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="152" parent="globals/GroceryView" pc="268435891" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="153" parent="globals/GroceryView" pc="268435907" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="156" parent="globals/GroceryView" pc="268435939" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="157" parent="globals/GroceryView" pc="268435949" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="159" parent="globals/GroceryView" pc="268435956" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="160" parent="globals/GroceryView" pc="268435972" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="162" parent="globals/GroceryView" pc="268435988" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="167" parent="globals/GroceryView" pc="268436014" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="168" parent="globals/GroceryView" pc="268436037" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="171" parent="globals/GroceryView" pc="268436060" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="172" parent="globals/GroceryView" pc="268436074" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="181" parent="globals/GroceryView" pc="268436101" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="182" parent="globals/GroceryView" pc="268436106" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="183" parent="globals/GroceryView" pc="268436120" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="193" parent="globals/GroceryView" pc="268436154" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="194" parent="globals/GroceryView" pc="268436159" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="195" parent="globals/GroceryView" pc="268436173" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="205" parent="globals/GroceryView" pc="268436206" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="206" parent="globals/GroceryView" pc="268436215" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="207" parent="globals/GroceryView" pc="268436231" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="210" parent="globals/GroceryView" pc="268436243" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="211" parent="globals/GroceryView" pc="268436260" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="212" parent="globals/GroceryView" pc="268436280" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="214" parent="globals/GroceryView" pc="268436299" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="217" parent="globals/GroceryView" pc="268436326" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="218" parent="globals/GroceryView" pc="268436331" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="219" parent="globals/GroceryView" pc="268436348" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="220" parent="globals/GroceryView" pc="268436368" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="222" parent="globals/GroceryView" pc="268436387" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="9" lineNum="225" parent="globals/GroceryView" pc="268436417" symbol="&lt;globals/GroceryView/&lt;&gt;drawItemRow&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="10" lineNum="265" parent="globals/GroceryView" pc="268436433" symbol="getSelectedItem"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="10" lineNum="266" parent="globals/GroceryView" pc="268436435" symbol="getSelectedItem"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="10" lineNum="267" parent="globals/GroceryView" pc="268436481" symbol="getSelectedItem"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="10" lineNum="269" parent="globals/GroceryView" pc="268436496" symbol="getSelectedItem"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="245" parent="globals/GroceryView" pc="268436498" symbol="scrollDown"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="246" parent="globals/GroceryView" pc="268436500" symbol="scrollDown"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="247" parent="globals/GroceryView" pc="268436523" symbol="scrollDown"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="248" parent="globals/GroceryView" pc="268436538" symbol="scrollDown"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="249" parent="globals/GroceryView" pc="268436558" symbol="scrollDown"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="11" lineNum="251" parent="globals/GroceryView" pc="268436582" symbol="scrollDown"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="12" lineNum="25" parent="globals/GroceryView" pc="268436597" symbol="onLayout"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="12" lineNum="26" parent="globals/GroceryView" pc="268436600" symbol="onLayout"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="12" lineNum="27" parent="globals/GroceryView" pc="268436614" symbol="onLayout"/>
@@ -89,29 +89,29 @@
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="12" lineNum="37" parent="globals/GroceryView" pc="268436783" symbol="onLayout"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="13" lineNum="45" parent="globals/GroceryView" pc="268436804" symbol="&lt;globals/GroceryView/&lt;&gt;getSmallFont&gt;"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="13" lineNum="46" parent="globals/GroceryView" pc="268436806" symbol="&lt;globals/GroceryView/&lt;&gt;getSmallFont&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="103" parent="globals/GroceryView" pc="268436826" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="104" parent="globals/GroceryView" pc="268436829" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="105" parent="globals/GroceryView" pc="268436832" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="106" parent="globals/GroceryView" pc="268436852" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="107" parent="globals/GroceryView" pc="268436869" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="112" parent="globals/GroceryView" pc="268436889" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="113" parent="globals/GroceryView" pc="268436906" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="114" parent="globals/GroceryView" pc="268436926" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="123" parent="globals/GroceryView" pc="268436956" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="124" parent="globals/GroceryView" pc="268436973" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="125" parent="globals/GroceryView" pc="268437008" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="134" parent="globals/GroceryView" pc="268437038" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="135" parent="globals/GroceryView" pc="268437054" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="228" parent="globals/GroceryView" pc="268437115" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="229" parent="globals/GroceryView" pc="268437118" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="230" parent="globals/GroceryView" pc="268437138" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="233" parent="globals/GroceryView" pc="268437142" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="234" parent="globals/GroceryView" pc="268437146" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="235" parent="globals/GroceryView" pc="268437159" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="236" parent="globals/GroceryView" pc="268437172" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="237" parent="globals/GroceryView" pc="268437209" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="239" parent="globals/GroceryView" pc="268437228" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="240" parent="globals/GroceryView" pc="268437244" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="104" parent="globals/GroceryView" pc="268436826" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="105" parent="globals/GroceryView" pc="268436829" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="106" parent="globals/GroceryView" pc="268436832" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="107" parent="globals/GroceryView" pc="268436852" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="108" parent="globals/GroceryView" pc="268436869" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="113" parent="globals/GroceryView" pc="268436889" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="114" parent="globals/GroceryView" pc="268436906" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="115" parent="globals/GroceryView" pc="268436926" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="124" parent="globals/GroceryView" pc="268436956" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="125" parent="globals/GroceryView" pc="268436973" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="126" parent="globals/GroceryView" pc="268437008" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="135" parent="globals/GroceryView" pc="268437038" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="14" lineNum="136" parent="globals/GroceryView" pc="268437054" symbol="&lt;globals/GroceryView/&lt;&gt;drawHeader&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="229" parent="globals/GroceryView" pc="268437115" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="230" parent="globals/GroceryView" pc="268437118" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="231" parent="globals/GroceryView" pc="268437138" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="234" parent="globals/GroceryView" pc="268437142" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="235" parent="globals/GroceryView" pc="268437146" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="236" parent="globals/GroceryView" pc="268437159" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="237" parent="globals/GroceryView" pc="268437172" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="238" parent="globals/GroceryView" pc="268437209" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="240" parent="globals/GroceryView" pc="268437228" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="15" lineNum="241" parent="globals/GroceryView" pc="268437244" symbol="&lt;globals/GroceryView/&lt;&gt;drawScrollIndicator&gt;"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="16" lineNum="21" parent="globals/GroceryView" pc="268437271" symbol="initialize"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="16" lineNum="22" parent="globals/GroceryView" pc="268437273" symbol="initialize"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="49" parent="globals/GroceryView" pc="268437286" symbol="onUpdate"/>
@@ -125,179 +125,180 @@
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="70" parent="globals/GroceryView" pc="268437401" symbol="onUpdate"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="71" parent="globals/GroceryView" pc="268437417" symbol="onUpdate"/>
 <entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="72" parent="globals/GroceryView" pc="268437434" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="79" parent="globals/GroceryView" pc="268437486" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="83" parent="globals/GroceryView" pc="268437490" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="84" parent="globals/GroceryView" pc="268437503" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="85" parent="globals/GroceryView" pc="268437520" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="88" parent="globals/GroceryView" pc="268437536" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="89" parent="globals/GroceryView" pc="268437555" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="91" parent="globals/GroceryView" pc="268437574" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="92" parent="globals/GroceryView" pc="268437589" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="93" parent="globals/GroceryView" pc="268437599" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="94" parent="globals/GroceryView" pc="268437621" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="96" parent="globals/GroceryView" pc="268437631" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="100" parent="globals/GroceryView" pc="268437667" symbol="onUpdate"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\BidiHelper.mc" id="18" lineNum="6" parent="globals/BidiHelper" pc="268437679" symbol="shapeHebrew"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\BidiHelper.mc" id="18" lineNum="7" parent="globals/BidiHelper" pc="268437681" symbol="shapeHebrew"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\BidiHelper.mc" id="18" lineNum="8" parent="globals/BidiHelper" pc="268437700" symbol="shapeHebrew"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\BidiHelper.mc" id="18" lineNum="10" parent="globals/BidiHelper" pc="268437709" symbol="shapeHebrew"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="13" parent="globals/GroceryService" pc="268437712" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="14" parent="globals/GroceryService" pc="268437715" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="15" parent="globals/GroceryService" pc="268437734" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="16" parent="globals/GroceryService" pc="268437753" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="19" parent="globals/GroceryService" pc="268437763" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="20" parent="globals/GroceryService" pc="268437805" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="22" parent="globals/GroceryService" pc="268437830" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="37" parent="globals/GroceryService" pc="268437833" symbol="fetchItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="38" parent="globals/GroceryService" pc="268437836" symbol="fetchItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="39" parent="globals/GroceryService" pc="268437850" symbol="fetchItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="40" parent="globals/GroceryService" pc="268437871" symbol="fetchItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="46" parent="globals/GroceryService" pc="268437905" symbol="fetchItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="49" parent="globals/GroceryService" pc="268437937" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="50" parent="globals/GroceryService" pc="268437940" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="51" parent="globals/GroceryService" pc="268437961" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="52" parent="globals/GroceryService" pc="268437976" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="53" parent="globals/GroceryService" pc="268437980" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="55" parent="globals/GroceryService" pc="268437997" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="56" parent="globals/GroceryService" pc="268438003" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="57" parent="globals/GroceryService" pc="268438020" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="58" parent="globals/GroceryService" pc="268438027" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="59" parent="globals/GroceryService" pc="268438043" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="60" parent="globals/GroceryService" pc="268438049" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="61" parent="globals/GroceryService" pc="268438066" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="67" parent="globals/GroceryService" pc="268438125" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="69" parent="globals/GroceryService" pc="268438151" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="70" parent="globals/GroceryService" pc="268438162" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="73" parent="globals/GroceryService" pc="268438183" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="74" parent="globals/GroceryService" pc="268438191" symbol="onReceiveItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="23" lineNum="90" parent="globals/GroceryService" pc="268438223" symbol="onToggleResponse"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="23" lineNum="91" parent="globals/GroceryService" pc="268438225" symbol="onToggleResponse"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="25" parent="globals/GroceryService" pc="268438247" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="26" parent="globals/GroceryService" pc="268438250" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="29" parent="globals/GroceryService" pc="268438257" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="30" parent="globals/GroceryService" pc="268438276" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="31" parent="globals/GroceryService" pc="268438295" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="33" parent="globals/GroceryService" pc="268438315" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="116" parent="globals/GroceryService" pc="268438318" symbol="loadOfflineItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="117" parent="globals/GroceryService" pc="268438321" symbol="loadOfflineItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="119" parent="globals/GroceryService" pc="268438325" symbol="loadOfflineItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="120" parent="globals/GroceryService" pc="268438344" symbol="loadOfflineItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="121" parent="globals/GroceryService" pc="268438350" symbol="loadOfflineItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="122" parent="globals/GroceryService" pc="268438367" symbol="loadOfflineItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="125" parent="globals/GroceryService" pc="268438419" symbol="loadOfflineItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="126" parent="globals/GroceryService" pc="268438423" symbol="loadOfflineItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="128" parent="globals/GroceryService" pc="268438461" symbol="loadOfflineItems"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="26" lineNum="9" parent="globals/GroceryService" pc="268438464" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="26" lineNum="10" parent="globals/GroceryService" pc="268438466" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="27" lineNum="79" parent="globals/GroceryService" pc="268438476" symbol="toggleItem"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="27" lineNum="80" parent="globals/GroceryService" pc="268438479" symbol="toggleItem"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="27" lineNum="81" parent="globals/GroceryService" pc="268438506" symbol="toggleItem"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="27" lineNum="87" parent="globals/GroceryService" pc="268438540" symbol="toggleItem"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="95" parent="globals/GroceryService" pc="268438572" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="97" parent="globals/GroceryService" pc="268438575" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="98" parent="globals/GroceryService" pc="268438579" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="99" parent="globals/GroceryService" pc="268438595" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="100" parent="globals/GroceryService" pc="268438602" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="110" parent="globals/GroceryService" pc="268438711" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="111" parent="globals/GroceryService" pc="268438737" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="112" parent="globals/GroceryService" pc="268438741" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="29" lineNum="57" parent="globals/GroceryDelegate" pc="268438780" symbol="onPreviousPage"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="29" lineNum="58" parent="globals/GroceryDelegate" pc="268438782" symbol="onPreviousPage"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="29" lineNum="59" parent="globals/GroceryDelegate" pc="268438794" symbol="onPreviousPage"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="29" parent="globals/GroceryDelegate" pc="268438796" symbol="onSwipe"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="30" parent="globals/GroceryDelegate" pc="268438799" symbol="onSwipe"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="31" parent="globals/GroceryDelegate" pc="268438808" symbol="onSwipe"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="32" parent="globals/GroceryDelegate" pc="268438815" symbol="onSwipe"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="33" parent="globals/GroceryDelegate" pc="268438827" symbol="onSwipe"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="34" parent="globals/GroceryDelegate" pc="268438832" symbol="onSwipe"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="35" parent="globals/GroceryDelegate" pc="268438840" symbol="onSwipe"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="36" parent="globals/GroceryDelegate" pc="268438852" symbol="onSwipe"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="38" parent="globals/GroceryDelegate" pc="268438857" symbol="onSwipe"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="31" lineNum="10" parent="globals/GroceryDelegate" pc="268438859" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="31" lineNum="11" parent="globals/GroceryDelegate" pc="268438861" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="31" lineNum="12" parent="globals/GroceryDelegate" pc="268438873" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="31" lineNum="13" parent="globals/GroceryDelegate" pc="268438882" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="17" parent="globals/GroceryDelegate" pc="268438892" symbol="onTap"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="18" parent="globals/GroceryDelegate" pc="268438895" symbol="onTap"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="19" parent="globals/GroceryDelegate" pc="268438904" symbol="onTap"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="21" parent="globals/GroceryDelegate" pc="268438924" symbol="onTap"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="22" parent="globals/GroceryDelegate" pc="268438930" symbol="onTap"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="23" parent="globals/GroceryDelegate" pc="268438941" symbol="onTap"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="25" parent="globals/GroceryDelegate" pc="268438946" symbol="onTap"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="84" parent="globals/GroceryDelegate" pc="268438948" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="85" parent="globals/GroceryDelegate" pc="268438951" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="86" parent="globals/GroceryDelegate" pc="268438959" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="89" parent="globals/GroceryDelegate" pc="268438975" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="90" parent="globals/GroceryDelegate" pc="268438990" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="91" parent="globals/GroceryDelegate" pc="268439025" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="94" parent="globals/GroceryDelegate" pc="268439043" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="42" parent="globals/GroceryDelegate" pc="268439055" symbol="onSelect"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="43" parent="globals/GroceryDelegate" pc="268439058" symbol="onSelect"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="44" parent="globals/GroceryDelegate" pc="268439071" symbol="onSelect"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="45" parent="globals/GroceryDelegate" pc="268439077" symbol="onSelect"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="46" parent="globals/GroceryDelegate" pc="268439088" symbol="onSelect"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="48" parent="globals/GroceryDelegate" pc="268439093" symbol="onSelect"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="35" lineNum="52" parent="globals/GroceryDelegate" pc="268439095" symbol="onNextPage"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="35" lineNum="53" parent="globals/GroceryDelegate" pc="268439097" symbol="onNextPage"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="35" lineNum="54" parent="globals/GroceryDelegate" pc="268439109" symbol="onNextPage"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="63" parent="globals/GroceryDelegate" pc="268439111" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="64" parent="globals/GroceryDelegate" pc="268439114" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="65" parent="globals/GroceryDelegate" pc="268439123" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="66" parent="globals/GroceryDelegate" pc="268439139" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="67" parent="globals/GroceryDelegate" pc="268439149" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="68" parent="globals/GroceryDelegate" pc="268439157" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="69" parent="globals/GroceryDelegate" pc="268439169" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="70" parent="globals/GroceryDelegate" pc="268439174" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="71" parent="globals/GroceryDelegate" pc="268439182" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="72" parent="globals/GroceryDelegate" pc="268439194" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="73" parent="globals/GroceryDelegate" pc="268439199" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="75" parent="globals/GroceryDelegate" pc="268439207" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="76" parent="globals/GroceryDelegate" pc="268439219" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="77" parent="globals/GroceryDelegate" pc="268439230" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="78" parent="globals/GroceryDelegate" pc="268439242" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="80" parent="globals/GroceryDelegate" pc="268439247" symbol="onKey"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="35" parent="globals/GroceryItem" pc="268439249" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="36" parent="globals/GroceryItem" pc="268439252" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="38" parent="globals/GroceryItem" pc="268439277" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="39" parent="globals/GroceryItem" pc="268439284" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="40" parent="globals/GroceryItem" pc="268439300" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="41" parent="globals/GroceryItem" pc="268439310" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="42" parent="globals/GroceryItem" pc="268439326" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="44" parent="globals/GroceryItem" pc="268439348" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="45" parent="globals/GroceryItem" pc="268439364" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="47" parent="globals/GroceryItem" pc="268439377" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="49" parent="globals/GroceryItem" pc="268439399" symbol="updateShapedText"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="38" lineNum="52" parent="globals/GroceryItem" pc="268439449" symbol="toggleChecked"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="38" lineNum="53" parent="globals/GroceryItem" pc="268439451" symbol="toggleChecked"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="17" parent="globals/GroceryItem" pc="268439465" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="18" parent="globals/GroceryItem" pc="268439468" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="19" parent="globals/GroceryItem" pc="268439484" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="20" parent="globals/GroceryItem" pc="268439490" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="22" parent="globals/GroceryItem" pc="268439523" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="23" parent="globals/GroceryItem" pc="268439576" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="24" parent="globals/GroceryItem" pc="268439629" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="25" parent="globals/GroceryItem" pc="268439682" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="26" parent="globals/GroceryItem" pc="268439735" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="27" parent="globals/GroceryItem" pc="268439778" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="28" parent="globals/GroceryItem" pc="268439794" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="29" parent="globals/GroceryItem" pc="268439800" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="32" parent="globals/GroceryItem" pc="268439833" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="40" lineNum="13" parent="globals/GroceryApp" pc="268439841" symbol="onStart"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="19" parent="globals/GroceryApp" pc="268439844" symbol="getInitialView"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="20" parent="globals/GroceryApp" pc="268439847" symbol="getInitialView"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="21" parent="globals/GroceryApp" pc="268439872" symbol="getInitialView"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="24" parent="globals/GroceryApp" pc="268439910" symbol="getInitialView"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="25" parent="globals/GroceryApp" pc="268439923" symbol="getInitialView"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="26" parent="globals/GroceryApp" pc="268439935" symbol="getInitialView"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="30" parent="globals/GroceryApp" pc="268439955" symbol="getInitialView"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="32" parent="globals/GroceryApp" pc="268439967" symbol="getInitialView"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="33" parent="globals/GroceryApp" pc="268439997" symbol="getInitialView"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="42" lineNum="9" parent="globals/GroceryApp" pc="268440015" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="42" lineNum="10" parent="globals/GroceryApp" pc="268440017" symbol="initialize"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="43" lineNum="16" parent="globals/GroceryApp" pc="268440030" symbol="onStop"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="44" lineNum="36" parent="globals/GroceryApp" pc="268440033" symbol="onItemsLoaded"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="44" lineNum="37" parent="globals/GroceryApp" pc="268440035" symbol="onItemsLoaded"/>
-<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="44" lineNum="38" parent="globals/GroceryApp" pc="268440044" symbol="onItemsLoaded"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="73" parent="globals/GroceryView" pc="268437474" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="80" parent="globals/GroceryView" pc="268437510" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="84" parent="globals/GroceryView" pc="268437514" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="85" parent="globals/GroceryView" pc="268437527" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="86" parent="globals/GroceryView" pc="268437544" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="89" parent="globals/GroceryView" pc="268437560" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="90" parent="globals/GroceryView" pc="268437579" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="92" parent="globals/GroceryView" pc="268437598" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="93" parent="globals/GroceryView" pc="268437613" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="94" parent="globals/GroceryView" pc="268437623" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="95" parent="globals/GroceryView" pc="268437645" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="97" parent="globals/GroceryView" pc="268437655" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryView.mc" id="17" lineNum="101" parent="globals/GroceryView" pc="268437691" symbol="onUpdate"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\BidiHelper.mc" id="18" lineNum="6" parent="globals/BidiHelper" pc="268437703" symbol="shapeHebrew"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\BidiHelper.mc" id="18" lineNum="7" parent="globals/BidiHelper" pc="268437705" symbol="shapeHebrew"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\BidiHelper.mc" id="18" lineNum="8" parent="globals/BidiHelper" pc="268437724" symbol="shapeHebrew"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\BidiHelper.mc" id="18" lineNum="10" parent="globals/BidiHelper" pc="268437733" symbol="shapeHebrew"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="13" parent="globals/GroceryService" pc="268437736" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="14" parent="globals/GroceryService" pc="268437739" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="15" parent="globals/GroceryService" pc="268437758" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="16" parent="globals/GroceryService" pc="268437777" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="19" parent="globals/GroceryService" pc="268437787" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="20" parent="globals/GroceryService" pc="268437829" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="20" lineNum="22" parent="globals/GroceryService" pc="268437854" symbol="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="37" parent="globals/GroceryService" pc="268437857" symbol="fetchItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="38" parent="globals/GroceryService" pc="268437860" symbol="fetchItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="39" parent="globals/GroceryService" pc="268437874" symbol="fetchItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="40" parent="globals/GroceryService" pc="268437895" symbol="fetchItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="21" lineNum="46" parent="globals/GroceryService" pc="268437929" symbol="fetchItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="49" parent="globals/GroceryService" pc="268437961" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="50" parent="globals/GroceryService" pc="268437964" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="51" parent="globals/GroceryService" pc="268437985" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="52" parent="globals/GroceryService" pc="268438000" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="53" parent="globals/GroceryService" pc="268438004" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="55" parent="globals/GroceryService" pc="268438021" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="56" parent="globals/GroceryService" pc="268438027" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="57" parent="globals/GroceryService" pc="268438044" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="58" parent="globals/GroceryService" pc="268438051" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="59" parent="globals/GroceryService" pc="268438067" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="60" parent="globals/GroceryService" pc="268438073" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="61" parent="globals/GroceryService" pc="268438090" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="67" parent="globals/GroceryService" pc="268438149" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="69" parent="globals/GroceryService" pc="268438175" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="70" parent="globals/GroceryService" pc="268438186" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="73" parent="globals/GroceryService" pc="268438207" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="22" lineNum="74" parent="globals/GroceryService" pc="268438215" symbol="onReceiveItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="23" lineNum="90" parent="globals/GroceryService" pc="268438247" symbol="onToggleResponse"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="23" lineNum="91" parent="globals/GroceryService" pc="268438249" symbol="onToggleResponse"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="25" parent="globals/GroceryService" pc="268438271" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="26" parent="globals/GroceryService" pc="268438274" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="29" parent="globals/GroceryService" pc="268438281" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="30" parent="globals/GroceryService" pc="268438300" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="31" parent="globals/GroceryService" pc="268438319" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="24" lineNum="33" parent="globals/GroceryService" pc="268438339" symbol="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="116" parent="globals/GroceryService" pc="268438342" symbol="loadOfflineItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="117" parent="globals/GroceryService" pc="268438345" symbol="loadOfflineItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="119" parent="globals/GroceryService" pc="268438349" symbol="loadOfflineItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="120" parent="globals/GroceryService" pc="268438368" symbol="loadOfflineItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="121" parent="globals/GroceryService" pc="268438374" symbol="loadOfflineItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="122" parent="globals/GroceryService" pc="268438391" symbol="loadOfflineItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="125" parent="globals/GroceryService" pc="268438443" symbol="loadOfflineItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="126" parent="globals/GroceryService" pc="268438447" symbol="loadOfflineItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="25" lineNum="128" parent="globals/GroceryService" pc="268438485" symbol="loadOfflineItems"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="26" lineNum="9" parent="globals/GroceryService" pc="268438488" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="26" lineNum="10" parent="globals/GroceryService" pc="268438490" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="27" lineNum="79" parent="globals/GroceryService" pc="268438500" symbol="toggleItem"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="27" lineNum="80" parent="globals/GroceryService" pc="268438503" symbol="toggleItem"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="27" lineNum="81" parent="globals/GroceryService" pc="268438530" symbol="toggleItem"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="27" lineNum="87" parent="globals/GroceryService" pc="268438564" symbol="toggleItem"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="95" parent="globals/GroceryService" pc="268438596" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="97" parent="globals/GroceryService" pc="268438599" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="98" parent="globals/GroceryService" pc="268438603" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="99" parent="globals/GroceryService" pc="268438619" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="100" parent="globals/GroceryService" pc="268438626" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="110" parent="globals/GroceryService" pc="268438735" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="111" parent="globals/GroceryService" pc="268438761" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryService.mc" id="28" lineNum="112" parent="globals/GroceryService" pc="268438765" symbol="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="29" lineNum="57" parent="globals/GroceryDelegate" pc="268438804" symbol="onPreviousPage"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="29" lineNum="58" parent="globals/GroceryDelegate" pc="268438806" symbol="onPreviousPage"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="29" lineNum="59" parent="globals/GroceryDelegate" pc="268438818" symbol="onPreviousPage"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="29" parent="globals/GroceryDelegate" pc="268438820" symbol="onSwipe"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="30" parent="globals/GroceryDelegate" pc="268438823" symbol="onSwipe"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="31" parent="globals/GroceryDelegate" pc="268438832" symbol="onSwipe"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="32" parent="globals/GroceryDelegate" pc="268438839" symbol="onSwipe"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="33" parent="globals/GroceryDelegate" pc="268438851" symbol="onSwipe"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="34" parent="globals/GroceryDelegate" pc="268438856" symbol="onSwipe"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="35" parent="globals/GroceryDelegate" pc="268438864" symbol="onSwipe"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="36" parent="globals/GroceryDelegate" pc="268438876" symbol="onSwipe"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="30" lineNum="38" parent="globals/GroceryDelegate" pc="268438881" symbol="onSwipe"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="31" lineNum="10" parent="globals/GroceryDelegate" pc="268438883" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="31" lineNum="11" parent="globals/GroceryDelegate" pc="268438885" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="31" lineNum="12" parent="globals/GroceryDelegate" pc="268438897" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="31" lineNum="13" parent="globals/GroceryDelegate" pc="268438906" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="17" parent="globals/GroceryDelegate" pc="268438916" symbol="onTap"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="18" parent="globals/GroceryDelegate" pc="268438919" symbol="onTap"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="19" parent="globals/GroceryDelegate" pc="268438928" symbol="onTap"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="21" parent="globals/GroceryDelegate" pc="268438948" symbol="onTap"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="22" parent="globals/GroceryDelegate" pc="268438954" symbol="onTap"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="23" parent="globals/GroceryDelegate" pc="268438965" symbol="onTap"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="32" lineNum="25" parent="globals/GroceryDelegate" pc="268438970" symbol="onTap"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="84" parent="globals/GroceryDelegate" pc="268438972" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="85" parent="globals/GroceryDelegate" pc="268438975" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="86" parent="globals/GroceryDelegate" pc="268438983" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="89" parent="globals/GroceryDelegate" pc="268438999" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="90" parent="globals/GroceryDelegate" pc="268439014" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="91" parent="globals/GroceryDelegate" pc="268439049" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="33" lineNum="94" parent="globals/GroceryDelegate" pc="268439067" symbol="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="42" parent="globals/GroceryDelegate" pc="268439079" symbol="onSelect"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="43" parent="globals/GroceryDelegate" pc="268439082" symbol="onSelect"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="44" parent="globals/GroceryDelegate" pc="268439095" symbol="onSelect"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="45" parent="globals/GroceryDelegate" pc="268439101" symbol="onSelect"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="46" parent="globals/GroceryDelegate" pc="268439112" symbol="onSelect"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="34" lineNum="48" parent="globals/GroceryDelegate" pc="268439117" symbol="onSelect"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="35" lineNum="52" parent="globals/GroceryDelegate" pc="268439119" symbol="onNextPage"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="35" lineNum="53" parent="globals/GroceryDelegate" pc="268439121" symbol="onNextPage"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="35" lineNum="54" parent="globals/GroceryDelegate" pc="268439133" symbol="onNextPage"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="63" parent="globals/GroceryDelegate" pc="268439135" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="64" parent="globals/GroceryDelegate" pc="268439138" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="65" parent="globals/GroceryDelegate" pc="268439147" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="66" parent="globals/GroceryDelegate" pc="268439163" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="67" parent="globals/GroceryDelegate" pc="268439173" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="68" parent="globals/GroceryDelegate" pc="268439181" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="69" parent="globals/GroceryDelegate" pc="268439193" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="70" parent="globals/GroceryDelegate" pc="268439198" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="71" parent="globals/GroceryDelegate" pc="268439206" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="72" parent="globals/GroceryDelegate" pc="268439218" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="73" parent="globals/GroceryDelegate" pc="268439223" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="75" parent="globals/GroceryDelegate" pc="268439231" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="76" parent="globals/GroceryDelegate" pc="268439243" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="77" parent="globals/GroceryDelegate" pc="268439254" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="78" parent="globals/GroceryDelegate" pc="268439266" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryDelegate.mc" id="36" lineNum="80" parent="globals/GroceryDelegate" pc="268439271" symbol="onKey"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="35" parent="globals/GroceryItem" pc="268439273" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="36" parent="globals/GroceryItem" pc="268439276" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="38" parent="globals/GroceryItem" pc="268439301" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="39" parent="globals/GroceryItem" pc="268439308" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="40" parent="globals/GroceryItem" pc="268439324" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="41" parent="globals/GroceryItem" pc="268439334" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="42" parent="globals/GroceryItem" pc="268439350" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="44" parent="globals/GroceryItem" pc="268439372" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="45" parent="globals/GroceryItem" pc="268439388" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="47" parent="globals/GroceryItem" pc="268439401" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="37" lineNum="49" parent="globals/GroceryItem" pc="268439423" symbol="updateShapedText"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="38" lineNum="52" parent="globals/GroceryItem" pc="268439473" symbol="toggleChecked"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="38" lineNum="53" parent="globals/GroceryItem" pc="268439475" symbol="toggleChecked"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="17" parent="globals/GroceryItem" pc="268439489" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="18" parent="globals/GroceryItem" pc="268439492" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="19" parent="globals/GroceryItem" pc="268439508" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="20" parent="globals/GroceryItem" pc="268439514" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="22" parent="globals/GroceryItem" pc="268439547" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="23" parent="globals/GroceryItem" pc="268439600" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="24" parent="globals/GroceryItem" pc="268439653" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="25" parent="globals/GroceryItem" pc="268439706" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="26" parent="globals/GroceryItem" pc="268439759" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="27" parent="globals/GroceryItem" pc="268439802" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="28" parent="globals/GroceryItem" pc="268439818" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="29" parent="globals/GroceryItem" pc="268439824" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryItem.mc" id="39" lineNum="32" parent="globals/GroceryItem" pc="268439857" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="40" lineNum="13" parent="globals/GroceryApp" pc="268439865" symbol="onStart"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="19" parent="globals/GroceryApp" pc="268439868" symbol="getInitialView"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="20" parent="globals/GroceryApp" pc="268439871" symbol="getInitialView"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="21" parent="globals/GroceryApp" pc="268439896" symbol="getInitialView"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="24" parent="globals/GroceryApp" pc="268439934" symbol="getInitialView"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="25" parent="globals/GroceryApp" pc="268439947" symbol="getInitialView"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="26" parent="globals/GroceryApp" pc="268439959" symbol="getInitialView"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="30" parent="globals/GroceryApp" pc="268439979" symbol="getInitialView"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="32" parent="globals/GroceryApp" pc="268439991" symbol="getInitialView"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="41" lineNum="33" parent="globals/GroceryApp" pc="268440021" symbol="getInitialView"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="42" lineNum="9" parent="globals/GroceryApp" pc="268440039" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="42" lineNum="10" parent="globals/GroceryApp" pc="268440041" symbol="initialize"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="43" lineNum="16" parent="globals/GroceryApp" pc="268440054" symbol="onStop"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="44" lineNum="36" parent="globals/GroceryApp" pc="268440057" symbol="onItemsLoaded"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="44" lineNum="37" parent="globals/GroceryApp" pc="268440059" symbol="onItemsLoaded"/>
+<entry filename="C:\\Users\\razie\\Development\\Grocery list\\garmin\\source\\GroceryApp.mc" id="44" lineNum="38" parent="globals/GroceryApp" pc="268440068" symbol="onItemsLoaded"/>
 </pcToLineNum>
 <symbolTable>
 <entry field="true" id="15" symbol="&lt;globals/GroceryView/&lt;&gt;_headerHeight&gt;"/>
@@ -440,65 +441,66 @@
 <entry endPc="268437269" name="trackY" stackId="4" startPc="268437118"/>
 <entry endPc="268437269" name="progress" stackId="5" startPc="268437118"/>
 <entry endPc="268437269" name="indicatorY" stackId="6" startPc="268437118"/>
-<entry arg="true" endPc="268437678" name="dc" stackId="1" startPc="268437286"/>
-<entry endPc="268437677" name="endIndex" stackId="2" startPc="268437289"/>
-<entry endPc="268437677" name="startX" stackId="3" startPc="268437289"/>
-<entry endPc="268437677" name="itemWidth" stackId="4" startPc="268437289"/>
-<entry endPc="268437666" name="i" stackId="5" startPc="268437589"/>
-<entry endPc="268437656" name="item" stackId="6" startPc="268437589"/>
-<entry endPc="268437656" name="rowY" stackId="7" startPc="268437589"/>
-<entry endPc="268437656" name="isFocused" stackId="8" startPc="268437589"/>
-<entry arg="true" endPc="268437711" name="text" stackId="1" startPc="268437679"/>
-<entry endPc="268437832" name="url" stackId="1" startPc="268437715"/>
-<entry endPc="268437935" name="url" stackId="1" startPc="268437836"/>
-<entry endPc="268437935" name="options" stackId="2" startPc="268437836"/>
-<entry arg="true" endPc="268438222" name="responseCode" stackId="1" startPc="268437937"/>
-<entry arg="true" endPc="268438222" name="data" stackId="2" startPc="268437937"/>
-<entry endPc="268438179" name="itemsList" stackId="3" startPc="268437976"/>
-<entry endPc="268438179" name="categories" stackId="4" startPc="268437976"/>
-<entry endPc="268438121" name="c" stackId="5" startPc="268438020"/>
-<entry endPc="268438111" name="cat" stackId="6" startPc="268438020"/>
-<entry endPc="268438111" name="items" stackId="7" startPc="268438020"/>
-<entry endPc="268438108" name="i" stackId="8" startPc="268438066"/>
-<entry endPc="268438221" name="cached" stackId="9" startPc="268438183"/>
-<entry arg="true" endPc="268438246" name="responseCode" stackId="1" startPc="268438223"/>
-<entry arg="true" endPc="268438246" name="data" stackId="2" startPc="268438223"/>
-<entry endPc="268438317" name="headers" stackId="1" startPc="268438250"/>
-<entry endPc="268438317" name="token" stackId="2" startPc="268438250"/>
-<entry endPc="268438463" name="itemsList" stackId="1" startPc="268438321"/>
-<entry endPc="268438412" name="cached" stackId="2" startPc="268438325"/>
-<entry endPc="268438409" name="i" stackId="3" startPc="268438367"/>
-<entry endPc="268438455" name="ex" stackId="4" startPc="268438419"/>
-<entry arg="true" endPc="268438475" name="callback" stackId="1" startPc="268438464"/>
-<entry arg="true" endPc="268438571" name="item" stackId="1" startPc="268438476"/>
-<entry endPc="268438570" name="url" stackId="2" startPc="268438479"/>
-<entry endPc="268438570" name="options" stackId="3" startPc="268438479"/>
-<entry arg="true" endPc="268438779" name="items" stackId="1" startPc="268438572"/>
-<entry endPc="268438730" name="serialized" stackId="2" startPc="268438575"/>
-<entry endPc="268438710" name="i" stackId="3" startPc="268438595"/>
-<entry endPc="268438700" name="it" stackId="4" startPc="268438595"/>
-<entry endPc="268438773" name="ex" stackId="5" startPc="268438737"/>
-<entry arg="true" endPc="268438858" name="swipeEvent" stackId="1" startPc="268438796"/>
-<entry endPc="268438858" name="direction" stackId="2" startPc="268438799"/>
-<entry arg="true" endPc="268438891" name="view" stackId="1" startPc="268438859"/>
-<entry arg="true" endPc="268438891" name="service" stackId="2" startPc="268438859"/>
-<entry arg="true" endPc="268438947" name="clickEvent" stackId="1" startPc="268438892"/>
-<entry endPc="268438947" name="coords" stackId="2" startPc="268438895"/>
-<entry endPc="268438947" name="clickedItem" stackId="3" startPc="268438895"/>
-<entry arg="true" endPc="268439054" name="item" stackId="1" startPc="268438948"/>
-<entry endPc="268439039" name="vibeProfile" stackId="2" startPc="268438990"/>
-<entry endPc="268439094" name="selected" stackId="1" startPc="268439058"/>
-<entry arg="true" endPc="268439248" name="keyEvent" stackId="1" startPc="268439111"/>
-<entry endPc="268439248" name="key" stackId="2" startPc="268439114"/>
-<entry endPc="268439447" name="q" stackId="1" startPc="268439252"/>
-<entry arg="true" endPc="268439840" name="dict" stackId="1" startPc="268439465"/>
-<entry endPc="268439839" name="rawId" stackId="2" startPc="268439468"/>
-<entry endPc="268439839" name="rawCatId" stackId="3" startPc="268439468"/>
-<entry endPc="268440014" name="cached" stackId="1" startPc="268439847"/>
-<entry endPc="268440014" name="delegate" stackId="2" startPc="268439847"/>
-<entry arg="true" endPc="268440065" name="success" stackId="1" startPc="268440033"/>
-<entry arg="true" endPc="268440065" name="items" stackId="2" startPc="268440033"/>
-<entry arg="true" endPc="268440065" name="errorMsg" stackId="3" startPc="268440033"/>
+<entry arg="true" endPc="268437702" name="dc" stackId="1" startPc="268437286"/>
+<entry endPc="268437510" name="msg" stackId="2" startPc="268437417"/>
+<entry endPc="268437701" name="endIndex" stackId="3" startPc="268437289"/>
+<entry endPc="268437701" name="startX" stackId="4" startPc="268437289"/>
+<entry endPc="268437701" name="itemWidth" stackId="5" startPc="268437289"/>
+<entry endPc="268437690" name="i" stackId="6" startPc="268437613"/>
+<entry endPc="268437680" name="item" stackId="7" startPc="268437613"/>
+<entry endPc="268437680" name="rowY" stackId="8" startPc="268437613"/>
+<entry endPc="268437680" name="isFocused" stackId="9" startPc="268437613"/>
+<entry arg="true" endPc="268437735" name="text" stackId="1" startPc="268437703"/>
+<entry endPc="268437856" name="url" stackId="1" startPc="268437739"/>
+<entry endPc="268437959" name="url" stackId="1" startPc="268437860"/>
+<entry endPc="268437959" name="options" stackId="2" startPc="268437860"/>
+<entry arg="true" endPc="268438246" name="responseCode" stackId="1" startPc="268437961"/>
+<entry arg="true" endPc="268438246" name="data" stackId="2" startPc="268437961"/>
+<entry endPc="268438203" name="itemsList" stackId="3" startPc="268438000"/>
+<entry endPc="268438203" name="categories" stackId="4" startPc="268438000"/>
+<entry endPc="268438145" name="c" stackId="5" startPc="268438044"/>
+<entry endPc="268438135" name="cat" stackId="6" startPc="268438044"/>
+<entry endPc="268438135" name="items" stackId="7" startPc="268438044"/>
+<entry endPc="268438132" name="i" stackId="8" startPc="268438090"/>
+<entry endPc="268438245" name="cached" stackId="9" startPc="268438207"/>
+<entry arg="true" endPc="268438270" name="responseCode" stackId="1" startPc="268438247"/>
+<entry arg="true" endPc="268438270" name="data" stackId="2" startPc="268438247"/>
+<entry endPc="268438341" name="headers" stackId="1" startPc="268438274"/>
+<entry endPc="268438341" name="token" stackId="2" startPc="268438274"/>
+<entry endPc="268438487" name="itemsList" stackId="1" startPc="268438345"/>
+<entry endPc="268438436" name="cached" stackId="2" startPc="268438349"/>
+<entry endPc="268438433" name="i" stackId="3" startPc="268438391"/>
+<entry endPc="268438479" name="ex" stackId="4" startPc="268438443"/>
+<entry arg="true" endPc="268438499" name="callback" stackId="1" startPc="268438488"/>
+<entry arg="true" endPc="268438595" name="item" stackId="1" startPc="268438500"/>
+<entry endPc="268438594" name="url" stackId="2" startPc="268438503"/>
+<entry endPc="268438594" name="options" stackId="3" startPc="268438503"/>
+<entry arg="true" endPc="268438803" name="items" stackId="1" startPc="268438596"/>
+<entry endPc="268438754" name="serialized" stackId="2" startPc="268438599"/>
+<entry endPc="268438734" name="i" stackId="3" startPc="268438619"/>
+<entry endPc="268438724" name="it" stackId="4" startPc="268438619"/>
+<entry endPc="268438797" name="ex" stackId="5" startPc="268438761"/>
+<entry arg="true" endPc="268438882" name="swipeEvent" stackId="1" startPc="268438820"/>
+<entry endPc="268438882" name="direction" stackId="2" startPc="268438823"/>
+<entry arg="true" endPc="268438915" name="view" stackId="1" startPc="268438883"/>
+<entry arg="true" endPc="268438915" name="service" stackId="2" startPc="268438883"/>
+<entry arg="true" endPc="268438971" name="clickEvent" stackId="1" startPc="268438916"/>
+<entry endPc="268438971" name="coords" stackId="2" startPc="268438919"/>
+<entry endPc="268438971" name="clickedItem" stackId="3" startPc="268438919"/>
+<entry arg="true" endPc="268439078" name="item" stackId="1" startPc="268438972"/>
+<entry endPc="268439063" name="vibeProfile" stackId="2" startPc="268439014"/>
+<entry endPc="268439118" name="selected" stackId="1" startPc="268439082"/>
+<entry arg="true" endPc="268439272" name="keyEvent" stackId="1" startPc="268439135"/>
+<entry endPc="268439272" name="key" stackId="2" startPc="268439138"/>
+<entry endPc="268439471" name="q" stackId="1" startPc="268439276"/>
+<entry arg="true" endPc="268439864" name="dict" stackId="1" startPc="268439489"/>
+<entry endPc="268439863" name="rawId" stackId="2" startPc="268439492"/>
+<entry endPc="268439863" name="rawCatId" stackId="3" startPc="268439492"/>
+<entry endPc="268440038" name="cached" stackId="1" startPc="268439871"/>
+<entry endPc="268440038" name="delegate" stackId="2" startPc="268439871"/>
+<entry arg="true" endPc="268440089" name="success" stackId="1" startPc="268440057"/>
+<entry arg="true" endPc="268440089" name="items" stackId="2" startPc="268440057"/>
+<entry arg="true" endPc="268440089" name="errorMsg" stackId="3" startPc="268440057"/>
 </localVars>
 <deviceInfo deviceVersion="2a089d06d343f3feda75c93ddf12e1fa29abe918" partNumber="006-B4565-00"/>
 <annotations>
@@ -600,7 +602,7 @@
 <functionEntry accessMode="public" endPc="268437285" name="initialize" parent="GroceryView" startPc="268437271">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437678" name="onUpdate" parent="GroceryView" startPc="268437286">
+<functionEntry accessMode="public" endPc="268437702" name="onUpdate" parent="GroceryView" startPc="268437286">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
@@ -613,102 +615,102 @@
 <functionEntry accessMode="public" name="&lt;init&gt;" parent="Strings">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437711" name="shapeHebrew" parent="BidiHelper" startPc="268437679">
+<functionEntry accessMode="public" endPc="268437735" name="shapeHebrew" parent="BidiHelper" startPc="268437703">
 <param id="text"/>
 <documentation/>
 </functionEntry>
 <functionEntry accessMode="public" name="initialize" parent="BidiHelper">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268437832" name="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;" parent="GroceryService" startPc="268437712">
+<functionEntry accessMode="private" endPc="268437856" name="&lt;globals/GroceryService/&lt;&gt;getBaseUrl&gt;" parent="GroceryService" startPc="268437736">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437936" name="fetchItems" parent="GroceryService" startPc="268437833">
+<functionEntry accessMode="public" endPc="268437960" name="fetchItems" parent="GroceryService" startPc="268437857">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438222" name="onReceiveItems" parent="GroceryService" startPc="268437937">
+<functionEntry accessMode="public" endPc="268438246" name="onReceiveItems" parent="GroceryService" startPc="268437961">
 <param id="responseCode"/>
 <param id="data"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438246" name="onToggleResponse" parent="GroceryService" startPc="268438223">
+<functionEntry accessMode="public" endPc="268438270" name="onToggleResponse" parent="GroceryService" startPc="268438247">
 <param id="responseCode"/>
 <param id="data"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268438317" name="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;" parent="GroceryService" startPc="268438247">
+<functionEntry accessMode="private" endPc="268438341" name="&lt;globals/GroceryService/&lt;&gt;getHeaders&gt;" parent="GroceryService" startPc="268438271">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438463" name="loadOfflineItems" parent="GroceryService" startPc="268438318">
+<functionEntry accessMode="public" endPc="268438487" name="loadOfflineItems" parent="GroceryService" startPc="268438342">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438475" name="initialize" parent="GroceryService" startPc="268438464">
+<functionEntry accessMode="public" endPc="268438499" name="initialize" parent="GroceryService" startPc="268438488">
 <param id="callback"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438571" name="toggleItem" parent="GroceryService" startPc="268438476">
+<functionEntry accessMode="public" endPc="268438595" name="toggleItem" parent="GroceryService" startPc="268438500">
 <param id="item"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268438779" name="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;" parent="GroceryService" startPc="268438572">
+<functionEntry accessMode="private" endPc="268438803" name="&lt;globals/GroceryService/&lt;&gt;saveOfflineItems&gt;" parent="GroceryService" startPc="268438596">
 <param id="items"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438795" name="onPreviousPage" parent="GroceryDelegate" startPc="268438780">
+<functionEntry accessMode="public" endPc="268438819" name="onPreviousPage" parent="GroceryDelegate" startPc="268438804">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438858" name="onSwipe" parent="GroceryDelegate" startPc="268438796">
+<functionEntry accessMode="public" endPc="268438882" name="onSwipe" parent="GroceryDelegate" startPc="268438820">
 <param id="swipeEvent"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438891" name="initialize" parent="GroceryDelegate" startPc="268438859">
+<functionEntry accessMode="public" endPc="268438915" name="initialize" parent="GroceryDelegate" startPc="268438883">
 <param id="view"/>
 <param id="service"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268438947" name="onTap" parent="GroceryDelegate" startPc="268438892">
+<functionEntry accessMode="public" endPc="268438971" name="onTap" parent="GroceryDelegate" startPc="268438916">
 <param id="clickEvent"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="private" endPc="268439054" name="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;" parent="GroceryDelegate" startPc="268438948">
+<functionEntry accessMode="private" endPc="268439078" name="&lt;globals/GroceryDelegate/&lt;&gt;toggleItemState&gt;" parent="GroceryDelegate" startPc="268438972">
 <param id="item"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268439094" name="onSelect" parent="GroceryDelegate" startPc="268439055">
+<functionEntry accessMode="public" endPc="268439118" name="onSelect" parent="GroceryDelegate" startPc="268439079">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268439110" name="onNextPage" parent="GroceryDelegate" startPc="268439095">
+<functionEntry accessMode="public" endPc="268439134" name="onNextPage" parent="GroceryDelegate" startPc="268439119">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268439248" name="onKey" parent="GroceryDelegate" startPc="268439111">
+<functionEntry accessMode="public" endPc="268439272" name="onKey" parent="GroceryDelegate" startPc="268439135">
 <param id="keyEvent"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268439448" name="updateShapedText" parent="GroceryItem" startPc="268439249">
+<functionEntry accessMode="public" endPc="268439472" name="updateShapedText" parent="GroceryItem" startPc="268439273">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268439464" name="toggleChecked" parent="GroceryItem" startPc="268439449">
+<functionEntry accessMode="public" endPc="268439488" name="toggleChecked" parent="GroceryItem" startPc="268439473">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268439840" name="initialize" parent="GroceryItem" startPc="268439465">
+<functionEntry accessMode="public" endPc="268439864" name="initialize" parent="GroceryItem" startPc="268439489">
 <param id="dict"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268439843" name="onStart" parent="GroceryApp" startPc="268439841">
+<functionEntry accessMode="public" endPc="268439867" name="onStart" parent="GroceryApp" startPc="268439865">
 <param id="state"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268440014" name="getInitialView" parent="GroceryApp" startPc="268439844">
+<functionEntry accessMode="public" endPc="268440038" name="getInitialView" parent="GroceryApp" startPc="268439868">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268440029" name="initialize" parent="GroceryApp" startPc="268440015">
+<functionEntry accessMode="public" endPc="268440053" name="initialize" parent="GroceryApp" startPc="268440039">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268440032" name="onStop" parent="GroceryApp" startPc="268440030">
+<functionEntry accessMode="public" endPc="268440056" name="onStop" parent="GroceryApp" startPc="268440054">
 <param id="state"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268440065" name="onItemsLoaded" parent="GroceryApp" startPc="268440033">
+<functionEntry accessMode="public" endPc="268440089" name="onItemsLoaded" parent="GroceryApp" startPc="268440057">
 <param id="success"/>
 <param id="items"/>
 <param id="errorMsg"/>

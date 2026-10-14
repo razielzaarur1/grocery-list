@@ -69,11 +69,12 @@ class GroceryView extends WatchUi.View {
 
         if (items.size() == 0) {
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+            var msg = (statusMessage != null && statusMessage.length() > 0) ? statusMessage : "הרשימה ריקה";
             dc.drawText(
                 _screenWidth / 2,
                 _screenHeight / 2,
                 getMainFont(),
-                BidiHelper.shapeHebrew("הרשימה ריקה"),
+                msg,
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
             );
             return;
