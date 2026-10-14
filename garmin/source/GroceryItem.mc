@@ -15,6 +15,8 @@ class GroceryItem {
     var shapedName as String = "";
     var shapedQuantity as String = "";
     var shapedNote as String = "";
+    var nameWidth as Number = 0;
+    var noteWidth as Number = 0;
 
     function initialize(dict as Dictionary) {
         var rawId = dict.get("id");

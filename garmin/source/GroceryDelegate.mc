@@ -65,14 +65,18 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
         return false;
     }
 
-    // Touch screen swipe fallback
+    // Touch screen swipe: ignore when dragging was active to avoid violent jumps
     function onSwipe(swipeEvent as WatchUi.SwipeEvent) as Boolean {
+        if (_wasDragging) {
+            _wasDragging = false;
+            return true;
+        }
         var direction = swipeEvent.getDirection();
         if (direction == WatchUi.SWIPE_UP) {
-            _view.scrollPixels(100);
+            _view.scrollPixels(50);
             return true;
         } else if (direction == WatchUi.SWIPE_DOWN) {
-            _view.scrollPixels(-100);
+            _view.scrollPixels(-50);
             return true;
         }
         return false;
