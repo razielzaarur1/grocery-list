@@ -74,7 +74,7 @@ class GroceryView extends WatchUi.View {
                 _screenWidth / 2,
                 _screenHeight / 2,
                 getMainFont(),
-                msg,
+                BidiHelper.shapeHebrew(msg),
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
             );
             return;

@@ -1,12 +1,19 @@
 import Toybox.Lang;
+import Toybox.StringUtil;
 
-// BidiHelper: Returns text in natural order without inversion
+// BidiHelper: Decodes UTF-8 bytes into true Unicode characters for Garmin BMFont
 class BidiHelper {
 
     static function shapeHebrew(text as String?) as String {
         if (text == null || text.length() == 0) {
             return "";
         }
-        return text;
+
+        try {
+            var chars = text.toCharArray();
+            return StringUtil.charArrayToString(chars);
+        } catch (ex) {
+            return text;
+        }
     }
 }
