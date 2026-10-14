@@ -25,7 +25,8 @@ def generate_bmfont(output_prefix, font_size, line_height, is_bold=False):
         if c not in chars:
             chars.append(c)
 
-    tex_w, tex_h = 512, 512
+    # Compact 256x256 texture for ultra-low RAM footprint on real Garmin watches
+    tex_w, tex_h = 256, 256
     img = Image.new("RGBA", (tex_w, tex_h), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
@@ -49,13 +50,13 @@ def generate_bmfont(output_prefix, font_size, line_height, is_bold=False):
         glyph_h = bottom - top
         adv = int(font.getlength(ch))
 
-        if cur_x + glyph_w + 4 >= tex_w:
+        if cur_x + glyph_w + 3 >= tex_w:
             cur_x = 2
-            cur_y += max_row_h + 4
+            cur_y += max_row_h + 3
             max_row_h = 0
 
-        if cur_y + glyph_h + 4 >= tex_h:
-            print(f"Warning: font texture overflow for {ch}")
+        if cur_y + glyph_h + 3 >= tex_h:
+            print(f"Warning: font texture overflow for {ch} at y={cur_y}")
             break
 
         draw.text((cur_x - left, cur_y - top), ch, font=font, fill=(255, 255, 255, 255))
@@ -65,7 +66,7 @@ def generate_bmfont(output_prefix, font_size, line_height, is_bold=False):
 
         char_records.append((cid, cur_x, cur_y, glyph_w, glyph_h, xoffset, top, adv))
 
-        cur_x += glyph_w + 4
+        cur_x += glyph_w + 3
         if glyph_h > max_row_h:
             max_row_h = glyph_h
 
@@ -74,22 +75,22 @@ def generate_bmfont(output_prefix, font_size, line_height, is_bold=False):
 
     fnt_filename = f"{output_prefix}.fnt"
     base_png = os.path.basename(png_filename)
-    face_name = "Segoe UI" if "segoe" in font_path.lower() else "Arial"
     with open(fnt_filename, "w", encoding="utf-8") as f:
-        f.write(f'info face="{face_name}" size={font_size} bold={1 if is_bold else 0} italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1\n')
-        f.write(f'common lineHeight={line_height} base={base} scaleW={tex_w} scaleH={tex_h} pages=1 packed=0 alphaChnl=0 redChnl=0 greenChnl=0 blueChnl=0\n')
+        # Standard Garmin-compatible BMFont format (no spaces in face name, exact standard common line)
+        f.write(f'info face="Arial" size={font_size} bold={1 if is_bold else 0} italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1\n')
+        f.write(f'common lineHeight={line_height} base={base} scaleW={tex_w} scaleH={tex_h} pages=1 packed=0\n')
         f.write(f'page id=0 file="{base_png}"\n')
         f.write(f'chars count={len(char_records)}\n')
         for rec in char_records:
             cid, x, y, gw, gh, xo, yo, adv = rec
             f.write(f'char id={cid:<5} x={x:<5} y={y:<5} width={gw:<5} height={gh:<5} xoffset={xo:<5} yoffset={yo:<5} xadvance={adv:<5} page=0 chnl=15\n')
 
-    print(f"Generated {fnt_filename} and {png_filename} with {len(char_records)} characters ({face_name} {font_size}px).")
+    print(f"Generated {fnt_filename} and {png_filename} with {len(char_records)} characters ({font_size}px, 256x256).")
 
 if __name__ == "__main__":
     out_dir = "c:\\Users\\razie\\Development\\Grocery list\\garmin\\resources\\fonts"
     os.makedirs(out_dir, exist_ok=True)
-    # Main font: 26px (increased from 22px for better readability on watch AMOLED)
+    # Main font: 26px
     generate_bmfont(os.path.join(out_dir, "hebrew_font"), 26, 32, is_bold=False)
-    # Small font: 19px (increased from 16px for notes, quantities, counts)
+    # Small font: 19px
     generate_bmfont(os.path.join(out_dir, "hebrew_small"), 19, 24, is_bold=False)

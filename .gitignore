@@ -40,3 +40,7 @@ Thumbs.db
 
 # Docker logs
 *.log
+
+# Garmin build outputs
+garmin/bin/
+
