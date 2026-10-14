@@ -9,10 +9,10 @@
             <iq:product id="venu3"/>
             <iq:product id="epix2"/>
             <iq:product id="fenix7pro"/>
+            <iq:product id="fenix847mm"/>
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="Communications"/>
-            <iq:uses-permission id="Storage"/>
         </iq:permissions>
         <iq:languages>
             <iq:language>heb</iq:language>

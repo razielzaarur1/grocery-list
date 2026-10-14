@@ -1,4 +1,5 @@
 import Toybox.Lang;
+import Toybox.StringUtil;
 
 // BidiHelper: Handles Right-to-Left (RTL) visual shaping for Hebrew on Garmin Connect IQ
 class BidiHelper {

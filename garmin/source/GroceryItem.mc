@@ -1,18 +1,18 @@
 import Toybox.Lang;
 
 class GroceryItem {
-    var id as Number;
-    var name as String;
-    var quantity as String;
-    var unit as String;
-    var note as String;
-    var isChecked as Boolean;
-    var categoryId as Number;
+    var id as Number = 0;
+    var name as String = "";
+    var quantity as String = "";
+    var unit as String = "";
+    var note as String = "";
+    var isChecked as Boolean = false;
+    var categoryId as Number = 0;
 
     // Pre-calculated shaped text for fast drawing
-    var shapedName as String;
-    var shapedQuantity as String;
-    var shapedNote as String;
+    var shapedName as String = "";
+    var shapedQuantity as String = "";
+    var shapedNote as String = "";
 
     function initialize(dict as Dictionary) {
         id = dict.get("id") as Number;

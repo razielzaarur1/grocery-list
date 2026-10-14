@@ -1,0 +1,46 @@
+{
+  "settings" : [ {
+    "key" : "serverUrl",
+    "valueType" : "string",
+    "defaultValue" : "https://zaarur-server.tiffany-minor.ts.net/grocery_list",
+    "configTitle" : "ServerUrlTitle",
+    "configPrompt" : "ServerUrlPrompt",
+    "configType" : "alphaNumeric",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : null,
+    "configMin" : null,
+    "configMax" : null,
+    "configMaxLength" : null
+  }, {
+    "key" : "deviceToken",
+    "valueType" : "string",
+    "defaultValue" : "",
+    "configTitle" : "$literal0$",
+    "configPrompt" : "$literal1$",
+    "configType" : "alphaNumeric",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : null,
+    "configMin" : null,
+    "configMax" : null,
+    "configMaxLength" : null
+  } ],
+  "supportsLiveValidation" : false,
+  "languages" : {
+    "valyrian" : {
+      "$literal1$" : "??? ???? ????? ????? (?????????)",
+      "$literal0$" : "???? ?????",
+      "ErrorText" : "????? ??????",
+      "EmptyText" : "?????? ????",
+      "ServerUrlTitle" : "????? ???",
+      "ServerUrlPrompt" : "??? ????? Tailscale Funnel ????",
+      "LoadingText" : "???? ??????...",
+      "AppName" : "????? ?????"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import Toybox.WatchUi;
 import Toybox.System;
 import Toybox.Attention;
+import Toybox.Lang;
 
 class GroceryDelegate extends WatchUi.BehaviorDelegate {
     private var _view as GroceryView;
