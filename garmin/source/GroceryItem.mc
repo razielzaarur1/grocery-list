@@ -15,6 +15,8 @@ class GroceryItem {
     var shapedName as String = "";
     var shapedQuantity as String = "";
     var shapedNote as String = "";
+    var fittedName as String = "";
+    var fittedNote as String = "";
     var nameWidth as Number = 0;
     var noteWidth as Number = 0;
 
@@ -59,6 +61,10 @@ class GroceryItem {
         shapedQuantity = BidiHelper.shapeHebrew(q);
 
         shapedNote = (note.length() > 0) ? BidiHelper.shapeHebrew(note) : "";
+        fittedName = "";
+        fittedNote = "";
+        nameWidth = 0;
+        noteWidth = 0;
     }
 
     function toggleChecked() as Void {

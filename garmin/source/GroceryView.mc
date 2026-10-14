@@ -62,37 +62,44 @@ class GroceryView extends WatchUi.View {
         if (scrollY < 0) {
             scrollY = 0;
         }
-        updateSelectionFromScroll();
         WatchUi.requestUpdate();
     }
 
-    function updateSelectionFromScroll() as Void {
-        if (rows.size() == 0) {
-            return;
+    private function truncateStringToWidth(
+        dc as Graphics.Dc,
+        text as String,
+        font as Graphics.FontDefinition,
+        maxWidth as Number
+    ) as String {
+        if (text == null || text.length() == 0) {
+            return "";
         }
-        var targetY = _headerHeight + (_screenHeight - _headerHeight) / 2;
-        var curY = _headerHeight + 6 - scrollY;
-        var bestIndex = -1;
-        var minDistance = 999999;
+        var fullW = dc.getTextWidthInPixels(text, font);
+        if (fullW <= maxWidth) {
+            return text;
+        }
 
-        for (var i = 0; i < rows.size(); i++) {
-            var row = rows[i];
-            var rHeight = row.rowHeight;
-            if (!row.isHeader && row.item != null) {
-                var rowCenter = curY + (rHeight / 2);
-                var diff = rowCenter - targetY;
-                var dist = diff < 0 ? -diff : diff;
-                if (dist < minDistance) {
-                    minDistance = dist;
-                    bestIndex = i;
-                }
+        var ell = "..";
+        var ellW = dc.getTextWidthInPixels(ell, font);
+        var targetW = maxWidth - ellW;
+        if (targetW <= 10) {
+            return text;
+        }
+
+        var chars = text.toCharArray();
+        var numChars = chars.size();
+        var curStr = "";
+
+        for (var i = 0; i < numChars; i++) {
+            var nextStr = curStr + chars[i].toString();
+            var nextW = dc.getTextWidthInPixels(nextStr, font);
+            if (nextW > targetW) {
+                return curStr + ell;
             }
-            curY += rHeight + 6;
+            curStr = nextStr;
         }
 
-        if (bestIndex != -1 && bestIndex != selectedIndex) {
-            selectedIndex = bestIndex;
-        }
+        return curStr + ell;
     }
 
     // Rebuilds rows: category headers first, unchecked items, then checked items at the bottom of the category!
@@ -187,6 +194,7 @@ class GroceryView extends WatchUi.View {
                 }
             }
         }
+        snapScrollToSelection();
     }
 
     function onUpdate(dc as Graphics.Dc) as Void {
@@ -307,17 +315,7 @@ class GroceryView extends WatchUi.View {
         dc.setColor(0x1e293b, Graphics.COLOR_TRANSPARENT);
         dc.drawLine(x, y + 2, x + width, y + 2);
 
-        // Category Title on the RIGHT in stylish sky blue
-        dc.setColor(0x38bdf8, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(
-            rightMargin,
-            textY,
-            getSmallFont(),
-            row.headerTitle,
-            Graphics.TEXT_JUSTIFY_RIGHT
-        );
-
-        // Category Count (e.g. "10/11") on the LEFT
+        // 1. Category Count (e.g. "10/11") on the LEFT
         dc.setColor(0x64748b, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             leftMargin,
@@ -325,6 +323,26 @@ class GroceryView extends WatchUi.View {
             getSmallFont(),
             row.headerCount,
             Graphics.TEXT_JUSTIFY_LEFT
+        );
+
+        // 2. Category Title on the RIGHT - safely truncated so it NEVER cuts the count on the left!
+        var countW = dc.getTextWidthInPixels(row.headerCount, getSmallFont());
+        var maxTitleW = (rightMargin - leftMargin) - countW - 16;
+        if (maxTitleW < 20) {
+            maxTitleW = 20;
+        }
+
+        if (row.fittedTitle.length() == 0) {
+            row.fittedTitle = truncateStringToWidth(dc, row.headerTitle, getSmallFont(), maxTitleW);
+        }
+
+        dc.setColor(0x38bdf8, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(
+            rightMargin,
+            textY,
+            getSmallFont(),
+            row.fittedTitle,
+            Graphics.TEXT_JUSTIFY_RIGHT
         );
     }
 
@@ -349,13 +367,14 @@ class GroceryView extends WatchUi.View {
 
         var rightMargin = x + width - 12;
         var leftMargin = x + 6;
+        var availWidth = rightMargin - leftMargin;
 
         var hasNote = (item.shapedNote.length() > 0);
         var hasQuantity = (item.shapedQuantity.length() > 0);
 
         var fontH = dc.getFontHeight(getMainFont());
-        var nameY = hasNote ? (y + 8) : (y + (height - fontH) / 2);
-        var noteY = y + 40;
+        var nameY = hasNote ? (y + 6) : (y + (height - fontH) / 2);
+        var noteY = y + 44;
 
         // Colors
         var nameColor;
@@ -371,18 +390,16 @@ class GroceryView extends WatchUi.View {
             grayColor = 0x94a3b8;
         }
 
-        // 1. Item Name on the RIGHT
-        dc.setColor(nameColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(
-            rightMargin,
-            nameY,
-            getMainFont(),
-            item.shapedName,
-            Graphics.TEXT_JUSTIFY_RIGHT
-        );
-
-        // 2. Quantity on the LEFT
+        // 1. Quantity on the LEFT
+        var qtyW = 0;
         if (hasQuantity) {
+            qtyW = dc.getTextWidthInPixels(item.shapedQuantity, getSmallFont());
+            var maxQtyW = (availWidth * 0.38).toNumber();
+            if (qtyW > maxQtyW) {
+                item.shapedQuantity = truncateStringToWidth(dc, item.shapedQuantity, getSmallFont(), maxQtyW);
+                qtyW = dc.getTextWidthInPixels(item.shapedQuantity, getSmallFont());
+            }
+
             dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 leftMargin,
@@ -393,14 +410,39 @@ class GroceryView extends WatchUi.View {
             );
         }
 
+        // 2. Item Name on the RIGHT - safely truncated so it never overlaps quantity!
+        var maxNameW = availWidth - (hasQuantity ? (qtyW + 14) : 0);
+        if (maxNameW < 30) {
+            maxNameW = 30;
+        }
+
+        if (item.fittedName.length() == 0) {
+            item.fittedName = truncateStringToWidth(dc, item.shapedName, getMainFont(), maxNameW);
+            item.nameWidth = dc.getTextWidthInPixels(item.fittedName, getMainFont());
+        }
+
+        dc.setColor(nameColor, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(
+            rightMargin,
+            nameY,
+            getMainFont(),
+            item.fittedName,
+            Graphics.TEXT_JUSTIFY_RIGHT
+        );
+
         // 3. Note directly underneath item name with generous vertical gap
         if (hasNote) {
+            if (item.fittedNote.length() == 0) {
+                item.fittedNote = truncateStringToWidth(dc, item.shapedNote, getSmallFont(), availWidth);
+                item.noteWidth = dc.getTextWidthInPixels(item.fittedNote, getSmallFont());
+            }
+
             dc.setColor(grayColor, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 rightMargin,
                 noteY,
                 getSmallFont(),
-                item.shapedNote,
+                item.fittedNote,
                 Graphics.TEXT_JUSTIFY_RIGHT
             );
         }
@@ -410,18 +452,11 @@ class GroceryView extends WatchUi.View {
             dc.setColor(0x64748b, Graphics.COLOR_TRANSPARENT);
             dc.setPenWidth(2);
 
-            if (item.nameWidth == 0) {
-                item.nameWidth = dc.getTextWidthInPixels(item.shapedName, getMainFont());
-            }
             var strikeY = nameY + (fontH / 2);
-
             dc.drawLine(rightMargin, strikeY, rightMargin - item.nameWidth, strikeY);
 
             // Strikethrough for note if present
             if (hasNote) {
-                if (item.noteWidth == 0) {
-                    item.noteWidth = dc.getTextWidthInPixels(item.shapedNote, getSmallFont());
-                }
                 var noteH = dc.getFontHeight(getSmallFont());
                 var noteStrikeY = noteY + (noteH / 2);
                 dc.drawLine(rightMargin, noteStrikeY, rightMargin - item.noteWidth, noteStrikeY);
@@ -452,40 +487,46 @@ class GroceryView extends WatchUi.View {
         dc.fillRoundedRectangle(_screenWidth - 8, indicatorY, 3, indicatorHeight, 2);
     }
 
-    // Navigation and Scrolling (Hardware Buttons & D-pad)
-    function scrollDown() as Void {
+    // Navigation and Selection: Moves the blue highlight item by item, with screen locked to it
+    function selectNextItem() as Void {
         if (rows.size() == 0) {
             return;
         }
 
-        // Find next item row (skip headers)
         for (var i = selectedIndex + 1; i < rows.size(); i++) {
-            if (!rows[i].isHeader) {
+            if (!rows[i].isHeader && rows[i].item != null) {
                 selectedIndex = i;
-                centerSelectedItem();
+                snapScrollToSelection();
                 WatchUi.requestUpdate();
                 return;
             }
         }
+    }
+
+    function selectPreviousItem() as Void {
+        if (rows.size() == 0) {
+            return;
+        }
+
+        for (var i = selectedIndex - 1; i >= 0; i--) {
+            if (!rows[i].isHeader && rows[i].item != null) {
+                selectedIndex = i;
+                snapScrollToSelection();
+                WatchUi.requestUpdate();
+                return;
+            }
+        }
+    }
+
+    function scrollDown() as Void {
+        selectNextItem();
     }
 
     function scrollUp() as Void {
-        if (rows.size() == 0) {
-            return;
-        }
-
-        // Find previous item row (skip headers)
-        for (var i = selectedIndex - 1; i >= 0; i--) {
-            if (!rows[i].isHeader) {
-                selectedIndex = i;
-                centerSelectedItem();
-                WatchUi.requestUpdate();
-                return;
-            }
-        }
+        selectPreviousItem();
     }
 
-    private function centerSelectedItem() as Void {
+    function snapScrollToSelection() as Void {
         if (rows.size() == 0 || selectedIndex < 0 || selectedIndex >= rows.size()) {
             return;
         }
@@ -493,8 +534,7 @@ class GroceryView extends WatchUi.View {
         for (var i = 0; i < rows.size(); i++) {
             if (i == selectedIndex) {
                 var itemCenter = accY + (rows[i].rowHeight / 2);
-                var viewportHeight = _screenHeight - _headerHeight;
-                scrollY = itemCenter - (viewportHeight / 2) + 6;
+                scrollY = itemCenter - 140;
                 var max = getMaxScroll();
                 if (scrollY > max) { scrollY = max; }
                 if (scrollY < 0) { scrollY = 0; }
@@ -524,6 +564,7 @@ class GroceryView extends WatchUi.View {
             if (touchY >= curY && touchY <= curY + rHeight) {
                 if (!row.isHeader && row.item != null) {
                     selectedIndex = i;
+                    snapScrollToSelection();
                     return row.item;
                 }
                 return null;
