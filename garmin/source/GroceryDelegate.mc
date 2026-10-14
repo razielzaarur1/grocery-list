@@ -15,7 +15,7 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
 
     // Touch screen tap on an item (or tap to retry when empty)
     function onTap(clickEvent as WatchUi.ClickEvent) as Boolean {
-        if (_view.items.size() == 0) {
+        if (_view.rows.size() == 0) {
             _view.isLoading = true;
             WatchUi.requestUpdate();
             _service.fetchItems();
@@ -98,6 +98,6 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
             Attention.vibrate(vibeProfile);
         }
 
-        WatchUi.requestUpdate();
+        _view.onItemToggled(item);
     }
 }

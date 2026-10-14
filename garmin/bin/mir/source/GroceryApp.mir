@@ -51,8 +51,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_19_68_34_4_s
         %tmp.9 = self;
         symbol [ method %tmp.10 21 38 44 ];
         %tmp.10 = getv function %tmp.9 :method;
-        %tmp.12 = const :onItemsLoaded;
-        symbol [ onItemsLoaded %tmp.12 21 46 59 const ];
+        %tmp.12 = const :onCategoriesLoaded;
+        symbol [ onCategoriesLoaded %tmp.12 21 46 64 const ];
         %tmp.13 = invoke %tmp.9 %tmp.10(%tmp.12);
         %tmp.5 = newc %tmp.8 (%tmp.13);
         symbol [ _service ? 21 8 16 ];
@@ -63,8 +63,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_19_68_34_4_s
         symbol [ cached %cached.1 24 12 18 ];
         symbol [ _service %tmp.15 24 21 29 ];
         %tmp.15 = getv ? :_service;
-        symbol [ loadOfflineItems %tmp.16 24 30 46 ];
-        %tmp.16 = getv function %tmp.15 :loadOfflineItems;
+        symbol [ loadOfflineCategories %tmp.16 24 30 51 ];
+        %tmp.16 = getv function %tmp.15 :loadOfflineCategories;
         %tmp.17 = invoke %tmp.15 %tmp.16();
         lputv %cached.1 %tmp.17;
         symbol [ cached %cached.1 24 12 18 ];
@@ -83,10 +83,10 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_25_31_27_8_s
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryApp.mc" 26 12 ]
         symbol [ _view %tmp.24 26 12 17 ];
         %tmp.24 = getv ? :_view;
-        symbol [ setItems %tmp.25 26 18 26 ];
-        %tmp.25 = getv function %tmp.24 :setItems;
+        symbol [ setCategories %tmp.25 26 18 31 ];
+        %tmp.25 = getv function %tmp.24 :setCategories;
         %tmp.26 = lgetv %cached.1;
-        symbol [ cached %tmp.26 26 27 33 ];
+        symbol [ cached %tmp.26 26 32 38 ];
         %tmp.27 = null;
         invoke %tmp.24 %tmp.25(%tmp.26, %tmp.27);
 C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_25_31_27_8_stop:
@@ -124,9 +124,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_25_8_27_8_if
         ret %tmp.46;
 C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_19_68_34_4_stop:
     }
-    [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryApp.mc"; @line = 36; @symbol_functiondef = [onItemsLoaded,36,13,26]; @symbol_param<0> = [success,36,27,34]; @symbol_param<0>_type<0> = [Boolean,36,38,45]; @symbol_param<1> = [items,36,47,52]; @symbol_param<1>_type<0> = [Array,36,56,61]; @symbol_param<1>_type<1> = [GroceryItem,36,62,73]; @symbol_param<2> = [errorMsg,36,76,84]; @symbol_param<2>_type<0> = [String,36,88,94]; ]
-    function onItemsLoaded(success as Boolean, items as Array<GroceryItem>, errorMsg as String or Null) as Void {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_36_105_40_4_start:
+    [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryApp.mc"; @line = 36; @symbol_functiondef = [onCategoriesLoaded,36,13,31]; @symbol_param<0> = [success,36,32,39]; @symbol_param<0>_type<0> = [Boolean,36,43,50]; @symbol_param<1> = [categories,36,52,62]; @symbol_param<1>_type<0> = [Array,36,66,71]; @symbol_param<1>_type<1> = [GroceryCategoryData,36,72,91]; @symbol_param<2> = [errorMsg,36,94,102]; @symbol_param<2>_type<0> = [String,36,106,112]; ]
+    function onCategoriesLoaded(success as Boolean, categories as Array<GroceryCategoryData>, errorMsg as String or Null) as Void {
+C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_36_123_40_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryApp.mc" 37 8 ]
 C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_37_8_39_8_if_stmt:
         symbol [ _view %tmp.2 37 12 17 ];
@@ -140,17 +140,17 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_37_27_39_8_s
         symbol [ _view %tmp.6 38 12 17 ];
         %tmp.6 = getv ? :_view;
         %tmp.7 = as %tmp.6 { (!Null) };
-        symbol [ setItems %tmp.8 38 18 26 ];
-        %tmp.8 = getv function %tmp.7 :setItems;
-        %tmp.9 = lgetv %items;
-        symbol [ items %tmp.9 38 27 32 ];
+        symbol [ setCategories %tmp.8 38 18 31 ];
+        %tmp.8 = getv function %tmp.7 :setCategories;
+        %tmp.9 = lgetv %categories;
+        symbol [ categories %tmp.9 38 32 42 ];
         %tmp.10 = lgetv %errorMsg;
-        symbol [ errorMsg %tmp.10 38 34 42 ];
+        symbol [ errorMsg %tmp.10 38 44 52 ];
         invoke %tmp.7 %tmp.8(%tmp.9, %tmp.10);
 C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_37_27_39_8_stop:
         goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_37_8_39_8_if_end;
 C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_37_8_39_8_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_36_105_40_4_stop:
+C__Users_razie_Development_Grocery_list_garmin_source_GroceryApp_mc_36_123_40_4_stop:
     }
 }
 [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryApp.mc"; @line = 1; ]

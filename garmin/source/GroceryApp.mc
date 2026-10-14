@@ -18,12 +18,12 @@ class GroceryApp extends Application.AppBase {
 
     function getInitialView() as [Views] or [Views, InputDelegates] {
         _view = new GroceryView();
-        _service = new GroceryService(method(:onItemsLoaded));
+        _service = new GroceryService(method(:onCategoriesLoaded));
 
         // Immediately show cached items from storage for 0ms startup delay
-        var cached = _service.loadOfflineItems();
+        var cached = _service.loadOfflineCategories();
         if (cached.size() > 0) {
-            _view.setItems(cached, null);
+            _view.setCategories(cached, null);
         }
 
         // Fetch fresh list from server
@@ -33,9 +33,9 @@ class GroceryApp extends Application.AppBase {
         return [ _view, delegate ];
     }
 
-    function onItemsLoaded(success as Boolean, items as Array<GroceryItem>, errorMsg as String?) as Void {
+    function onCategoriesLoaded(success as Boolean, categories as Array<GroceryCategoryData>, errorMsg as String?) as Void {
         if (_view != null) {
-            _view.setItems(items, errorMsg);
+            _view.setCategories(categories, errorMsg);
         }
     }
 }

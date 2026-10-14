@@ -33,7 +33,7 @@ class GroceryService {
         return headers;
     }
 
-    // Fetch items list from backend API
+    // Fetch items grouped by category from backend API
     function fetchItems() as Void {
         var url = getBaseUrl() + "/api/items";
         System.println("Fetching from URL: " + url);
@@ -49,28 +49,23 @@ class GroceryService {
     function onReceiveItems(responseCode as Number, data as Dictionary?) as Void {
         System.println("onReceiveItems code: " + responseCode);
         if (responseCode == 200 && data != null) {
-            var itemsList = [] as Array<GroceryItem>;
-            var categories = data.get("categories") as Array<Dictionary>?;
+            var categoriesList = [] as Array<GroceryCategoryData>;
+            var rawCategories = data.get("categories") as Array<Dictionary>?;
 
-            if (categories != null) {
-                for (var c = 0; c < categories.size(); c++) {
-                    var cat = categories[c];
-                    var items = cat.get("items") as Array<Dictionary>?;
-                    if (items != null) {
-                        for (var i = 0; i < items.size(); i++) {
-                            itemsList.add(new GroceryItem(items[i]));
-                        }
+            if (rawCategories != null) {
+                for (var c = 0; c < rawCategories.size(); c++) {
+                    var catData = new GroceryCategoryData(rawCategories[c]);
+                    if (catData.items.size() > 0) {
+                        categoriesList.add(catData);
                     }
                 }
             }
 
-            System.println("Parsed items count: " + itemsList.size());
-            // Save to persistent storage for offline access
-            saveOfflineItems(itemsList);
-            _callback.invoke(true, itemsList, null);
+            System.println("Parsed categories count: " + categoriesList.size());
+            saveOfflineCategories(categoriesList);
+            _callback.invoke(true, categoriesList, null);
         } else {
-            // Offline fallback: load cached items from storage
-            var cached = loadOfflineItems();
+            var cached = loadOfflineCategories();
             _callback.invoke(false, cached, "שגיאת חיבור (" + responseCode + ")");
         }
     }
@@ -92,39 +87,51 @@ class GroceryService {
     }
 
     // Persistent storage caching for offline supermarket use
-    private function saveOfflineItems(items as Array<GroceryItem>) as Void {
+    private function saveOfflineCategories(categories as Array<GroceryCategoryData>) as Void {
         try {
             var serialized = [] as Array<Dictionary>;
-            for (var i = 0; i < items.size(); i++) {
-                var it = items[i];
+            for (var c = 0; c < categories.size(); c++) {
+                var cat = categories[c];
+                var itemsArr = [] as Array<Dictionary>;
+                for (var i = 0; i < cat.items.size(); i++) {
+                    var it = cat.items[i];
+                    itemsArr.add({
+                        "id" => it.id,
+                        "name" => it.name,
+                        "quantity" => it.quantity,
+                        "unit" => it.unit,
+                        "note" => it.note,
+                        "is_checked" => it.isChecked,
+                        "category_id" => it.categoryId,
+                        "global_add_order" => it.globalAddOrder
+                    });
+                }
                 serialized.add({
-                    "id" => it.id,
-                    "name" => it.name,
-                    "quantity" => it.quantity,
-                    "unit" => it.unit,
-                    "note" => it.note,
-                    "is_checked" => it.isChecked,
-                    "category_id" => it.categoryId
+                    "id" => cat.id,
+                    "name" => cat.name,
+                    "total_count" => cat.totalCount,
+                    "remaining_count" => cat.remainingCount,
+                    "items" => itemsArr
                 });
             }
-            Application.Storage.setValue("cached_items", serialized);
+            Application.Storage.setValue("cached_categories", serialized);
         } catch (ex) {
-            System.println("Failed to cache items: " + ex.getErrorMessage());
+            System.println("Failed to cache: " + ex.getErrorMessage());
         }
     }
 
-    function loadOfflineItems() as Array<GroceryItem> {
-        var itemsList = [] as Array<GroceryItem>;
+    function loadOfflineCategories() as Array<GroceryCategoryData> {
+        var result = [] as Array<GroceryCategoryData>;
         try {
-            var cached = Application.Storage.getValue("cached_items") as Array<Dictionary>?;
+            var cached = Application.Storage.getValue("cached_categories") as Array<Dictionary>?;
             if (cached != null) {
-                for (var i = 0; i < cached.size(); i++) {
-                    itemsList.add(new GroceryItem(cached[i]));
+                for (var c = 0; c < cached.size(); c++) {
+                    result.add(new GroceryCategoryData(cached[c]));
                 }
             }
         } catch (ex) {
-            System.println("Failed to load cached items: " + ex.getErrorMessage());
+            System.println("Failed to load cached: " + ex.getErrorMessage());
         }
-        return itemsList;
+        return result;
     }
 }

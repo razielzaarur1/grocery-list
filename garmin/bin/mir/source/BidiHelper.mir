@@ -11,609 +11,97 @@ class BidiHelper {
     static
     <init> {
     }
-    [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc"; @line = 7; @symbol_functiondef = [isHebrewChar,7,20,32]; @symbol_param<0> = [c,7,33,34]; @symbol_param<0>_type<0> = [Char,7,38,42]; @symbol_return<0> = [Boolean,7,47,54]; ]
-    static
-    function isHebrewChar(c as Char) as Boolean {
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_7_55_10_4_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 8 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_7_55_10_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_7_55_10_4_stop" ]
-        %code.1 = local;
-        symbol [ code %code.1 8 12 16 ];
-        %tmp.1 = lgetv %c;
-        symbol [ c %tmp.1 8 19 20 ];
-        symbol [ toNumber %tmp.2 8 21 29 ];
-        %tmp.2 = getv function %tmp.1 :toNumber;
-        %tmp.3 = invoke %tmp.1 %tmp.2();
-        lputv %code.1 %tmp.3;
-        symbol [ code %code.1 8 12 16 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 9 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_9_16_9_42_begin:
-        %tmp.4 = lgetv %code.1;
-        symbol [ code %tmp.4 9 16 20 ];
-        %tmp.5 = 0x0590;
-        %tmp.6 = gte %tmp.4 %tmp.5;
-        %tmp.7 = dup %tmp.6;
-        bf %tmp.7 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_9_34_9_42_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_9_34_9_42_true:
-        %tmp.8 = lgetv %code.1;
-        symbol [ code %tmp.8 9 34 38 ];
-        %tmp.9 = 0x05FF;
-        %tmp.10 = lte %tmp.8 %tmp.9;
-        %tmp.11 = and %tmp.6 %tmp.10;
-        push %tmp.11;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_9_34_9_42_end:
-        %tmp.12 = phi [%tmp.7 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_9_16_9_42_begin] [%tmp.11 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_9_34_9_42_true] [%tmp.12 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_9_34_9_42_end];
-        ret %tmp.12;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_7_55_10_4_stop:
-    }
-    [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc"; @line = 12; @symbol_functiondef = [shapeHebrew,12,20,31]; @symbol_param<0> = [text,12,32,36]; @symbol_param<0>_type<0> = [String,12,40,46]; @symbol_return<0> = [String,12,52,58]; ]
+    [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc"; @line = 7; @symbol_functiondef = [shapeHebrew,7,20,31]; @symbol_param<0> = [text,7,32,36]; @symbol_param<0>_type<0> = [String,7,40,46]; @symbol_return<0> = [String,7,52,58]; ]
     static
     function shapeHebrew(text as String or Null) as String {
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_59_90_4_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 13 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_8_15_8_if_stmt:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_12_13_45_begin:
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_7_59_18_4_start:
+[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 8 8 ]
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_8_10_8_if_stmt:
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_12_8_45_begin:
         %tmp.1 = lgetv %text;
-        symbol [ text %tmp.1 13 12 16 ];
+        symbol [ text %tmp.1 8 12 16 ];
         %tmp.2 = null;
         %tmp.3 = eq %tmp.1 %tmp.2;
-        bt %tmp.3 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_8_15_8_if_true;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_28_13_45_false:
+        bt %tmp.3 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_8_10_8_if_true;
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_28_8_45_false:
         %tmp.4 = lgetv %text;
-        symbol [ text %tmp.4 13 28 32 ];
+        symbol [ text %tmp.4 8 28 32 ];
         %tmp.5 = as %tmp.4 { (!Null) };
-        symbol [ length %tmp.6 13 33 39 ];
+        symbol [ length %tmp.6 8 33 39 ];
         %tmp.6 = getv function %tmp.5 :length;
         %tmp.7 = invoke %tmp.5 %tmp.6();
         %tmp.8 = 0;
         %tmp.9 = eq %tmp.7 %tmp.8;
         push %tmp.9;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_28_13_45_end:
-        %tmp.10 = phi [%tmp.3 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_12_13_45_begin] [%tmp.9 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_28_13_45_false] [%tmp.10 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_28_13_45_end];
-        bf %tmp.10 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_8_15_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_8_15_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_48_15_8_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 14 12 ]
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_28_8_45_end:
+        %tmp.10 = phi [%tmp.3 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_12_8_45_begin] [%tmp.9 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_28_8_45_false] [%tmp.10 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_28_8_45_end];
+        bf %tmp.10 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_8_10_8_if_end;
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_8_10_8_if_true:
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_48_10_8_start:
+[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 9 12 ]
         %tmp.11 = "";
         ret %tmp.11;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_48_15_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_8_15_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_13_8_15_8_if_end:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 17 8 ]
-        try @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_beginTry @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_endTry @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_catch @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_finally;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_beginTry:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 18 12 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_stop" ]
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_48_10_8_stop:
+        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_8_10_8_if_end;
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_8_8_10_8_if_end:
+[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 12 8 ]
+        try @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_beginTry @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_endTry @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_catch @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_finally;
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_beginTry:
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_12_15_8_start:
+[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 13 12 ]
+        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_12_15_8_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_12_15_8_stop" ]
         %chars.1 = local;
-        symbol [ chars %chars.1 18 16 21 ];
+        symbol [ chars %chars.1 13 16 21 ];
         %tmp.12 = lgetv %text;
-        symbol [ text %tmp.12 18 24 28 ];
-        symbol [ toCharArray %tmp.13 18 29 40 ];
+        symbol [ text %tmp.12 13 24 28 ];
+        symbol [ toCharArray %tmp.13 13 29 40 ];
         %tmp.13 = getv function %tmp.12 :toCharArray;
         %tmp.14 = invoke %tmp.12 %tmp.13();
         lputv %chars.1 %tmp.14;
-        symbol [ chars %chars.1 18 16 21 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 19 12 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_stop" ]
-        %len.2 = local;
-        symbol [ len %len.2 19 16 19 ];
-        %tmp.15 = lgetv %chars.1;
-        symbol [ chars %tmp.15 19 22 27 ];
-        symbol [ size %tmp.16 19 28 32 ];
-        %tmp.16 = getv function %tmp.15 :size;
-        %tmp.17 = invoke %tmp.15 %tmp.16();
-        lputv %len.2 %tmp.17;
-        symbol [ len %len.2 19 16 19 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 20 12 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_stop" ]
-        %hasHebrew.3 = local;
-        symbol [ hasHebrew %hasHebrew.3 20 16 25 ];
-        %tmp.18 = false;
-        lputv %hasHebrew.3 %tmp.18;
-        symbol [ hasHebrew %hasHebrew.3 20 16 25 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 22 12 ]
-        for @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_test @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_incr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_init:
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_begin" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_end" ]
-        %i.4 = local;
-        symbol [ i %i.4 22 21 22 ];
-        %tmp.19 = 0;
-        lputv %i.4 %tmp.19;
-        symbol [ i %i.4 22 21 22 ];
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_test:
-        %tmp.20 = lgetv %i.4;
-        symbol [ i %tmp.20 22 28 29 ];
-        %tmp.21 = lgetv %len.2;
-        symbol [ len %tmp.21 22 32 35 ];
-        %tmp.22 = lt %tmp.20 %tmp.21;
-        bf %tmp.22 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_begin:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_42_27_12_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 23 16 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_23_16_26_16_if_stmt:
-        %tmp.23 = self;
-        symbol [ isHebrewChar %tmp.24 23 20 32 ];
-        %tmp.24 = getv function %tmp.23 :isHebrewChar;
-        %tmp.25 = lgetv %chars.1;
-        symbol [ chars %tmp.25 23 33 38 ];
-        %tmp.26 = lgetv %i.4;
-        symbol [ i %tmp.26 23 39 40 ];
-        %tmp.27 = agetv %tmp.25 %tmp.26;
-        %tmp.28 = invoke %tmp.23 %tmp.24(%tmp.27);
-        bf %tmp.28 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_23_16_26_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_23_16_26_16_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_23_44_26_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 24 20 ]
-        %tmp.29 = true;
-        lputv %hasHebrew.3 %tmp.29;
-        symbol [ hasHebrew %hasHebrew.3 24 20 29 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 25 20 ]
-        goto break @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_23_44_26_16_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_23_16_26_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_23_16_26_16_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_42_27_12_stop:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_incr:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 22 ]
-        %tmp.32 = lgetv %i.4;
-        symbol [ i %tmp.32 22 37 38 ];
-        %tmp.33 = add %tmp.32 1;
-        lputv %i.4 %tmp.33;
-        symbol [ i %i.4 22 37 38 ];
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_test;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_22_12_27_12_for_end:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 30 12 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_30_12_32_12_if_stmt:
-        %tmp.34 = lgetv %hasHebrew.3;
-        symbol [ hasHebrew %tmp.34 30 17 26 ];
-        %tmp.35 = not %tmp.34;
-        bf %tmp.35 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_30_12_32_12_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_30_12_32_12_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_30_28_32_12_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 31 16 ]
-        symbol [ StringUtil %tmp.36 31 23 33 ];
-        %tmp.36 = getm $.Toybox.StringUtil;
-        symbol [ charArrayToString %tmp.37 31 34 51 ];
-        %tmp.37 = getv function %tmp.36 :charArrayToString;
-        %tmp.38 = lgetv %chars.1;
-        symbol [ chars %tmp.38 31 52 57 ];
-        %tmp.39 = invoke %tmp.36 %tmp.37(%tmp.38);
-        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_finally;
-        ret %tmp.39;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_30_28_32_12_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_30_12_32_12_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_30_12_32_12_if_end:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 35 12 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_stop" ]
-        %reversed.5 = local;
-        symbol [ reversed %reversed.5 35 16 24 ];
-        %tmp.41 = lgetv %len.2;
-        symbol [ len %tmp.41 35 32 35 ];
-        %tmp.40 = newa %tmp.41;
-        lputv %reversed.5 %tmp.40;
-        symbol [ reversed %reversed.5 35 16 24 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 36 12 ]
-        for @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_test @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_incr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_init:
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_begin" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_end" ]
-        %i.6 = local;
-        symbol [ i %i.6 36 21 22 ];
-        %tmp.42 = 0;
-        lputv %i.6 %tmp.42;
-        symbol [ i %i.6 36 21 22 ];
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_test:
-        %tmp.43 = lgetv %i.6;
-        symbol [ i %tmp.43 36 28 29 ];
-        %tmp.44 = lgetv %len.2;
-        symbol [ len %tmp.44 36 32 35 ];
-        %tmp.45 = lt %tmp.43 %tmp.44;
-        bf %tmp.45 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_begin:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_42_53_12_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 37 16 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_42_53_12_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_42_53_12_stop" ]
-        %ch.7 = local;
-        symbol [ ch %ch.7 37 20 22 ];
-        %tmp.46 = lgetv %chars.1;
-        symbol [ chars %tmp.46 37 25 30 ];
-        %tmp.47 = lgetv %len.2;
-        symbol [ len %tmp.47 37 31 34 ];
-        %tmp.48 = 1;
-        %tmp.49 = sub %tmp.47 %tmp.48;
-        %tmp.50 = lgetv %i.6;
-        symbol [ i %tmp.50 37 41 42 ];
-        %tmp.51 = sub %tmp.49 %tmp.50;
-        %tmp.52 = agetv %tmp.46 %tmp.51;
-        lputv %ch.7 %tmp.52;
-        symbol [ ch %ch.7 37 20 22 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 38 16 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_38_16_52_16_if_stmt:
-        %tmp.53 = lgetv %ch.7;
-        symbol [ ch %tmp.53 38 20 22 ];
-        %tmp.54 = '(';
-        %tmp.55 = eq %tmp.53 %tmp.54;
-        bf %tmp.55 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_38_16_52_16_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_38_16_52_16_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_38_31_40_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 39 20 ]
-        %tmp.56 = lgetv %reversed.5;
-        symbol [ reversed %tmp.56 39 20 28 ];
-        %tmp.57 = ')';
-        %tmp.58 = lgetv %i.6;
-        symbol [ i %tmp.58 39 29 30 ];
-        aputv %tmp.56 %tmp.58 %tmp.57;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_38_31_40_16_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_38_16_52_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_38_16_52_16_if_false:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 40 23 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_40_23_52_16_if_stmt:
-        %tmp.59 = lgetv %ch.7;
-        symbol [ ch %tmp.59 40 27 29 ];
-        %tmp.60 = ')';
-        %tmp.61 = eq %tmp.59 %tmp.60;
-        bf %tmp.61 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_40_23_52_16_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_40_23_52_16_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_40_38_42_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 41 20 ]
-        %tmp.62 = lgetv %reversed.5;
-        symbol [ reversed %tmp.62 41 20 28 ];
-        %tmp.63 = '(';
-        %tmp.64 = lgetv %i.6;
-        symbol [ i %tmp.64 41 29 30 ];
-        aputv %tmp.62 %tmp.64 %tmp.63;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_40_38_42_16_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_40_23_52_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_40_23_52_16_if_false:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 42 23 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_42_23_52_16_if_stmt:
-        %tmp.65 = lgetv %ch.7;
-        symbol [ ch %tmp.65 42 27 29 ];
-        %tmp.66 = '[';
-        %tmp.67 = eq %tmp.65 %tmp.66;
-        bf %tmp.67 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_42_23_52_16_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_42_23_52_16_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_42_38_44_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 43 20 ]
-        %tmp.68 = lgetv %reversed.5;
-        symbol [ reversed %tmp.68 43 20 28 ];
-        %tmp.69 = ']';
-        %tmp.70 = lgetv %i.6;
-        symbol [ i %tmp.70 43 29 30 ];
-        aputv %tmp.68 %tmp.70 %tmp.69;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_42_38_44_16_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_42_23_52_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_42_23_52_16_if_false:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 44 23 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_44_23_52_16_if_stmt:
-        %tmp.71 = lgetv %ch.7;
-        symbol [ ch %tmp.71 44 27 29 ];
-        %tmp.72 = ']';
-        %tmp.73 = eq %tmp.71 %tmp.72;
-        bf %tmp.73 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_44_23_52_16_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_44_23_52_16_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_44_38_46_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 45 20 ]
-        %tmp.74 = lgetv %reversed.5;
-        symbol [ reversed %tmp.74 45 20 28 ];
-        %tmp.75 = '[';
-        %tmp.76 = lgetv %i.6;
-        symbol [ i %tmp.76 45 29 30 ];
-        aputv %tmp.74 %tmp.76 %tmp.75;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_44_38_46_16_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_44_23_52_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_44_23_52_16_if_false:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 46 23 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_46_23_52_16_if_stmt:
-        %tmp.77 = lgetv %ch.7;
-        symbol [ ch %tmp.77 46 27 29 ];
-        %tmp.78 = '{';
-        %tmp.79 = eq %tmp.77 %tmp.78;
-        bf %tmp.79 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_46_23_52_16_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_46_23_52_16_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_46_38_48_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 47 20 ]
-        %tmp.80 = lgetv %reversed.5;
-        symbol [ reversed %tmp.80 47 20 28 ];
-        %tmp.81 = '}';
-        %tmp.82 = lgetv %i.6;
-        symbol [ i %tmp.82 47 29 30 ];
-        aputv %tmp.80 %tmp.82 %tmp.81;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_46_38_48_16_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_46_23_52_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_46_23_52_16_if_false:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 48 23 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_48_23_52_16_if_stmt:
-        %tmp.83 = lgetv %ch.7;
-        symbol [ ch %tmp.83 48 27 29 ];
-        %tmp.84 = '}';
-        %tmp.85 = eq %tmp.83 %tmp.84;
-        bf %tmp.85 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_48_23_52_16_if_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_48_23_52_16_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_48_38_50_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 49 20 ]
-        %tmp.86 = lgetv %reversed.5;
-        symbol [ reversed %tmp.86 49 20 28 ];
-        %tmp.87 = '{';
-        %tmp.88 = lgetv %i.6;
-        symbol [ i %tmp.88 49 29 30 ];
-        aputv %tmp.86 %tmp.88 %tmp.87;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_48_38_50_16_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_48_23_52_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_48_23_52_16_if_else_false:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_50_23_52_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 51 20 ]
-        %tmp.89 = lgetv %reversed.5;
-        symbol [ reversed %tmp.89 51 20 28 ];
-        %tmp.90 = lgetv %ch.7;
-        symbol [ ch %tmp.90 51 34 36 ];
-        %tmp.91 = lgetv %i.6;
-        symbol [ i %tmp.91 51 29 30 ];
-        aputv %tmp.89 %tmp.91 %tmp.90;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_50_23_52_16_stop:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_48_23_52_16_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_46_23_52_16_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_44_23_52_16_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_42_23_52_16_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_40_23_52_16_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_38_16_52_16_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_42_53_12_stop:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_incr:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 36 ]
-        %tmp.94 = lgetv %i.6;
-        symbol [ i %tmp.94 36 37 38 ];
-        %tmp.95 = add %tmp.94 1;
-        lputv %i.6 %tmp.95;
-        symbol [ i %i.6 36 37 38 ];
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_test;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_36_12_53_12_for_end:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 56 12 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_stop" ]
-        %numStart.8 = local;
-        symbol [ numStart %numStart.8 56 16 24 ];
-        %tmp.96 = -1;
-        lputv %numStart.8 %tmp.96;
-        symbol [ numStart %numStart.8 56 16 24 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 57 12 ]
-        for @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_test @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_incr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_init:
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_begin" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_end" ]
-        %i.9 = local;
-        symbol [ i %i.9 57 21 22 ];
-        %tmp.97 = 0;
-        lputv %i.9 %tmp.97;
-        symbol [ i %i.9 57 21 22 ];
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_test:
-        %tmp.98 = lgetv %i.9;
-        symbol [ i %tmp.98 57 28 29 ];
-        %tmp.99 = lgetv %len.2;
-        symbol [ len %tmp.99 57 33 36 ];
-        %tmp.100 = lte %tmp.98 %tmp.99;
-        bf %tmp.100 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_begin:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_43_84_12_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 58 16 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_43_84_12_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_43_84_12_stop" ]
-        %isDigit.10 = local;
-        symbol [ isDigit %isDigit.10 58 20 27 ];
-        %tmp.101 = false;
-        lputv %isDigit.10 %tmp.101;
-        symbol [ isDigit %isDigit.10 58 20 27 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 59 16 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_59_16_64_16_if_stmt:
-        %tmp.102 = lgetv %i.9;
-        symbol [ i %tmp.102 59 20 21 ];
-        %tmp.103 = lgetv %len.2;
-        symbol [ len %tmp.103 59 24 27 ];
-        %tmp.104 = lt %tmp.102 %tmp.103;
-        bf %tmp.104 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_59_16_64_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_59_16_64_16_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_59_29_64_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 60 20 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_59_29_64_16_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_59_29_64_16_stop" ]
-        %ch.11 = local;
-        symbol [ ch %ch.11 60 24 26 ];
-        %tmp.105 = lgetv %reversed.5;
-        symbol [ reversed %tmp.105 60 29 37 ];
-        %tmp.106 = lgetv %i.9;
-        symbol [ i %tmp.106 60 38 39 ];
-        %tmp.107 = agetv %tmp.105 %tmp.106;
-        lputv %ch.11 %tmp.107;
-        symbol [ ch %ch.11 60 24 26 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 61 20 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_20_63_20_if_stmt:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_24_61_43_begin:
-        %tmp.108 = lgetv %ch.11;
-        symbol [ ch %tmp.108 61 24 26 ];
-        %tmp.109 = '0';
-        %tmp.110 = gte %tmp.108 %tmp.109;
-        bf %tmp.110 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_20_63_20_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_37_61_43_true:
-        %tmp.111 = lgetv %ch.11;
-        symbol [ ch %tmp.111 61 37 39 ];
-        %tmp.112 = '9';
-        %tmp.113 = lte %tmp.111 %tmp.112;
-        push %tmp.113;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_37_61_43_end:
-        %tmp.114 = phi [%tmp.110 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_24_61_43_begin] [%tmp.113 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_37_61_43_true] [%tmp.114 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_37_61_43_end];
-        bf %tmp.114 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_20_63_20_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_20_63_20_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_48_63_20_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 62 24 ]
-        %tmp.115 = true;
-        lputv %isDigit.10 %tmp.115;
-        symbol [ isDigit %isDigit.10 62 24 31 ];
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_48_63_20_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_20_63_20_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_61_20_63_20_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_59_29_64_16_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_59_16_64_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_59_16_64_16_if_end:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 66 16 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_66_16_83_16_if_stmt:
-        %tmp.116 = lgetv %isDigit.10;
-        symbol [ isDigit %tmp.116 66 20 27 ];
-        bf %tmp.116 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_66_16_83_16_if_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_66_16_83_16_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_66_29_70_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 67 20 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_67_20_69_20_if_stmt:
-        %tmp.117 = lgetv %numStart.8;
-        symbol [ numStart %tmp.117 67 24 32 ];
-        %tmp.118 = -1;
-        %tmp.119 = eq %tmp.117 %tmp.118;
-        bf %tmp.119 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_67_20_69_20_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_67_20_69_20_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_67_40_69_20_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 68 24 ]
-        %tmp.120 = lgetv %i.9;
-        symbol [ i %tmp.120 68 35 36 ];
-        lputv %numStart.8 %tmp.120;
-        symbol [ numStart %numStart.8 68 24 32 ];
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_67_40_69_20_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_67_20_69_20_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_67_20_69_20_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_66_29_70_16_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_66_16_83_16_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_66_16_83_16_if_else_false:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_70_23_83_16_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 71 20 ]
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_71_20_82_20_if_stmt:
-        %tmp.121 = lgetv %numStart.8;
-        symbol [ numStart %tmp.121 71 24 32 ];
-        %tmp.122 = -1;
-        %tmp.123 = ne %tmp.121 %tmp.122;
-        bf %tmp.123 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_71_20_82_20_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_71_20_82_20_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_71_40_82_20_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 72 24 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_71_40_82_20_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_71_40_82_20_stop" ]
-        %numEnd.12 = local;
-        symbol [ numEnd %numEnd.12 72 28 34 ];
-        %tmp.124 = lgetv %i.9;
-        symbol [ i %tmp.124 72 37 38 ];
-        %tmp.125 = 1;
-        %tmp.126 = sub %tmp.124 %tmp.125;
-        lputv %numEnd.12 %tmp.126;
-        symbol [ numEnd %numEnd.12 72 28 34 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 74 24 ]
-        while @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_24_80_24_while_test @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_24_80_24_while_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_24_80_24_while_test:
-        %tmp.127 = lgetv %numStart.8;
-        symbol [ numStart %tmp.127 74 31 39 ];
-        %tmp.128 = lgetv %numEnd.12;
-        symbol [ numEnd %tmp.128 74 42 48 ];
-        %tmp.129 = lt %tmp.127 %tmp.128;
-        bf %tmp.129 @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_24_80_24_while_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_24_80_24_while_begin:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_50_80_24_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 75 28 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_50_80_24_start" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_50_80_24_stop" ]
-        %tmp.13 = local;
-        symbol [ tmp %tmp.13 75 32 35 ];
-        %tmp.130 = lgetv %reversed.5;
-        symbol [ reversed %tmp.130 75 38 46 ];
-        %tmp.131 = lgetv %numStart.8;
-        symbol [ numStart %tmp.131 75 47 55 ];
-        %tmp.132 = agetv %tmp.130 %tmp.131;
-        lputv %tmp.13 %tmp.132;
-        symbol [ tmp %tmp.13 75 32 35 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 76 28 ]
-        %tmp.133 = lgetv %reversed.5;
-        symbol [ reversed %tmp.133 76 28 36 ];
-        %tmp.134 = lgetv %reversed.5;
-        symbol [ reversed %tmp.134 76 49 57 ];
-        %tmp.135 = lgetv %numEnd.12;
-        symbol [ numEnd %tmp.135 76 58 64 ];
-        %tmp.136 = agetv %tmp.134 %tmp.135;
-        %tmp.137 = lgetv %numStart.8;
-        symbol [ numStart %tmp.137 76 37 45 ];
-        aputv %tmp.133 %tmp.137 %tmp.136;
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 77 28 ]
-        %tmp.138 = lgetv %reversed.5;
-        symbol [ reversed %tmp.138 77 28 36 ];
-        %tmp.139 = lgetv %tmp.13;
-        symbol [ tmp %tmp.139 77 47 50 ];
-        %tmp.140 = lgetv %numEnd.12;
-        symbol [ numEnd %tmp.140 77 37 43 ];
-        aputv %tmp.138 %tmp.140 %tmp.139;
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 78 28 ]
-        %tmp.143 = lgetv %numStart.8;
-        symbol [ numStart %tmp.143 78 28 36 ];
-        %tmp.144 = add %tmp.143 1;
-        lputv %numStart.8 %tmp.144;
-        symbol [ numStart %numStart.8 78 28 36 ];
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 79 28 ]
-        %tmp.147 = lgetv %numEnd.12;
-        symbol [ numEnd %tmp.147 79 28 34 ];
-        %tmp.148 = sub %tmp.147 1;
-        lputv %numEnd.12 %tmp.148;
-        symbol [ numEnd %numEnd.12 79 28 34 ];
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_50_80_24_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_24_80_24_while_test;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_74_24_80_24_while_end:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 81 24 ]
-        %tmp.149 = -1;
-        lputv %numStart.8 %tmp.149;
-        symbol [ numStart %numStart.8 81 24 32 ];
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_71_40_82_20_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_71_20_82_20_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_71_20_82_20_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_70_23_83_16_stop:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_66_16_83_16_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_43_84_12_stop:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_incr:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 57 ]
-        %tmp.152 = lgetv %i.9;
-        symbol [ i %tmp.152 57 38 39 ];
-        %tmp.153 = add %tmp.152 1;
-        lputv %i.9 %tmp.153;
-        symbol [ i %i.9 57 38 39 ];
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_test;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_57_12_84_12_for_end:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 86 12 ]
-        symbol [ StringUtil %tmp.154 86 19 29 ];
-        %tmp.154 = getm $.Toybox.StringUtil;
-        symbol [ charArrayToString %tmp.155 86 30 47 ];
-        %tmp.155 = getv function %tmp.154 :charArrayToString;
-        %tmp.156 = lgetv %reversed.5;
-        symbol [ reversed %tmp.156 86 48 56 ];
-        %tmp.157 = invoke %tmp.154 %tmp.155(%tmp.156);
-        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_finally;
-        ret %tmp.157;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_12_87_8_stop:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_endTry:
-        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_finally;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_catch:
-        %tmp.158 = exception;
-        push %tmp.158;
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 87 10 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_catch" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_87_10_89_8_end" ]
-        %ex.14 = local;
-        symbol [ ex %ex.14 87 17 19 ];
-        %tmp.159 = dup %tmp.158;
-        lputv %ex.14 %tmp.159;
-        symbol [ ex %ex.14 87 17 19 ];
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_87_21_89_8_start:
-[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 88 12 ]
+        symbol [ chars %chars.1 13 16 21 ];
+[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 14 12 ]
+        symbol [ StringUtil %tmp.15 14 19 29 ];
+        %tmp.15 = getm $.Toybox.StringUtil;
+        symbol [ charArrayToString %tmp.16 14 30 47 ];
+        %tmp.16 = getv function %tmp.15 :charArrayToString;
+        %tmp.17 = lgetv %chars.1;
+        symbol [ chars %tmp.17 14 48 53 ];
+        %tmp.18 = invoke %tmp.15 %tmp.16(%tmp.17);
+        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_finally;
+        ret %tmp.18;
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_12_15_8_stop:
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_endTry:
+        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_finally;
+        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_end;
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_catch:
+        %tmp.19 = exception;
+        push %tmp.19;
+[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 15 10 ]
+        [ "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_catch" "C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_15_10_17_8_end" ]
+        %ex.2 = local;
+        symbol [ ex %ex.2 15 17 19 ];
+        %tmp.20 = dup %tmp.19;
+        lputv %ex.2 %tmp.20;
+        symbol [ ex %ex.2 15 17 19 ];
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_15_21_17_8_start:
+[ "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc" 16 12 ]
         pop;
-        %tmp.160 = lgetv %text;
-        symbol [ text %tmp.160 88 19 23 ];
-        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_finally;
-        ret %tmp.160;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_87_21_89_8_stop:
-        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_finally;
+        %tmp.21 = lgetv %text;
+        symbol [ text %tmp.21 16 19 23 ];
+        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_finally;
+        ret %tmp.21;
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_15_21_17_8_stop:
+        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_finally;
         pop;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_end;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_87_10_89_8_end:
-        try @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_catch @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_87_10_89_8_end @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_87_10_89_8_end @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_finally;
-        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_finally;
-        throw %tmp.158;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_finally:
+        goto @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_end;
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_15_10_17_8_end:
+        try @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_catch @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_15_10_17_8_end @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_15_10_17_8_end @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_finally;
+        jsr @C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_finally;
+        throw %tmp.19;
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_finally:
         jsrret;
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_17_8_89_8_end:
-C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_59_90_4_stop:
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_12_8_17_8_end:
+C__Users_razie_Development_Grocery_list_garmin_source_BidiHelper_mc_7_59_18_4_stop:
     }
 }
 [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\BidiHelper.mc"; @line = 1; ]

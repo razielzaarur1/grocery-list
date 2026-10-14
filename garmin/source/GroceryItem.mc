@@ -8,6 +8,8 @@ class GroceryItem {
     var note as String = "";
     var isChecked as Boolean = false;
     var categoryId as Number = 0;
+    var categoryName as String = "";
+    var globalAddOrder as Number = 0;
 
     // Pre-calculated shaped text for fast drawing
     var shapedName as String = "";
@@ -27,6 +29,14 @@ class GroceryItem {
         var rawCatId = dict.get("category_id");
         if (rawCatId != null) {
             categoryId = (rawCatId has :toNumber) ? rawCatId.toNumber() : 0;
+        }
+        var rawOrder = dict.get("global_add_order");
+        if (rawOrder != null) {
+            globalAddOrder = (rawOrder has :toNumber) ? rawOrder.toNumber() : 0;
+        }
+        var rawCatName = dict.get("category_name");
+        if (rawCatName != null) {
+            categoryName = rawCatName.toString();
         }
 
         updateShapedText();

@@ -1,11 +1,16 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-def generate_bmfont(output_prefix, font_size, line_height):
-    font_path = "C:\\Windows\\Fonts\\arialbd.ttf" if "regular" in output_prefix else "C:\\Windows\\Fonts\\arial.ttf"
-    if not os.path.exists(font_path):
+def generate_bmfont(output_prefix, font_size, line_height, is_bold=False):
+    if is_bold and os.path.exists("C:\\Windows\\Fonts\\segoeuib.ttf"):
+        font_path = "C:\\Windows\\Fonts\\segoeuib.ttf"
+    elif os.path.exists("C:\\Windows\\Fonts\\segoeui.ttf"):
+        font_path = "C:\\Windows\\Fonts\\segoeui.ttf"
+    elif is_bold and os.path.exists("C:\\Windows\\Fonts\\arialbd.ttf"):
+        font_path = "C:\\Windows\\Fonts\\arialbd.ttf"
+    else:
         font_path = "C:\\Windows\\Fonts\\arial.ttf"
-        
+
     font = ImageFont.truetype(font_path, font_size)
 
     # Characters to include:
@@ -14,8 +19,8 @@ def generate_bmfont(output_prefix, font_size, line_height):
     # 2. Hebrew block 0x05D0 to 0x05EA
     for i in range(0x05D0, 0x05EB):
         chars.append(chr(i))
-    # 3. Common symbols: bullet, geresh, gershayim
-    extra = ['•', '״', '׳', '₪', '°']
+    # 3. Common symbols: bullet, geresh, gershayim, shekel, degree, slash
+    extra = ['•', '״', '׳', '₪', '°', '/', '-', '(', ')', '[', ']', '+', ':']
     for c in extra:
         if c not in chars:
             chars.append(c)
@@ -28,14 +33,12 @@ def generate_bmfont(output_prefix, font_size, line_height):
     max_row_h = 0
     char_records = []
 
-    # Get ascent/descent
     ascent, descent = font.getmetrics()
     base = ascent
 
     for ch in chars:
         cid = ord(ch)
         bbox = font.getbbox(ch)
-        # bbox is (left, top, right, bottom)
         if ch == ' ':
             w = font.getlength(ch)
             char_records.append((cid, 0, 0, 0, 0, 0, 0, int(w)))
@@ -55,38 +58,38 @@ def generate_bmfont(output_prefix, font_size, line_height):
             print(f"Warning: font texture overflow for {ch}")
             break
 
-        # Draw glyph: offset by -left, -top
         draw.text((cur_x - left, cur_y - top), ch, font=font, fill=(255, 255, 255, 255))
 
         xoffset = left
-        yoffset = top + base # distance from top of line to top of glyph
-        # In BMFont: yoffset is from line top (0) to top of glyph
+        yoffset = top + base
+
         char_records.append((cid, cur_x, cur_y, glyph_w, glyph_h, xoffset, top, adv))
 
         cur_x += glyph_w + 4
         if glyph_h > max_row_h:
             max_row_h = glyph_h
 
-    # Save PNG
     png_filename = f"{output_prefix}_0.png"
     img.save(png_filename)
 
-    # Save FNT
     fnt_filename = f"{output_prefix}.fnt"
     base_png = os.path.basename(png_filename)
+    face_name = "Segoe UI" if "segoe" in font_path.lower() else "Arial"
     with open(fnt_filename, "w", encoding="utf-8") as f:
-        f.write(f'info face="Arial" size={font_size} bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1\n')
-        f.write(f'common lineHeight={line_height} base={base} scaleW={tex_w} scaleH={tex_h} pages=1 packed=0\n')
+        f.write(f'info face="{face_name}" size={font_size} bold={1 if is_bold else 0} italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1\n')
+        f.write(f'common lineHeight={line_height} base={base} scaleW={tex_w} scaleH={tex_h} pages=1 packed=0 alphaChnl=0 redChnl=0 greenChnl=0 blueChnl=0\n')
         f.write(f'page id=0 file="{base_png}"\n')
         f.write(f'chars count={len(char_records)}\n')
         for rec in char_records:
             cid, x, y, gw, gh, xo, yo, adv = rec
             f.write(f'char id={cid:<5} x={x:<5} y={y:<5} width={gw:<5} height={gh:<5} xoffset={xo:<5} yoffset={yo:<5} xadvance={adv:<5} page=0 chnl=15\n')
 
-    print(f"Generated {fnt_filename} and {png_filename} with {len(char_records)} characters.")
+    print(f"Generated {fnt_filename} and {png_filename} with {len(char_records)} characters ({face_name} {font_size}px).")
 
 if __name__ == "__main__":
     out_dir = "c:\\Users\\razie\\Development\\Grocery list\\garmin\\resources\\fonts"
     os.makedirs(out_dir, exist_ok=True)
-    generate_bmfont(os.path.join(out_dir, "hebrew_font"), 26, 32)
-    generate_bmfont(os.path.join(out_dir, "hebrew_small"), 18, 22)
+    # Main font: 22px (crisp, modern, highly legible)
+    generate_bmfont(os.path.join(out_dir, "hebrew_font"), 22, 28, is_bold=False)
+    # Small font: 16px (for notes, quantities, counts)
+    generate_bmfont(os.path.join(out_dir, "hebrew_small"), 16, 20, is_bold=False)
