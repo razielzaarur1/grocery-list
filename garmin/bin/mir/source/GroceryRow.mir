@@ -21,7 +21,7 @@ class GroceryRow {
     var item as GroceryItem or Null = null;
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryRow.mc"; @line = 10; @symbol_functiondef = [initializeAsHeader,10,13,31]; @symbol_param<0> = [catId,10,32,37]; @symbol_param<0>_type<0> = [Number,10,41,47]; @symbol_param<1> = [title,10,49,54]; @symbol_param<1>_type<0> = [String,10,58,64]; @symbol_param<2> = [countStr,10,66,74]; @symbol_param<2>_type<0> = [String,10,78,84]; ]
     function initializeAsHeader(catId as Number, title as String, countStr as String) {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_10_86_16_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_10_86_16_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryRow.mc" 11 8 ]
         %tmp.1 = true;
         symbol [ isHeader ? 11 8 16 ];
@@ -50,11 +50,11 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_10_86_16_4_s
         %tmp.9 = null;
         symbol [ item ? 15 8 12 ];
         putv self :item %tmp.9;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_10_86_16_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_10_86_16_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryRow.mc"; @line = 18; @symbol_functiondef = [initializeAsItem,18,13,29]; @symbol_param<0> = [groceryItem,18,30,41]; @symbol_param<0>_type<0> = [GroceryItem,18,45,56]; ]
     function initializeAsItem(groceryItem as GroceryItem) {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_18_58_24_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_18_58_24_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryRow.mc" 19 8 ]
         %tmp.1 = false;
         symbol [ isHeader ? 19 8 16 ];
@@ -79,7 +79,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_18_58_24_4_s
         %tmp.6 = "";
         symbol [ headerCount ? 23 8 19 ];
         putv self :headerCount %tmp.6;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_18_58_24_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryRow_mc_18_58_24_4_stop:
     }
 }
 [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryRow.mc"; @line = 1; ]

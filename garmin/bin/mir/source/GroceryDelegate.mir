@@ -21,7 +21,7 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
     var _service as GroceryService;
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc"; @line = 9; @symbol_functiondef = [initialize,9,13,23]; @symbol_param<0> = [view,9,24,28]; @symbol_param<0>_type<0> = [GroceryView,9,32,43]; @symbol_param<1> = [service,9,45,52]; @symbol_param<1>_type<0> = [GroceryService,9,56,70]; ]
     function initialize(view as GroceryView, service as GroceryService) as Void {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_9_72_13_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_9_72_13_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 10 8 ]
         symbol [ BehaviorDelegate %tmp.2 10 8 24 ];
         %tmp.2 = getv ? :BehaviorDelegate;
@@ -38,13 +38,13 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_9_72_13
         symbol [ service %tmp.5 12 19 26 ];
         symbol [ _service ? 12 8 16 ];
         putv self :_service %tmp.5;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_9_72_13_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_9_72_13_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc"; @line = 16; @symbol_functiondef = [onTap,16,13,18]; @symbol_param<0> = [clickEvent,16,19,29]; @symbol_param<0>_type<0> = [WatchUi,16,33,40]; @symbol_param<0>_type<1> = [ClickEvent,16,41,51]; @symbol_return<0> = [Boolean,16,56,63]; ]
     function onTap(clickEvent as WatchUi.ClickEvent) as Boolean {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 17 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_stmt:
         symbol [ _view %tmp.2 17 12 17 ];
         %tmp.2 = getv ? :_view;
         symbol [ rows %tmp.3 17 18 22 ];
@@ -54,9 +54,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22
         %tmp.5 = invoke %tmp.3 %tmp.4();
         %tmp.6 = 0;
         %tmp.7 = eq %tmp.5 %tmp.6;
-        bf %tmp.7 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_36_22_8_start:
+        bf %tmp.7 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_36_22_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 18 12 ]
         symbol [ _view %tmp.8 18 12 17 ];
         %tmp.8 = getv self :_view;
@@ -78,11 +78,11 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_36_2
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 21 12 ]
         %tmp.15 = true;
         ret %tmp.15;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_36_22_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_36_22_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 24 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_stop" ]
         %coords.1 = local;
         symbol [ coords %coords.1 24 12 18 ];
         %tmp.16 = lgetv %clickEvent;
@@ -93,7 +93,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22
         lputv %coords.1 %tmp.18;
         symbol [ coords %coords.1 24 12 18 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 25 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_stop" ]
         %clickedItem.2 = local;
         symbol [ clickedItem %clickedItem.2 25 12 23 ];
         symbol [ _view %tmp.20 25 26 31 ];
@@ -108,14 +108,14 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_17_8_22
         lputv %clickedItem.2 %tmp.25;
         symbol [ clickedItem %clickedItem.2 25 12 23 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 27 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_stmt:
         %tmp.26 = lgetv %clickedItem.2;
         symbol [ clickedItem %tmp.26 27 12 23 ];
         %tmp.27 = null;
         %tmp.28 = ne %tmp.26 %tmp.27;
-        bf %tmp.28 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_33_30_8_start:
+        bf %tmp.28 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_33_30_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 28 12 ]
         %tmp.29 = self;
         symbol [ toggleItemState %tmp.30 28 12 27 ];
@@ -127,19 +127,19 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_33_3
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 29 12 ]
         %tmp.33 = true;
         ret %tmp.33;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_33_30_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_33_30_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_27_8_30_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 31 8 ]
         %tmp.34 = false;
         ret %tmp.34;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_16_64_32_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc"; @line = 35; @symbol_functiondef = [onSwipe,35,13,20]; @symbol_param<0> = [swipeEvent,35,21,31]; @symbol_param<0>_type<0> = [WatchUi,35,35,42]; @symbol_param<0>_type<1> = [SwipeEvent,35,43,53]; @symbol_return<0> = [Boolean,35,58,65]; ]
     function onSwipe(swipeEvent as WatchUi.SwipeEvent) as Boolean {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_35_66_45_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_35_66_45_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 36 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_35_66_45_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_35_66_45_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_35_66_45_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_35_66_45_4_stop" ]
         %direction.1 = local;
         symbol [ direction %direction.1 36 12 21 ];
         %tmp.1 = lgetv %swipeEvent;
@@ -150,7 +150,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_35_66_4
         lputv %direction.1 %tmp.3;
         symbol [ direction %direction.1 36 12 21 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 37 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_stmt:
         %tmp.4 = lgetv %direction.1;
         symbol [ direction %tmp.4 37 12 21 ];
         symbol [ WatchUi %tmp.5 37 25 32 ];
@@ -158,9 +158,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43
         symbol [ SWIPE_UP %tmp.6 37 33 41 ];
         %tmp.6 = getv %tmp.5 :SWIPE_UP;
         %tmp.7 = eq %tmp.4 %tmp.6;
-        bf %tmp.7 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_43_40_8_start:
+        bf %tmp.7 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_43_40_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 38 12 ]
         symbol [ _view %tmp.9 38 12 17 ];
         %tmp.9 = getv ? :_view;
@@ -170,11 +170,11 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_43_4
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 39 12 ]
         %tmp.11 = true;
         ret %tmp.11;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_43_40_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_false:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_43_40_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_false:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 40 15 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_stmt:
         %tmp.12 = lgetv %direction.1;
         symbol [ direction %tmp.12 40 19 28 ];
         symbol [ WatchUi %tmp.13 40 32 39 ];
@@ -182,9 +182,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_4
         symbol [ SWIPE_DOWN %tmp.14 40 40 50 ];
         %tmp.14 = getv %tmp.13 :SWIPE_DOWN;
         %tmp.15 = eq %tmp.12 %tmp.14;
-        bf %tmp.15 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_52_43_8_start:
+        bf %tmp.15 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_52_43_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 41 12 ]
         symbol [ _view %tmp.17 41 12 17 ];
         %tmp.17 = getv ? :_view;
@@ -194,20 +194,20 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_52_4
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 42 12 ]
         %tmp.19 = true;
         ret %tmp.19;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_52_43_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_52_43_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_40_15_43_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_37_8_43_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 44 8 ]
         %tmp.20 = false;
         ret %tmp.20;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_35_66_45_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_35_66_45_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc"; @line = 48; @symbol_functiondef = [onSelect,48,13,21]; @symbol_return<0> = [Boolean,48,27,34]; ]
     function onSelect() as Boolean {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_48_35_55_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_48_35_55_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 49 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_48_35_55_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_48_35_55_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_48_35_55_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_48_35_55_4_stop" ]
         %selected.1 = local;
         symbol [ selected %selected.1 49 12 20 ];
         symbol [ _view %tmp.2 49 23 28 ];
@@ -218,14 +218,14 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_48_35_5
         lputv %selected.1 %tmp.4;
         symbol [ selected %selected.1 49 12 20 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 50 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_stmt:
         %tmp.5 = lgetv %selected.1;
         symbol [ selected %tmp.5 50 12 20 ];
         %tmp.6 = null;
         %tmp.7 = ne %tmp.5 %tmp.6;
-        bf %tmp.7 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_30_53_8_start:
+        bf %tmp.7 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_30_53_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 51 12 ]
         %tmp.8 = self;
         symbol [ toggleItemState %tmp.9 51 12 27 ];
@@ -237,17 +237,17 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_30_5
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 52 12 ]
         %tmp.12 = true;
         ret %tmp.12;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_30_53_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_30_53_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_50_8_53_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 54 8 ]
         %tmp.13 = false;
         ret %tmp.13;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_48_35_55_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_48_35_55_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc"; @line = 58; @symbol_functiondef = [onNextPage,58,13,23]; @symbol_return<0> = [Boolean,58,29,36]; ]
     function onNextPage() as Boolean {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_58_37_61_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_58_37_61_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 59 8 ]
         symbol [ _view %tmp.2 59 8 13 ];
         %tmp.2 = getv ? :_view;
@@ -257,11 +257,11 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_58_37_6
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 60 8 ]
         %tmp.4 = true;
         ret %tmp.4;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_58_37_61_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_58_37_61_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc"; @line = 63; @symbol_functiondef = [onPreviousPage,63,13,27]; @symbol_return<0> = [Boolean,63,33,40]; ]
     function onPreviousPage() as Boolean {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_63_41_66_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_63_41_66_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 64 8 ]
         symbol [ _view %tmp.2 64 8 13 ];
         %tmp.2 = getv ? :_view;
@@ -271,13 +271,13 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_63_41_6
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 65 8 ]
         %tmp.4 = true;
         ret %tmp.4;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_63_41_66_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_63_41_66_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc"; @line = 69; @symbol_functiondef = [onKey,69,13,18]; @symbol_param<0> = [keyEvent,69,19,27]; @symbol_param<0>_type<0> = [WatchUi,69,31,38]; @symbol_param<0>_type<1> = [KeyEvent,69,39,47]; @symbol_return<0> = [Boolean,69,52,59]; ]
     function onKey(keyEvent as WatchUi.KeyEvent) as Boolean {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_69_60_87_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_69_60_87_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 70 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_69_60_87_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_69_60_87_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_69_60_87_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_69_60_87_4_stop" ]
         %key.1 = local;
         symbol [ key %key.1 70 12 15 ];
         %tmp.1 = lgetv %keyEvent;
@@ -288,8 +288,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_69_60_8
         lputv %key.1 %tmp.3;
         symbol [ key %key.1 70 12 15 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 71 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_stmt:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_12_71_55_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_12_71_55_begin:
         %tmp.4 = lgetv %key.1;
         symbol [ key %tmp.4 71 12 15 ];
         symbol [ WatchUi %tmp.5 71 19 26 ];
@@ -297,8 +297,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_12_7
         symbol [ KEY_ENTER %tmp.6 71 27 36 ];
         %tmp.6 = getv %tmp.5 :KEY_ENTER;
         %tmp.7 = eq %tmp.4 %tmp.6;
-        bt %tmp.7 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_true;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_40_71_55_false:
+        bt %tmp.7 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_true;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_40_71_55_false:
         %tmp.8 = lgetv %key.1;
         symbol [ key %tmp.8 71 40 43 ];
         symbol [ WatchUi %tmp.9 71 47 54 ];
@@ -307,22 +307,22 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_40_7
         %tmp.10 = getv %tmp.9 :KEY_START;
         %tmp.11 = eq %tmp.8 %tmp.10;
         push %tmp.11;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_40_71_55_end:
-        %tmp.12 = phi [%tmp.7 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_12_71_55_begin] [%tmp.11 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_40_71_55_false] [%tmp.12 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_40_71_55_end];
-        bf %tmp.12 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_66_73_8_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_40_71_55_end:
+        %tmp.12 = phi [%tmp.7 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_12_71_55_begin] [%tmp.11 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_40_71_55_false] [%tmp.12 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_40_71_55_end];
+        bf %tmp.12 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_66_73_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 72 12 ]
         %tmp.13 = self;
         symbol [ onSelect %tmp.14 72 19 27 ];
         %tmp.14 = getv function %tmp.13 :onSelect;
         %tmp.15 = invoke %tmp.13 %tmp.14();
         ret %tmp.15;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_66_73_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_false:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_66_73_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_false:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 73 15 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_stmt:
         %tmp.16 = lgetv %key.1;
         symbol [ key %tmp.16 73 19 22 ];
         symbol [ WatchUi %tmp.17 73 26 33 ];
@@ -330,9 +330,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_8
         symbol [ KEY_DOWN %tmp.18 73 34 42 ];
         %tmp.18 = getv %tmp.17 :KEY_DOWN;
         %tmp.19 = eq %tmp.16 %tmp.18;
-        bf %tmp.19 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_44_76_8_start:
+        bf %tmp.19 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_44_76_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 74 12 ]
         symbol [ _view %tmp.21 74 12 17 ];
         %tmp.21 = getv ? :_view;
@@ -342,11 +342,11 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_44_7
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 75 12 ]
         %tmp.23 = true;
         ret %tmp.23;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_44_76_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_false:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_44_76_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_false:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 76 15 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_stmt:
         %tmp.24 = lgetv %key.1;
         symbol [ key %tmp.24 76 19 22 ];
         symbol [ WatchUi %tmp.25 76 26 33 ];
@@ -354,9 +354,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_8
         symbol [ KEY_UP %tmp.26 76 34 40 ];
         %tmp.26 = getv %tmp.25 :KEY_UP;
         %tmp.27 = eq %tmp.24 %tmp.26;
-        bf %tmp.27 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_42_79_8_start:
+        bf %tmp.27 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_42_79_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 77 12 ]
         symbol [ _view %tmp.29 77 12 17 ];
         %tmp.29 = getv ? :_view;
@@ -366,11 +366,11 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_42_7
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 78 12 ]
         %tmp.31 = true;
         ret %tmp.31;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_42_79_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_false:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_42_79_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_false:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 79 15 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_stmt:
         %tmp.32 = lgetv %key.1;
         symbol [ key %tmp.32 79 19 22 ];
         symbol [ WatchUi %tmp.33 79 26 33 ];
@@ -378,9 +378,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_8
         symbol [ KEY_MENU %tmp.34 79 34 42 ];
         %tmp.34 = getv %tmp.33 :KEY_MENU;
         %tmp.35 = eq %tmp.32 %tmp.34;
-        bf %tmp.35 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_44_85_8_start:
+        bf %tmp.35 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_44_85_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 81 12 ]
         symbol [ _view %tmp.36 81 12 17 ];
         %tmp.36 = getv self :_view;
@@ -402,21 +402,21 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_44_8
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 84 12 ]
         %tmp.43 = true;
         ret %tmp.43;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_44_85_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_44_85_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_79_15_85_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_76_15_85_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_73_15_85_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_71_8_85_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 86 8 ]
         %tmp.44 = false;
         ret %tmp.44;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_69_60_87_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_69_60_87_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc"; @line = 90; @symbol_functiondef = [toggleItemState,90,21,36]; @symbol_param<0> = [item,90,37,41]; @symbol_param<0>_type<0> = [GroceryItem,90,45,56]; ]
     private
     function toggleItemState(item as GroceryItem) as Void {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_90_66_94_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_90_66_94_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc" 91 8 ]
         %tmp.1 = lgetv %item;
         symbol [ item %tmp.1 91 8 12 ];
@@ -439,7 +439,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_90_66_9
         %tmp.10 = lgetv %item;
         symbol [ item %tmp.10 93 28 32 ];
         invoke %tmp.8 %tmp.9(%tmp.10);
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_90_66_94_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryDelegate_mc_90_66_94_4_stop:
     }
 }
 [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryDelegate.mc"; @line = 1; ]

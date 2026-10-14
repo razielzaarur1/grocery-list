@@ -35,9 +35,9 @@ class GroceryItem {
     var shapedNote as String = "";
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc"; @line = 19; @symbol_functiondef = [initialize,19,13,23]; @symbol_param<0> = [dict,19,24,28]; @symbol_param<0>_type<0> = [Dictionary,19,32,42]; ]
     function initialize(dict as Dictionary) as Void {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 20 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop" ]
         %rawId.1 = local;
         symbol [ rawId %rawId.1 20 12 17 ];
         %tmp.1 = lgetv %dict;
@@ -49,24 +49,24 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_
         lputv %rawId.1 %tmp.4;
         symbol [ rawId %rawId.1 20 12 17 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 21 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_stmt:
         %tmp.5 = lgetv %rawId.1;
         symbol [ rawId %tmp.5 21 12 17 ];
         %tmp.6 = null;
         %tmp.7 = ne %tmp.5 %tmp.6;
-        bf %tmp.7 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_27_23_8_start:
+        bf %tmp.7 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_27_23_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 22 12 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_begin:
         %tmp.8 = lgetv %rawId.1;
         symbol [ rawId %tmp.8 22 18 23 ];
         %tmp.9 = as %tmp.8 { (!Null) };
         %tmp.11 = const :toNumber;
         symbol [ toNumber %tmp.11 22 29 37 const ];
         %tmp.12 = canhazplz %tmp.9 %tmp.11;
-        bf %tmp.12 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_true:
+        bf %tmp.12 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_true:
         %tmp.13 = lgetv %rawId.1;
         symbol [ rawId %tmp.13 22 41 46 ];
         %tmp.14 = as %tmp.13 { (interface { var toNumber; }) && (!Null) };
@@ -74,19 +74,19 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60
         %tmp.15 = getv function %tmp.14 :toNumber;
         %tmp.16 = invoke %tmp.14 %tmp.15();
         push %tmp.16;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_else_false:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_false:
         %tmp.17 = 0;
         push %tmp.17;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_end:
-        %tmp.18 = phi [%tmp.12 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_begin] [%tmp.16 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_true] [%tmp.17 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_else_false] [%tmp.18 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_end];
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_end:
+        %tmp.18 = phi [%tmp.12 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_begin] [%tmp.16 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_true] [%tmp.17 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_false] [%tmp.18 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_22_17_22_60_end];
         symbol [ id ? 22 12 14 ];
         putv self :id %tmp.18;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_27_23_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_27_23_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_21_8_23_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 24 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_begin:
         %tmp.19 = lgetv %dict;
         symbol [ dict %tmp.19 24 15 19 ];
         symbol [ get %tmp.20 24 20 23 ];
@@ -95,8 +95,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72
         %tmp.22 = invoke %tmp.19 %tmp.20(%tmp.21);
         %tmp.23 = null;
         %tmp.24 = ne %tmp.22 %tmp.23;
-        bf %tmp.24 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_true:
+        bf %tmp.24 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_true:
         %tmp.25 = lgetv %dict;
         symbol [ dict %tmp.25 24 42 46 ];
         symbol [ get %tmp.26 24 47 50 ];
@@ -107,16 +107,16 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72
         %tmp.29 = getv function %tmp.28 :toString;
         %tmp.30 = invoke %tmp.28 %tmp.29();
         push %tmp.30;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_else_false:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_false:
         %tmp.31 = "";
         push %tmp.31;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_end:
-        %tmp.32 = phi [%tmp.24 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_begin] [%tmp.30 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_true] [%tmp.31 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_else_false] [%tmp.32 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_end];
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_end:
+        %tmp.32 = phi [%tmp.24 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_begin] [%tmp.30 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_true] [%tmp.31 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_false] [%tmp.32 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_24_15_24_72_end];
         symbol [ name ? 24 8 12 ];
         putv self :name %tmp.32;
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 25 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_begin:
         %tmp.33 = lgetv %dict;
         symbol [ dict %tmp.33 25 19 23 ];
         symbol [ get %tmp.34 25 24 27 ];
@@ -125,8 +125,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84
         %tmp.36 = invoke %tmp.33 %tmp.34(%tmp.35);
         %tmp.37 = null;
         %tmp.38 = ne %tmp.36 %tmp.37;
-        bf %tmp.38 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_true:
+        bf %tmp.38 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_true:
         %tmp.39 = lgetv %dict;
         symbol [ dict %tmp.39 25 50 54 ];
         symbol [ get %tmp.40 25 55 58 ];
@@ -137,16 +137,16 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84
         %tmp.43 = getv function %tmp.42 :toString;
         %tmp.44 = invoke %tmp.42 %tmp.43();
         push %tmp.44;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_else_false:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_false:
         %tmp.45 = "";
         push %tmp.45;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_end:
-        %tmp.46 = phi [%tmp.38 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_begin] [%tmp.44 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_true] [%tmp.45 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_else_false] [%tmp.46 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_end];
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_end:
+        %tmp.46 = phi [%tmp.38 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_begin] [%tmp.44 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_true] [%tmp.45 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_false] [%tmp.46 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_25_19_25_84_end];
         symbol [ quantity ? 25 8 16 ];
         putv self :quantity %tmp.46;
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 26 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_begin:
         %tmp.47 = lgetv %dict;
         symbol [ dict %tmp.47 26 15 19 ];
         symbol [ get %tmp.48 26 20 23 ];
@@ -155,8 +155,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72
         %tmp.50 = invoke %tmp.47 %tmp.48(%tmp.49);
         %tmp.51 = null;
         %tmp.52 = ne %tmp.50 %tmp.51;
-        bf %tmp.52 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_true:
+        bf %tmp.52 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_true:
         %tmp.53 = lgetv %dict;
         symbol [ dict %tmp.53 26 42 46 ];
         symbol [ get %tmp.54 26 47 50 ];
@@ -167,16 +167,16 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72
         %tmp.57 = getv function %tmp.56 :toString;
         %tmp.58 = invoke %tmp.56 %tmp.57();
         push %tmp.58;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_else_false:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_false:
         %tmp.59 = "";
         push %tmp.59;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_end:
-        %tmp.60 = phi [%tmp.52 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_begin] [%tmp.58 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_true] [%tmp.59 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_else_false] [%tmp.60 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_end];
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_end:
+        %tmp.60 = phi [%tmp.52 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_begin] [%tmp.58 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_true] [%tmp.59 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_false] [%tmp.60 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_26_15_26_72_end];
         symbol [ unit ? 26 8 12 ];
         putv self :unit %tmp.60;
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 27 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_begin:
         %tmp.61 = lgetv %dict;
         symbol [ dict %tmp.61 27 15 19 ];
         symbol [ get %tmp.62 27 20 23 ];
@@ -185,8 +185,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72
         %tmp.64 = invoke %tmp.61 %tmp.62(%tmp.63);
         %tmp.65 = null;
         %tmp.66 = ne %tmp.64 %tmp.65;
-        bf %tmp.66 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_true:
+        bf %tmp.66 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_true:
         %tmp.67 = lgetv %dict;
         symbol [ dict %tmp.67 27 42 46 ];
         symbol [ get %tmp.68 27 47 50 ];
@@ -197,16 +197,16 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72
         %tmp.71 = getv function %tmp.70 :toString;
         %tmp.72 = invoke %tmp.70 %tmp.71();
         push %tmp.72;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_else_false:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_false:
         %tmp.73 = "";
         push %tmp.73;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_end:
-        %tmp.74 = phi [%tmp.66 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_begin] [%tmp.72 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_true] [%tmp.73 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_else_false] [%tmp.74 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_end];
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_end:
+        %tmp.74 = phi [%tmp.66 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_begin] [%tmp.72 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_true] [%tmp.73 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_false] [%tmp.74 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_27_15_27_72_end];
         symbol [ note ? 27 8 12 ];
         putv self :note %tmp.74;
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 28 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_begin:
         %tmp.75 = lgetv %dict;
         symbol [ dict %tmp.75 28 20 24 ];
         symbol [ get %tmp.76 28 25 28 ];
@@ -215,8 +215,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89
         %tmp.78 = invoke %tmp.75 %tmp.76(%tmp.77);
         %tmp.79 = null;
         %tmp.80 = ne %tmp.78 %tmp.79;
-        bf %tmp.80 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_true:
+        bf %tmp.80 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_true:
         %tmp.81 = lgetv %dict;
         symbol [ dict %tmp.81 28 53 57 ];
         symbol [ get %tmp.82 28 58 61 ];
@@ -226,16 +226,16 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89
         %tmp.85 = as %tmp.84 Boolean;
         symbol [ Boolean %tmp.85 28 79 86 ];
         push %tmp.85;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_else_false:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_false:
         %tmp.86 = false;
         push %tmp.86;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_end:
-        %tmp.87 = phi [%tmp.80 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_begin] [%tmp.85 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_true] [%tmp.86 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_else_false] [%tmp.87 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_end];
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_end:
+        %tmp.87 = phi [%tmp.80 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_begin] [%tmp.85 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_true] [%tmp.86 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_false] [%tmp.87 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89_end];
         symbol [ isChecked ? 28 8 17 ];
         putv self :isChecked %tmp.87;
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 29 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop" ]
         %rawCatId.2 = local;
         symbol [ rawCatId %rawCatId.2 29 12 20 ];
         %tmp.88 = lgetv %dict;
@@ -247,24 +247,24 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_28_20_28_89
         lputv %rawCatId.2 %tmp.91;
         symbol [ rawCatId %rawCatId.2 29 12 20 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 30 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_stmt:
         %tmp.92 = lgetv %rawCatId.2;
         symbol [ rawCatId %tmp.92 30 12 20 ];
         %tmp.93 = null;
         %tmp.94 = ne %tmp.92 %tmp.93;
-        bf %tmp.94 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_30_32_8_start:
+        bf %tmp.94 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_30_32_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 31 12 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_begin:
         %tmp.95 = lgetv %rawCatId.2;
         symbol [ rawCatId %tmp.95 31 26 34 ];
         %tmp.96 = as %tmp.95 { (!Null) };
         %tmp.98 = const :toNumber;
         symbol [ toNumber %tmp.98 31 40 48 const ];
         %tmp.99 = canhazplz %tmp.96 %tmp.98;
-        bf %tmp.99 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_true:
+        bf %tmp.99 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_true:
         %tmp.100 = lgetv %rawCatId.2;
         symbol [ rawCatId %tmp.100 31 52 60 ];
         %tmp.101 = as %tmp.100 { (interface { var toNumber; }) && (!Null) };
@@ -272,19 +272,19 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74
         %tmp.102 = getv function %tmp.101 :toNumber;
         %tmp.103 = invoke %tmp.101 %tmp.102();
         push %tmp.103;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_else_false:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_false:
         %tmp.104 = 0;
         push %tmp.104;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_end:
-        %tmp.105 = phi [%tmp.99 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_begin] [%tmp.103 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_true] [%tmp.104 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_else_false] [%tmp.105 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_end];
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_end:
+        %tmp.105 = phi [%tmp.99 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_begin] [%tmp.103 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_true] [%tmp.104 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_false] [%tmp.105 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_31_25_31_74_end];
         symbol [ categoryId ? 31 12 22 ];
         putv self :categoryId %tmp.105;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_30_32_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_30_32_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 33 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop" ]
         %rawOrder.3 = local;
         symbol [ rawOrder %rawOrder.3 33 12 20 ];
         %tmp.106 = lgetv %dict;
@@ -296,24 +296,24 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_30_8_32_8_i
         lputv %rawOrder.3 %tmp.109;
         symbol [ rawOrder %rawOrder.3 33 12 20 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 34 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_stmt:
         %tmp.110 = lgetv %rawOrder.3;
         symbol [ rawOrder %tmp.110 34 12 20 ];
         %tmp.111 = null;
         %tmp.112 = ne %tmp.110 %tmp.111;
-        bf %tmp.112 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_30_36_8_start:
+        bf %tmp.112 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_30_36_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 35 12 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_begin:
         %tmp.113 = lgetv %rawOrder.3;
         symbol [ rawOrder %tmp.113 35 30 38 ];
         %tmp.114 = as %tmp.113 { (!Null) };
         %tmp.116 = const :toNumber;
         symbol [ toNumber %tmp.116 35 44 52 const ];
         %tmp.117 = canhazplz %tmp.114 %tmp.116;
-        bf %tmp.117 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_true:
+        bf %tmp.117 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_true:
         %tmp.118 = lgetv %rawOrder.3;
         symbol [ rawOrder %tmp.118 35 56 64 ];
         %tmp.119 = as %tmp.118 { (interface { var toNumber; }) && (!Null) };
@@ -321,19 +321,19 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78
         %tmp.120 = getv function %tmp.119 :toNumber;
         %tmp.121 = invoke %tmp.119 %tmp.120();
         push %tmp.121;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_else_false:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_false:
         %tmp.122 = 0;
         push %tmp.122;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_end:
-        %tmp.123 = phi [%tmp.117 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_begin] [%tmp.121 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_true] [%tmp.122 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_else_false] [%tmp.123 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_end];
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_end:
+        %tmp.123 = phi [%tmp.117 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_begin] [%tmp.121 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_true] [%tmp.122 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_false] [%tmp.123 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_35_29_35_78_end];
         symbol [ globalAddOrder ? 35 12 26 ];
         putv self :globalAddOrder %tmp.123;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_30_36_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_30_36_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 37 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop" ]
         %rawCatName.4 = local;
         symbol [ rawCatName %rawCatName.4 37 12 22 ];
         %tmp.124 = lgetv %dict;
@@ -345,14 +345,14 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_34_8_36_8_i
         lputv %rawCatName.4 %tmp.127;
         symbol [ rawCatName %rawCatName.4 37 12 22 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 38 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_stmt:
         %tmp.128 = lgetv %rawCatName.4;
         symbol [ rawCatName %tmp.128 38 12 22 ];
         %tmp.129 = null;
         %tmp.130 = ne %tmp.128 %tmp.129;
-        bf %tmp.130 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_32_40_8_start:
+        bf %tmp.130 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_32_40_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 39 12 ]
         %tmp.131 = lgetv %rawCatName.4;
         symbol [ rawCatName %tmp.131 39 27 37 ];
@@ -362,19 +362,19 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_32_40_8_
         %tmp.134 = invoke %tmp.132 %tmp.133();
         symbol [ categoryName ? 39 12 24 ];
         putv self :categoryName %tmp.134;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_32_40_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_32_40_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_38_8_40_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 42 8 ]
         %tmp.135 = self;
         symbol [ updateShapedText %tmp.136 42 8 24 ];
         %tmp.136 = getv function %tmp.135 :updateShapedText;
         invoke %tmp.135 %tmp.136();
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_19_44_43_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc"; @line = 45; @symbol_functiondef = [updateShapedText,45,13,29]; ]
     function updateShapedText() as Void {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_45_40_60_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_45_40_60_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 46 8 ]
         symbol [ BidiHelper %tmp.2 46 21 31 ];
         %tmp.2 = getv ? :BidiHelper;
@@ -386,14 +386,14 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_45_40_60_4_
         symbol [ shapedName ? 46 8 18 ];
         putv self :shapedName %tmp.6;
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 48 8 ]
-        [ "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_45_40_60_4_start" "C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_45_40_60_4_stop" ]
+        [ "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_45_40_60_4_start" "C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_45_40_60_4_stop" ]
         %q.1 = local;
         symbol [ q %q.1 48 12 13 ];
         %tmp.7 = "";
         lputv %q.1 %tmp.7;
         symbol [ q %q.1 48 12 13 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 49 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_stmt:
         symbol [ quantity %tmp.9 49 12 20 ];
         %tmp.9 = getv ? :quantity;
         symbol [ length %tmp.10 49 21 27 ];
@@ -401,9 +401,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_i
         %tmp.11 = invoke %tmp.9 %tmp.10();
         %tmp.12 = 0;
         %tmp.13 = gt %tmp.11 %tmp.12;
-        bf %tmp.13 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_35_54_8_start:
+        bf %tmp.13 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_35_54_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 50 12 ]
         %tmp.14 = lgetv %q.1;
         symbol [ q %tmp.14 50 12 13 ];
@@ -413,7 +413,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_35_54_8_
         lputv %q.1 %tmp.17;
         symbol [ q %q.1 50 12 13 ];
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 51 12 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_stmt:
         symbol [ unit %tmp.19 51 16 20 ];
         %tmp.19 = getv ? :unit;
         symbol [ length %tmp.20 51 21 27 ];
@@ -421,9 +421,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12
         %tmp.21 = invoke %tmp.19 %tmp.20();
         %tmp.22 = 0;
         %tmp.23 = gt %tmp.21 %tmp.22;
-        bf %tmp.23 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_35_53_12_start:
+        bf %tmp.23 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_35_53_12_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 52 16 ]
         %tmp.24 = lgetv %q.1;
         symbol [ q %tmp.24 52 16 17 ];
@@ -434,14 +434,14 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_35_53_12
         %tmp.29 = add %tmp.24 %tmp.28;
         lputv %q.1 %tmp.29;
         symbol [ q %q.1 52 16 17 ];
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_35_53_12_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_35_54_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_false:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_35_53_12_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_51_12_53_12_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_35_54_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_false:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 54 15 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_stmt:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_stmt:
         symbol [ unit %tmp.31 54 19 23 ];
         %tmp.31 = getv ? :unit;
         symbol [ length %tmp.32 54 24 30 ];
@@ -449,9 +449,9 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_
         %tmp.33 = invoke %tmp.31 %tmp.32();
         %tmp.34 = 0;
         %tmp.35 = gt %tmp.33 %tmp.34;
-        bf %tmp.35 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_true:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_38_56_8_start:
+        bf %tmp.35 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_true:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_38_56_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 55 12 ]
         %tmp.36 = lgetv %q.1;
         symbol [ q %tmp.36 55 12 13 ];
@@ -460,10 +460,10 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_38_56_8_
         %tmp.39 = add %tmp.36 %tmp.38;
         lputv %q.1 %tmp.39;
         symbol [ q %q.1 55 12 13 ];
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_38_56_8_stop:
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_end:
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_38_56_8_stop:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_54_15_56_8_if_end:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_if_end:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 57 8 ]
         symbol [ BidiHelper %tmp.41 57 25 35 ];
         %tmp.41 = getv ? :BidiHelper;
@@ -475,7 +475,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_49_8_56_8_i
         symbol [ shapedQuantity ? 57 8 22 ];
         putv self :shapedQuantity %tmp.44;
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 59 8 ]
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_begin:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_begin:
         symbol [ note %tmp.46 59 22 26 ];
         %tmp.46 = getv ? :note;
         symbol [ length %tmp.47 59 27 33 ];
@@ -483,8 +483,8 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74
         %tmp.48 = invoke %tmp.46 %tmp.47();
         %tmp.49 = 0;
         %tmp.50 = gt %tmp.48 %tmp.49;
-        bf %tmp.50 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_else_false;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_true:
+        bf %tmp.50 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_false;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_true:
         symbol [ BidiHelper %tmp.52 59 43 53 ];
         %tmp.52 = getv ? :BidiHelper;
         symbol [ shapeHebrew %tmp.53 59 54 65 ];
@@ -493,26 +493,26 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74
         %tmp.55 = getv ? :note;
         %tmp.56 = invoke %tmp.52 %tmp.53(%tmp.55);
         push %tmp.56;
-        goto @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_end;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_else_false:
+        goto @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_end;
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_false:
         %tmp.57 = "";
         push %tmp.57;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_end:
-        %tmp.58 = phi [%tmp.50 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_begin] [%tmp.56 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_true] [%tmp.57 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_else_false] [%tmp.58 @C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_end];
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_end:
+        %tmp.58 = phi [%tmp.50 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_begin] [%tmp.56 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_true] [%tmp.57 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_false] [%tmp.58 @C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_59_21_59_74_end];
         symbol [ shapedNote ? 59 8 18 ];
         putv self :shapedNote %tmp.58;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_45_40_60_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_45_40_60_4_stop:
     }
     [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc"; @line = 62; @symbol_functiondef = [toggleChecked,62,13,26]; ]
     function toggleChecked() as Void {
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_62_37_64_4_start:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_62_37_64_4_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc" 63 8 ]
         symbol [ isChecked %tmp.2 63 21 30 ];
         %tmp.2 = getv ? :isChecked;
         %tmp.3 = not %tmp.2;
         symbol [ isChecked ? 63 8 17 ];
         putv self :isChecked %tmp.3;
-C__Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_62_37_64_4_stop:
+C_Users_razie_Development_Grocery_list_garmin_source_GroceryItem_mc_62_37_64_4_stop:
     }
 }
 [ @file = "C:\Users\razie\Development\Grocery list\garmin\source\GroceryItem.mc"; @line = 1; ]
