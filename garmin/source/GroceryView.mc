@@ -16,8 +16,6 @@ class GroceryView extends WatchUi.View {
     private var _screenHeight as Number = 454;
     private var _itemRowHeight as Number = 64;
     private var _categoryRowHeight as Number = 40;
-    private var _font as Object? = null;
-    private var _fontSmall as Object? = null;
 
     function initialize() {
         View.initialize();
@@ -27,24 +25,14 @@ class GroceryView extends WatchUi.View {
         _screenWidth = dc.getWidth();
         _screenHeight = dc.getHeight();
         _headerHeight = (_screenHeight * 0.17).toNumber();
-
-        try {
-            _font = WatchUi.loadResource(Rez.Fonts.HebrewFont);
-            _fontSmall = WatchUi.loadResource(Rez.Fonts.HebrewSmall);
-            System.println("Segoe UI fonts loaded successfully");
-        } catch (ex) {
-            System.println("Font load error: " + ex.getErrorMessage());
-            _font = null;
-            _fontSmall = null;
-        }
     }
 
     function getMainFont() {
-        return _font != null ? _font : Graphics.FONT_SMALL;
+        return Graphics.FONT_MEDIUM;
     }
 
     function getSmallFont() {
-        return _fontSmall != null ? _fontSmall : Graphics.FONT_XTINY;
+        return Graphics.FONT_TINY;
     }
 
     // Rebuilds rows: category headers first, unchecked items, then checked items at the bottom of the category!
@@ -343,15 +331,16 @@ class GroceryView extends WatchUi.View {
 
             // Measure exact text pixel width
             var textWidth = dc.getTextWidthInPixels(item.shapedName, getMainFont());
-            // Exact vertical center of 26px Hebrew glyphs: nameY + 21
-            var strikeY = nameY + 21;
+            var fontH = dc.getFontHeight(getMainFont());
+            var strikeY = nameY + (fontH / 2);
 
             dc.drawLine(rightMargin, strikeY, rightMargin - textWidth, strikeY);
 
             // Strikethrough for note if present
             if (hasNote) {
                 var noteWidth = dc.getTextWidthInPixels(item.shapedNote, getSmallFont());
-                var noteStrikeY = noteY + 16;
+                var noteH = dc.getFontHeight(getSmallFont());
+                var noteStrikeY = noteY + (noteH / 2);
                 dc.drawLine(rightMargin, noteStrikeY, rightMargin - noteWidth, noteStrikeY);
             }
 

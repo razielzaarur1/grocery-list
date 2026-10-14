@@ -9,11 +9,6 @@ class BidiHelper {
             return "";
         }
 
-        try {
-            var chars = text.toCharArray();
-            return StringUtil.charArrayToString(chars);
-        } catch (ex) {
-            return text;
-        }
+        return text;
     }
 }
