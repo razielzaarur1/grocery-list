@@ -62,7 +62,37 @@ class GroceryView extends WatchUi.View {
         if (scrollY < 0) {
             scrollY = 0;
         }
+        updateSelectionFromScroll();
         WatchUi.requestUpdate();
+    }
+
+    function updateSelectionFromScroll() as Void {
+        if (rows.size() == 0) {
+            return;
+        }
+        var targetY = _headerHeight + (_screenHeight - _headerHeight) / 2;
+        var curY = _headerHeight + 6 - scrollY;
+        var bestIndex = -1;
+        var minDistance = 999999;
+
+        for (var i = 0; i < rows.size(); i++) {
+            var row = rows[i];
+            var rHeight = row.rowHeight;
+            if (!row.isHeader && row.item != null) {
+                var rowCenter = curY + (rHeight / 2);
+                var diff = rowCenter - targetY;
+                var dist = diff < 0 ? -diff : diff;
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    bestIndex = i;
+                }
+            }
+            curY += rHeight + 6;
+        }
+
+        if (bestIndex != -1 && bestIndex != selectedIndex) {
+            selectedIndex = bestIndex;
+        }
     }
 
     // Rebuilds rows: category headers first, unchecked items, then checked items at the bottom of the category!
@@ -309,10 +339,12 @@ class GroceryView extends WatchUi.View {
     ) as Void {
         // Selection highlight box
         if (isFocused) {
-            dc.setColor(0x162032, Graphics.COLOR_TRANSPARENT);
+            dc.setColor(0x13233c, Graphics.COLOR_TRANSPARENT);
             dc.fillRoundedRectangle(x - 4, y + 2, width + 8, height - 4, 8);
+            dc.setColor(0x0284c7, Graphics.COLOR_TRANSPARENT);
+            dc.drawRoundedRectangle(x - 4, y + 2, width + 8, height - 4, 8);
             dc.setColor(0x38bdf8, Graphics.COLOR_TRANSPARENT);
-            dc.fillRoundedRectangle(x + width - 1, y + 6, 4, height - 12, 2);
+            dc.fillRoundedRectangle(x + width, y + 6, 3, height - 12, 2);
         }
 
         var rightMargin = x + width - 12;
@@ -430,7 +462,7 @@ class GroceryView extends WatchUi.View {
         for (var i = selectedIndex + 1; i < rows.size(); i++) {
             if (!rows[i].isHeader) {
                 selectedIndex = i;
-                ensureSelectionVisible();
+                centerSelectedItem();
                 WatchUi.requestUpdate();
                 return;
             }
@@ -446,27 +478,23 @@ class GroceryView extends WatchUi.View {
         for (var i = selectedIndex - 1; i >= 0; i--) {
             if (!rows[i].isHeader) {
                 selectedIndex = i;
-                ensureSelectionVisible();
+                centerSelectedItem();
                 WatchUi.requestUpdate();
                 return;
             }
         }
     }
 
-    private function ensureSelectionVisible() as Void {
+    private function centerSelectedItem() as Void {
+        if (rows.size() == 0 || selectedIndex < 0 || selectedIndex >= rows.size()) {
+            return;
+        }
         var accY = 0;
         for (var i = 0; i < rows.size(); i++) {
             if (i == selectedIndex) {
-                var itemTop = accY;
-                var itemBottom = accY + rows[i].rowHeight;
-                var visibleTop = scrollY;
-                var visibleBottom = scrollY + (_screenHeight - _headerHeight - 20);
-
-                if (itemTop < visibleTop) {
-                    scrollY = itemTop;
-                } else if (itemBottom > visibleBottom) {
-                    scrollY = itemBottom - (_screenHeight - _headerHeight - 20);
-                }
+                var itemCenter = accY + (rows[i].rowHeight / 2);
+                var viewportHeight = _screenHeight - _headerHeight;
+                scrollY = itemCenter - (viewportHeight / 2) + 6;
                 var max = getMaxScroll();
                 if (scrollY > max) { scrollY = max; }
                 if (scrollY < 0) { scrollY = 0; }
