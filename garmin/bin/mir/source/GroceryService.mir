@@ -70,7 +70,7 @@ C__Users_razie_Development_Grocery_list_garmin_source_GroceryService_mc_15_27_15
 C__Users_razie_Development_Grocery_list_garmin_source_GroceryService_mc_15_8_17_8_if_true:
 C__Users_razie_Development_Grocery_list_garmin_source_GroceryService_mc_15_46_17_8_start:
 [ "C:\Users\razie\Development\Grocery list\garmin\source\GroceryService.mc" 16 12 ]
-        %tmp.16 = "https://zaarur-server.tiffany-minor.ts.net/grocery_list";
+        %tmp.16 = "http://127.0.0.1:8000";
         lputv %url.1 %tmp.16;
         symbol [ url %url.1 16 12 15 ];
 C__Users_razie_Development_Grocery_list_garmin_source_GroceryService_mc_15_46_17_8_stop:

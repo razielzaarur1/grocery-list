@@ -1,4 +1,4 @@
 <properties>
-    <property id="serverUrl" type="string">https://zaarur-server.tiffany-minor.ts.net/grocery_list</property>
+    <property id="serverUrl" type="string">http://127.0.0.1:8000</property>
     <property id="deviceToken" type="string"></property>
 </properties>

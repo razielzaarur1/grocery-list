@@ -2,7 +2,7 @@
   "settings" : [ {
     "key" : "serverUrl",
     "valueType" : "string",
-    "defaultValue" : "https://zaarur-server.tiffany-minor.ts.net/grocery_list",
+    "defaultValue" : "http://127.0.0.1:8000",
     "configTitle" : "ServerUrlTitle",
     "configPrompt" : "ServerUrlPrompt",
     "configType" : "alphaNumeric",
