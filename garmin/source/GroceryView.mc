@@ -15,6 +15,8 @@ class GroceryView extends WatchUi.View {
     private var _headerHeight as Number = 65;
     private var _screenWidth as Number = 454;
     private var _screenHeight as Number = 454;
+    private var _font as Object? = null;
+    private var _fontSmall as Object? = null;
 
     function initialize() {
         View.initialize();
@@ -26,6 +28,22 @@ class GroceryView extends WatchUi.View {
         _headerHeight = (_screenHeight * 0.15).toNumber();
         var availableHeight = _screenHeight - _headerHeight - 20;
         _rowHeight = (availableHeight / visibleCount).toNumber();
+
+        try {
+            _font = WatchUi.loadResource(Rez.Fonts.HebrewFont);
+            _fontSmall = WatchUi.loadResource(Rez.Fonts.HebrewSmall);
+        } catch (ex) {
+            _font = null;
+            _fontSmall = null;
+        }
+    }
+
+    private function getMainFont() {
+        return _font != null ? _font : Graphics.FONT_SMALL;
+    }
+
+    private function getSmallFont() {
+        return _fontSmall != null ? _fontSmall : Graphics.FONT_SYSTEM_XTINY;
     }
 
     function onUpdate(dc as Graphics.Dc) as Void {
@@ -42,7 +60,7 @@ class GroceryView extends WatchUi.View {
             dc.drawText(
                 _screenWidth / 2,
                 _screenHeight / 2,
-                Graphics.FONT_SMALL,
+                getMainFont(),
                 BidiHelper.shapeHebrew("טוען נתונים..."),
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
             );
@@ -54,7 +72,7 @@ class GroceryView extends WatchUi.View {
             dc.drawText(
                 _screenWidth / 2,
                 _screenHeight / 2,
-                Graphics.FONT_SMALL,
+                getMainFont(),
                 BidiHelper.shapeHebrew("הרשימה ריקה"),
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
             );
@@ -95,8 +113,8 @@ class GroceryView extends WatchUi.View {
         var titleText = BidiHelper.shapeHebrew("רשימת קניות");
         dc.drawText(
             _screenWidth / 2,
-            18,
-            Graphics.FONT_XTINY,
+            14,
+            getMainFont(),
             titleText,
             Graphics.TEXT_JUSTIFY_CENTER
         );
@@ -106,8 +124,8 @@ class GroceryView extends WatchUi.View {
         var subText = BidiHelper.shapeHebrew(remaining + " נותרו מתוך " + items.size());
         dc.drawText(
             _screenWidth / 2,
-            38,
-            Graphics.FONT_SYSTEM_XTINY,
+            40,
+            getSmallFont(),
             subText,
             Graphics.TEXT_JUSTIFY_CENTER
         );
@@ -153,7 +171,7 @@ class GroceryView extends WatchUi.View {
         dc.drawText(
             rightMargin,
             nameY,
-            Graphics.FONT_SMALL,
+            getMainFont(),
             item.shapedName,
             Graphics.TEXT_JUSTIFY_RIGHT
         );
@@ -164,7 +182,7 @@ class GroceryView extends WatchUi.View {
             dc.drawText(
                 leftMargin,
                 nameY + 2,
-                Graphics.FONT_SYSTEM_XTINY,
+                getSmallFont(),
                 item.shapedQuantity,
                 Graphics.TEXT_JUSTIFY_LEFT
             );
@@ -176,7 +194,7 @@ class GroceryView extends WatchUi.View {
             dc.drawText(
                 rightMargin,
                 nameY + 24,
-                Graphics.FONT_SYSTEM_XTINY,
+                getSmallFont(),
                 item.shapedNote,
                 Graphics.TEXT_JUSTIFY_RIGHT
             );

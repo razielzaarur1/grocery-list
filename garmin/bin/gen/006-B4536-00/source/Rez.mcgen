@@ -9,6 +9,11 @@ module Rez {
         (:initialized) var LauncherIcon as ResourceId;
     } // Drawables
 
+    module Fonts {
+        (:initialized) var HebrewFont as ResourceId;
+        (:initialized) var HebrewSmall as ResourceId;
+    } // Fonts
+
     module Strings {
         (:initialized) var ErrorText as ResourceId;
         (:initialized) var EmptyText as ResourceId;
