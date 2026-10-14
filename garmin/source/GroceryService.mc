@@ -7,11 +7,13 @@ class GroceryService {
     private var _callback as Method;
     private var _lastVersion as Number = -1;
     private var _isBusy as Boolean = false;
+    private var _isOffline as Boolean = false;
     private var _pendingToggles as Array<Dictionary> = [] as Array<Dictionary>;
     private var _lastCategories as Array<GroceryCategoryData> = [] as Array<GroceryCategoryData>;
 
     function initialize(callback as Method) {
         _callback = callback;
+        loadPendingToggles();
     }
 
     function isBusy() as Boolean {
@@ -20,6 +22,10 @@ class GroceryService {
 
     function hasPendingToggles() as Boolean {
         return _pendingToggles.size() > 0;
+    }
+
+    function isOffline() as Boolean {
+        return _isOffline;
     }
 
     private function getBaseUrl() as String {
@@ -45,11 +51,28 @@ class GroceryService {
         return headers;
     }
 
+    // Force full bidirectional sync (e.g. on manual refresh or MENU press)
+    function forceSync() as Void {
+        _lastVersion = -1;
+        if (_pendingToggles.size() > 0) {
+            processQueue();
+        } else {
+            fetchItems();
+        }
+    }
+
     // Check lightweight 15-byte version for real-time live sync
     function checkVersion() as Void {
-        if (_isBusy || _pendingToggles.size() > 0) {
+        if (_isBusy) {
             return;
         }
+
+        // If user made offline toggles while disconnected, prioritize flushing them to server first!
+        if (_pendingToggles.size() > 0) {
+            processQueue();
+            return;
+        }
+
         _isBusy = true;
         var url = getBaseUrl() + "/api/items/version";
         var options = {
@@ -64,13 +87,14 @@ class GroceryService {
     function onReceiveVersion(responseCode as Number, data as Dictionary?) as Void {
         _isBusy = false;
 
-        // If user queued toggles while checkVersion was in flight, execute toggles immediately!
+        // If toggles were queued while checkVersion was in flight, execute them immediately!
         if (_pendingToggles.size() > 0) {
             processQueue();
             return;
         }
 
         if (responseCode == 200 && data != null) {
+            _isOffline = false;
             var v = data.get("version");
             if (v != null) {
                 var verNum = (v has :toNumber) ? v.toNumber() : 0;
@@ -78,14 +102,22 @@ class GroceryService {
                     fetchItems();
                 }
             }
+        } else {
+            _isOffline = true;
         }
     }
 
     // Fetch items grouped by category from backend API
     function fetchItems() as Void {
-        if (_isBusy || _pendingToggles.size() > 0) {
+        if (_isBusy) {
             return;
         }
+
+        if (_pendingToggles.size() > 0) {
+            processQueue();
+            return;
+        }
+
         _isBusy = true;
         var url = getBaseUrl() + "/api/items";
         System.println("Fetching from URL: " + url);
@@ -102,6 +134,7 @@ class GroceryService {
         _isBusy = false;
         System.println("onReceiveItems code: " + responseCode);
         if (responseCode == 200 && data != null) {
+            _isOffline = false;
             var v = data.get("version");
             if (v != null) {
                 _lastVersion = (v has :toNumber) ? v.toNumber() : 0;
@@ -124,6 +157,7 @@ class GroceryService {
             saveOfflineCategories(categoriesList);
             _callback.invoke(true, categoriesList, null);
         } else {
+            _isOffline = true;
             var cached = loadOfflineCategories();
             _lastCategories = cached;
             _callback.invoke(false, cached, "שגיאת חיבור (" + responseCode + ")");
@@ -133,17 +167,25 @@ class GroceryService {
         processQueue();
     }
 
-    // Toggle item checked state: queues request to ensure 100% reliable BLE transmission
+    // Toggle item checked state: queues request to ensure 100% reliable BLE transmission & offline persistence
     function toggleItem(item as GroceryItem) as Void {
-        var req = {
-            "id" => item.id,
-            "isChecked" => item.isChecked,
-            "item" => item,
-            "retries" => 0
-        };
-        _pendingToggles.add(req);
+        var found = false;
+        for (var i = 0; i < _pendingToggles.size(); i++) {
+            if (_pendingToggles[i].get("id") == item.id) {
+                _pendingToggles[i].put("isChecked", item.isChecked);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            _pendingToggles.add({
+                "id" => item.id,
+                "isChecked" => item.isChecked
+            });
+        }
+        savePendingToggles();
 
-        // Update local offline cache immediately
+        // Update local offline cache immediately so it stays in flash storage
         if (_lastCategories.size() > 0) {
             saveOfflineCategories(_lastCategories);
         }
@@ -183,36 +225,69 @@ class GroceryService {
             return;
         }
 
-        var currentReq = _pendingToggles[0];
-
         if (responseCode == 200) {
+            _isOffline = false;
+            // Successfully delivered to server! Remove from queue and save updated queue
+            _pendingToggles.remove(_pendingToggles[0]);
+            savePendingToggles();
+
             // Update version so subsequent checkVersion won't trigger redundant fetch
             if (data != null && data.get("version") != null) {
                 var v = data.get("version");
                 _lastVersion = (v has :toNumber) ? v.toNumber() : _lastVersion;
             }
-            _pendingToggles.remove(currentReq);
-            processQueue();
-        } else {
-            var retries = currentReq.get("retries") as Number;
-            if (retries < 2) {
-                currentReq.put("retries", retries + 1);
+
+            if (_pendingToggles.size() > 0) {
                 processQueue();
             } else {
-                // Permanently failed after 2 retries: revert item state and alert
-                _pendingToggles.remove(currentReq);
-                var it = currentReq.get("item") as GroceryItem;
-                if (it != null) {
-                    var prevChecked = currentReq.get("isChecked") as Boolean;
-                    it.isChecked = !prevChecked;
-                }
-                _callback.invoke(false, null, "שגיאה בסימון (" + responseCode + ")");
-                processQueue();
+                // All pending offline toggles have been successfully delivered to server!
+                // Trigger version check now to confirm total harmony with server
+                checkVersion();
             }
+        } else {
+            // Network failure / offline: responseCode < 0 (BLE disconnected / timeout) or 5xx
+            // Keep item in persistent offline queue. DO NOT revert the item!
+            // When internet or Bluetooth reconnects, the periodic timer will flush the queue.
+            _isOffline = true;
+            System.println("Toggle failed, retained in offline queue: " + responseCode);
         }
     }
 
     // Persistent storage caching for offline supermarket use
+    private function savePendingToggles() as Void {
+        try {
+            var serialized = [] as Array<Dictionary>;
+            for (var i = 0; i < _pendingToggles.size(); i++) {
+                var t = _pendingToggles[i];
+                serialized.add({
+                    "id" => t.get("id"),
+                    "isChecked" => t.get("isChecked")
+                });
+            }
+            Application.Storage.setValue("pending_toggles", serialized);
+        } catch (ex) {
+            System.println("Failed to save pending toggles: " + ex.getErrorMessage());
+        }
+    }
+
+    private function loadPendingToggles() as Void {
+        try {
+            var saved = Application.Storage.getValue("pending_toggles") as Array<Dictionary>?;
+            if (saved != null && saved.size() > 0) {
+                _pendingToggles = [] as Array<Dictionary>;
+                for (var i = 0; i < saved.size(); i++) {
+                    var itemDict = saved[i];
+                    _pendingToggles.add({
+                        "id" => itemDict.get("id"),
+                        "isChecked" => itemDict.get("isChecked")
+                    });
+                }
+            }
+        } catch (ex) {
+            System.println("Failed to load pending toggles: " + ex.getErrorMessage());
+        }
+    }
+
     private function saveOfflineCategories(categories as Array<GroceryCategoryData>) as Void {
         try {
             var serialized = [] as Array<Dictionary>;
@@ -258,6 +333,7 @@ class GroceryService {
         } catch (ex) {
             System.println("Failed to load cached: " + ex.getErrorMessage());
         }
+        _lastCategories = result;
         return result;
     }
 }

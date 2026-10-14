@@ -41,7 +41,7 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    // Touch screen tap on an item (or tap to retry when empty)
+    // Touch screen tap on an item (or tap to retry when empty, or tap header to force sync)
     function onTap(clickEvent as WatchUi.ClickEvent) as Boolean {
         if (_wasDragging) {
             _wasDragging = false;
@@ -51,11 +51,16 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
         if (_view.rows.size() == 0) {
             _view.isLoading = true;
             WatchUi.requestUpdate();
-            _service.fetchItems();
+            _service.forceSync();
             return true;
         }
 
         var coords = clickEvent.getCoordinates();
+        if (coords[1] < 84) {
+            _service.forceSync();
+            return true;
+        }
+
         var clickedItem = _view.getItemAtCoordinates(coords[1]);
 
         if (clickedItem != null) {
@@ -118,7 +123,7 @@ class GroceryDelegate extends WatchUi.BehaviorDelegate {
             // Long press MENU to force sync from server
             _view.isLoading = true;
             WatchUi.requestUpdate();
-            _service.fetchItems();
+            _service.forceSync();
             return true;
         }
         return false;
