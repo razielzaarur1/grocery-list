@@ -206,9 +206,9 @@ class GroceryView extends WatchUi.View {
             Graphics.TEXT_JUSTIFY_CENTER
         );
 
-        // Subtitle: "X נותרו מתוך Y"
+        // Subtitle: "X/Y נותרו"
         dc.setColor(0x94a3b8, Graphics.COLOR_TRANSPARENT);
-        var subText = BidiHelper.shapeHebrew(totalRem + " נותרו מתוך " + totalCount);
+        var subText = BidiHelper.shapeHebrew(totalRem + "/" + totalCount + " נותרו");
         dc.drawText(
             _screenWidth / 2,
             38,
