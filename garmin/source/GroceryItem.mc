@@ -15,13 +15,19 @@ class GroceryItem {
     var shapedNote as String = "";
 
     function initialize(dict as Dictionary) {
-        id = dict.get("id") as Number;
+        var rawId = dict.get("id");
+        if (rawId != null) {
+            id = (rawId has :toNumber) ? rawId.toNumber() : 0;
+        }
         name = dict.get("name") != null ? dict.get("name").toString() : "";
         quantity = dict.get("quantity") != null ? dict.get("quantity").toString() : "";
         unit = dict.get("unit") != null ? dict.get("unit").toString() : "";
         note = dict.get("note") != null ? dict.get("note").toString() : "";
         isChecked = dict.get("is_checked") != null ? dict.get("is_checked") as Boolean : false;
-        categoryId = dict.get("category_id") != null ? dict.get("category_id") as Number : 0;
+        var rawCatId = dict.get("category_id");
+        if (rawCatId != null) {
+            categoryId = (rawCatId has :toNumber) ? rawCatId.toNumber() : 0;
+        }
 
         updateShapedText();
     }

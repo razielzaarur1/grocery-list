@@ -36,6 +36,7 @@ class GroceryService {
     // Fetch items list from backend API
     function fetchItems() as Void {
         var url = getBaseUrl() + "/api/items";
+        System.println("Fetching from URL: " + url);
         var options = {
             :method => Communications.HTTP_REQUEST_METHOD_GET,
             :headers => getHeaders(),
@@ -46,6 +47,7 @@ class GroceryService {
     }
 
     function onReceiveItems(responseCode as Number, data as Dictionary?) as Void {
+        System.println("onReceiveItems code: " + responseCode);
         if (responseCode == 200 && data != null) {
             var itemsList = [] as Array<GroceryItem>;
             var categories = data.get("categories") as Array<Dictionary>?;
@@ -62,6 +64,7 @@ class GroceryService {
                 }
             }
 
+            System.println("Parsed items count: " + itemsList.size());
             // Save to persistent storage for offline access
             saveOfflineItems(itemsList);
             _callback.invoke(true, itemsList, null);
